@@ -1,0 +1,23 @@
+{
+  "name": "krillion-si",
+  "type": "module",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build && node scripts/copy-sitemap.js",
+    "postbuild": "node scripts/copy-sitemap.js",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "^3.2.1",
+    "@astrojs/tailwind": "^5.1.5",
+    "astro": "^5.4.2",
+    "canvas-confetti": "^1.9.4",
+    "tailwindcss": "^3.4.17"
+  },
+  "devDependencies": {
+    "@types/canvas-confetti": "^1.9.0"
+  }
+}

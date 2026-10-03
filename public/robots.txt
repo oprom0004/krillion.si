@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://krillionhints.com/sitemap.xml
+Sitemap: https://krillionhints.com/sitemap-index.xml

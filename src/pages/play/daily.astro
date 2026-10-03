@@ -1,0 +1,25 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import KrillionArena from '../../components/KrillionArena.astro';
+---
+
+<Layout
+  title="Play Krillion Daily Dive | Official Daily Trench Challenge - Krillion.si"
+  description="Play today's official Krillion daily dive. 7 challenging prompts across global categories. Test your score against today's global trench depth rankings."
+>
+  <div class="py-10 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto space-y-6">
+    <div class="text-center space-y-2">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-950/40 border border-cyan-500/30 text-abyss-cyan text-xs font-bold">
+        <span>📅 OFFICIAL DAILY PROMPT SET</span>
+      </div>
+      <h1 class="text-3xl sm:text-4xl font-black text-white tracking-tight">
+        Krillion Daily Abyss Dive
+      </h1>
+      <p class="text-slate-400 text-xs sm:text-sm max-w-lg mx-auto">
+        7 synchronized daily prompts. Can you break 40,000 meters and earn the Hadal Sinker crown?
+      </p>
+    </div>
+
+    <KrillionArena initialMode="daily" />
+  </div>
+</Layout>

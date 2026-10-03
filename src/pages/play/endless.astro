@@ -1,0 +1,25 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import KrillionArena from '../../components/KrillionArena.astro';
+---
+
+<Layout
+  title="Play Krillion Endless Mode | Unlimited Practice Trench Diver - Krillion.si"
+  description="Practice Krillion without daily waiting periods. Endless randomized trivia prompts from history, geography, science, and cinema to sharpen your 7,000m abyssal intuition."
+>
+  <div class="py-10 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto space-y-6">
+    <div class="text-center space-y-2">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-950/40 border border-cyan-500/30 text-abyss-cyan text-xs font-bold">
+        <span>♾️ UNLIMITED PRACTICE CHAMBER</span>
+      </div>
+      <h1 class="text-3xl sm:text-4xl font-black text-white tracking-tight">
+        Krillion Endless Trench Dive
+      </h1>
+      <p class="text-slate-400 text-xs sm:text-sm max-w-lg mx-auto">
+        No 24-hour lockouts. Train your mind to identify ultra-rare answers before playing the official Daily challenge.
+      </p>
+    </div>
+
+    <KrillionArena initialMode="endless" />
+  </div>
+</Layout>
