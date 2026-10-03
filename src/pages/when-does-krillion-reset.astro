@@ -1,0 +1,153 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout
+  title="When Does Krillion Reset? Daily Midnight Schedule & Reset Countdown - Krillion.si"
+  description="What time does Krillion reset? View live countdown to the next daily Krillion puzzle across UTC, EST, PST, GMT, and JST time zones. Don't wait—play Endless mode now!"
+>
+  <article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 prose prose-invert prose-cyan">
+    <div class="mb-8 text-center not-prose">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-950/40 border border-cyan-500/30 text-abyss-cyan text-xs font-bold mb-3">
+        <span>⏱️ LIVE TIMEZONE TRACKER</span>
+      </div>
+      <h1 class="text-3xl sm:text-4xl md:text-5xl font-black text-white leading-tight">
+        When Does Krillion Reset?
+      </h1>
+      <p class="text-slate-400 text-sm max-w-xl mx-auto mt-2">
+        Find out exactly when the next official Krillion Daily Trench Dive unlocks in your local timezone.
+      </p>
+    </div>
+
+    <!-- Live Countdown Widget -->
+    <div class="my-8 p-8 rounded-3xl bg-abyss-card border border-cyan-500/40 text-center not-prose shadow-2xl shadow-cyan-950/30">
+      <div class="text-xs font-bold uppercase tracking-widest text-slate-400 mb-2">Next Daily Dive Unlocks In</div>
+      <div id="reset-countdown" class="font-mono text-4xl sm:text-6xl font-black text-abyss-cyan my-3 tracking-wider">
+        --:--:--
+      </div>
+      <div class="text-xs text-slate-400">
+        Official Daily Reset occurs every night at <span class="text-white font-bold">Midnight (00:00 UTC)</span>
+      </div>
+
+      <!-- Skip the wait CTA -->
+      <div class="mt-6 pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-center gap-3">
+        <span class="text-xs text-slate-300">Don't want to wait for tomorrow's reset?</span>
+        <a
+          href="/endless"
+          class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-abyss-cyan to-blue-600 text-abyss-dark font-extrabold text-xs sm:text-sm hover:scale-105 active:scale-95 transition-all shadow-md"
+        >
+          Play Endless Mode Instantly ♾️
+        </a>
+      </div>
+    </div>
+
+    <h2>Krillion Reset Time Across Global Timezones</h2>
+    <p>
+      The official Krillion daily puzzle synchronized roll-over takes place at <strong>00:00 UTC (Coordinated Universal Time)</strong>. Check your regional local time below:
+    </p>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full text-xs text-left bg-abyss-card rounded-2xl border border-white/10 overflow-hidden">
+        <thead class="bg-white/5 uppercase text-slate-400">
+          <tr>
+            <th class="p-3">Region</th>
+            <th class="p-3">Time Zone</th>
+            <th class="p-3">Local Reset Time</th>
+            <th class="p-3">Reset Timing</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-white/5">
+          <tr>
+            <td class="p-3 font-semibold text-white">United Kingdom</td>
+            <td class="p-3 font-mono text-slate-400">GMT / BST</td>
+            <td class="p-3 font-bold text-abyss-cyan">12:00 AM (Midnight)</td>
+            <td class="p-3 text-slate-400">Same calendar day</td>
+          </tr>
+          <tr>
+            <td class="p-3 font-semibold text-white">US Eastern</td>
+            <td class="p-3 font-mono text-slate-400">EST / EDT</td>
+            <td class="p-3 font-bold text-abyss-cyan">8:00 PM (or 7:00 PM EST)</td>
+            <td class="p-3 text-slate-400">Evening before</td>
+          </tr>
+          <tr>
+            <td class="p-3 font-semibold text-white">US Pacific</td>
+            <td class="p-3 font-mono text-slate-400">PST / PDT</td>
+            <td class="p-3 font-bold text-abyss-cyan">5:00 PM (or 4:00 PM PST)</td>
+            <td class="p-3 text-slate-400">Late afternoon before</td>
+          </tr>
+          <tr>
+            <td class="p-3 font-semibold text-white">Central Europe</td>
+            <td class="p-3 font-mono text-slate-400">CET / CEST</td>
+            <td class="p-3 font-bold text-abyss-cyan">1:00 AM (or 2:00 AM CEST)</td>
+            <td class="p-3 text-slate-400">Early morning</td>
+          </tr>
+          <tr>
+            <td class="p-3 font-semibold text-white">East Asia / China / Singapore</td>
+            <td class="p-3 font-mono text-slate-400">CST / SGT</td>
+            <td class="p-3 font-bold text-abyss-cyan">8:00 AM</td>
+            <td class="p-3 text-slate-400">Morning commute</td>
+          </tr>
+          <tr>
+            <td class="p-3 font-semibold text-white">Japan & Korea</td>
+            <td class="p-3 font-mono text-slate-400">JST / KST</td>
+            <td class="p-3 font-bold text-abyss-cyan">9:00 AM</td>
+            <td class="p-3 text-slate-400">Morning</td>
+          </tr>
+          <tr>
+            <td class="p-3 font-semibold text-white">Australia (Sydney)</td>
+            <td class="p-3 font-mono text-slate-400">AEST / AEDT</td>
+            <td class="p-3 font-bold text-abyss-cyan">10:00 AM (or 11:00 AM)</td>
+            <td class="p-3 text-slate-400">Mid-morning</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2>Why Do Some Players See Puzzles Early?</h2>
+    <p>
+      Depending on your device's browser cache and timezone offsets, local midnight resets can sometimes display prompts before the global UTC sync. If you run into any synchronization glitch, refreshing your browser cache or switching between modes will pull the fresh daily batch.
+    </p>
+
+    <div class="mt-12 p-8 rounded-3xl bg-abyss-card border border-cyan-500/30 text-center not-prose space-y-4">
+      <h3 class="text-2xl font-black text-white">Bypass the Daily Cooldown Right Now</h3>
+      <p class="text-xs text-slate-300 max-w-md mx-auto">
+        While waiting for the next daily batch to drop, keep your trivia reflexes sharp with unlimited random prompts.
+      </p>
+      <div class="flex justify-center gap-4 pt-2">
+        <a href="/endless" class="px-6 py-3 rounded-2xl bg-abyss-cyan text-abyss-dark font-extrabold text-sm hover:scale-105 transition-all">
+          Launch Endless Dive ♾️
+        </a>
+        <a href="https://krillionhints.com" target="_blank" rel="noopener" class="px-6 py-3 rounded-2xl bg-white/10 hover:bg-white/20 text-white font-bold text-sm transition-all border border-white/10">
+          Get Today's Hints & Solver ↗
+        </a>
+      </div>
+    </div>
+  </article>
+
+  <script>
+    function updateCountdown() {
+      const now = new Date();
+      // Calculate next midnight UTC
+      const nextUTC = new Date(Date.UTC(
+        now.getUTCFullYear(),
+        now.getUTCMonth(),
+        now.getUTCDate() + 1,
+        0, 0, 0
+      ));
+      
+      const diffMs = nextUTC.getTime() - now.getTime();
+      const hours = Math.floor(diffMs / (1000 * 60 * 60));
+      const minutes = Math.floor((diffMs % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((diffMs % (1000 * 60)) / 1000);
+
+      const el = document.getElementById('reset-countdown');
+      if (el) {
+        const pad = (n: number) => n.toString().padStart(2, '0');
+        el.textContent = `${pad(hours)}:${pad(minutes)}:${pad(seconds)}`;
+      }
+    }
+
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+  </script>
+</Layout>
