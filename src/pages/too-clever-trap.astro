@@ -1,91 +1,116 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
+
+const breadcrumbs = [
+  { label: 'Home', href: '/' },
+  { label: 'Too-Clever Trap' }
+];
+
+const trapSchema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "The 'Too-Clever' Trap: Why Intelligent Trivia Players Fail to Reach 7,000m Depth in Krillion",
+  "description": "An analysis of consensus clustering and game theory in reverse trivia. Learn why common clever answers fail to score deep in Krillion.",
+  "author": {
+    "@type": "Organization",
+    "name": "Krillion Strategy Guild"
+  }
+};
 ---
 
 <Layout
-  title="The Too-Clever Trap in Krillion | Avoid 3,000m Mid-Depth Jam - Krillion.si"
-  description="Why do intelligent trivia players get trapped at 3,000 meters in Krillion? Understand the psychology of 'cleverness' and how to dive deeper into the true abyss."
+  title="The 'Too-Clever' Trap in Krillion | Game Theory & Rarity Guide - Krillion.si"
+  description="Why do smart players get stuck at 3,000m? Learn the cognitive science behind Krillion's 'Too-Clever' crowd trap and how to avoid consensus clustering."
+  schema={trapSchema}
 >
-  <article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 prose prose-invert prose-cyan">
-    <div class="mb-8">
-      <div class="text-xs font-bold uppercase tracking-wider text-amber-400 mb-2">Cognitive Science of Trivia</div>
+  <article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10 prose prose-invert prose-cyan">
+    <div class="not-prose mb-8 space-y-3">
+      <Breadcrumb items={breadcrumbs} />
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-950/60 border border-cyan-500/30 text-cyan-400 text-xs font-bold font-mono">
+        <span>COGNITIVE PSYCHOLOGY & GAME THEORY</span>
+      </div>
       <h1 class="text-3xl sm:text-4xl md:text-5xl font-black text-white leading-tight">
-        The "Too-Clever" Crowd Trap: Why Smart Answers Get Stuck at 3,000m
+        The "Too-Clever" Trap: Why Smart Players Get Stuck at 3,000m
       </h1>
-      <p class="text-slate-400 text-sm mt-3">
-        By Krillion Archival Research Team • Updated October 2026 • 5 min read
+      <p class="text-slate-400 text-xs sm:text-sm">
+        By Krillion Strategy Guild • Updated 2026 • 5 min read
       </p>
     </div>
 
-    <p>
-      If you've played Krillion for even a few rounds, you have almost certainly experienced the frustration of typing an answer you were confident nobody else would think of—only to see the depth meter halt abruptly at <strong>3,200 meters</strong> with an amber warning: <em>Too-Clever Trap</em>.
-    </p>
+    <!-- Trap Warning Box -->
+    <div class="bg-amber-950/20 border border-amber-500/30 rounded-3xl p-6 my-8 not-prose space-y-3 shadow-lg shadow-amber-950/20">
+      <h3 class="text-base font-bold text-amber-300 flex items-center gap-2 font-mono">
+        <svg class="w-4 h-4 text-amber-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        <span>Definition: The Consensus Clustering Phenomenon</span>
+      </h3>
+      <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+        The <strong>"Too-Clever" Trap</strong> occurs when a player bypasses the obvious surface answers and selects an answer they believe is an intellectual secret (e.g., <em>Monaco</em> for sovereign microstates or <em>Tungsten</em> for chemical elements), only to discover that thousands of other intelligent players had the identical thought process.
+      </p>
+    </div>
 
-    <h2>The Psychology of the Intermediate Clever Answer</h2>
+    <h2>Why Consensus Clustering Happens</h2>
     <p>
-      In reverse-trivia games, the distribution of player responses does not form a smooth bell curve. Instead, it forms two massive gravitational clusters:
+      In any open-prompt reverse-trivia game, human memory follows a predictable cognitive hierarchy:
     </p>
     <ol>
-      <li><strong>The Casual Floater (0m - 1,500m):</strong> Answers recalled by 70% of participants without effort.</li>
-      <li><strong>The Intellectual Convergence (2,500m - 4,500m):</strong> The answer chosen by participants who want to show off that they know slightly more than casual trivia players.</li>
+      <li><strong>Level 0 (Pop-Culture Consensus):</strong> Top of mind for 70% of humans (e.g. <em>France</em>, <em>Hydrogen</em>).</li>
+      <li><strong>Level 1 (Educated Consensus):</strong> Top of mind for people who read books or watch documentaries (e.g. <em>San Marino</em>, <em>Caligula</em>, <em>Helium</em>).</li>
+      <li><strong>Level 2 (Deep Archive Rarity):</strong> Historical footnotes, obscure treaties, and peripheral geographic enclaves (e.g. <em>Tuvalu</em>, <em>Majorian</em>, <em>Rhenium</em>).</li>
     </ol>
     <p>
-      Because smart players share remarkably similar cultural and educational touchstones (Wikipedia front pages, high school honors classes, viral YouTube essays), they simultaneously gravitate toward the exact same "uncommon" answer.
+      Players who operate at Level 1 believe they are at Level 2. Because the active player base of Krillion consists largely of trivia enthusiasts, <strong>Level 1 answers suffer severe collision rates</strong>, dragging submarines into the 3,000m deadlock.
     </p>
 
-    <h2>Classic Examples of the Too-Clever Trap</h2>
+    <h2>Classic "Too-Clever" Traps by Category</h2>
     <div class="not-prose my-6 overflow-x-auto">
       <table class="w-full text-xs text-left bg-abyss-card rounded-2xl border border-white/10 overflow-hidden">
-        <thead class="bg-white/5 uppercase text-slate-400">
+        <thead class="bg-white/5 uppercase text-slate-400 font-mono">
           <tr>
-            <th class="p-3">Prompt</th>
-            <th class="p-3">Casual Floater (0m)</th>
-            <th class="p-3 text-amber-400">The Too-Clever Trap (3,000m)</th>
-            <th class="p-3 text-abyss-cyan">7,000m Hadal Sinker</th>
+            <th class="p-3">Category Prompt</th>
+            <th class="p-3 text-amber-300">The "Too-Clever" Trap (3,000m)</th>
+            <th class="p-3 text-cyan-400">The True Hadal Sinker (7,000m)</th>
           </tr>
         </thead>
-        <tbody class="divide-y divide-white/5">
+        <tbody class="divide-y divide-white/5 font-mono">
           <tr>
-            <td class="p-3 font-semibold text-white">Shakespeare Play</td>
-            <td class="p-3">Hamlet, Macbeth</td>
-            <td class="p-3 text-amber-300">Titus Andronicus</td>
-            <td class="p-3 text-abyss-cyan font-bold">Cymbeline, Pericles</td>
+            <td class="p-3 text-slate-300 font-sans">European Microstates</td>
+            <td class="p-3 text-amber-300 font-sans"><em>Monaco, San Marino, Liechtenstein</em></td>
+            <td class="p-3 text-cyan-300 font-sans"><em>Andorra la Vella (parishes), Guernsey enclaves</em></td>
           </tr>
           <tr>
-            <td class="p-3 font-semibold text-white">Roman Emperor</td>
-            <td class="p-3">Augustus, Nero</td>
-            <td class="p-3 text-amber-300">Caligula, Marcus Aurelius</td>
-            <td class="p-3 text-abyss-cyan font-bold">Didius Julianus, Probus</td>
+            <td class="p-3 text-slate-300 font-sans">Shakespeare Plays</td>
+            <td class="p-3 text-amber-300 font-sans"><em>Titus Andronicus, The Tempest</em></td>
+            <td class="p-3 text-cyan-300 font-sans"><em>Cymbeline, Pericles Prince of Tyre</em></td>
           </tr>
           <tr>
-            <td class="p-3 font-semibold text-white">Southern Hemisphere Nation</td>
-            <td class="p-3">Australia, Brazil</td>
-            <td class="p-3 text-amber-300">Madagascar, Uruguay</td>
-            <td class="p-3 text-abyss-cyan font-bold">Eswatini, Tuvalu, Nauru</td>
+            <td class="p-3 text-slate-300 font-sans">Periodic Elements</td>
+            <td class="p-3 text-amber-300 font-sans"><em>Tungsten, Titanium, Mercury</em></td>
+            <td class="p-3 text-cyan-300 font-sans"><em>Hafnium, Rhenium, Thulium</em></td>
           </tr>
           <tr>
-            <td class="p-3 font-semibold text-white">Transition Metal</td>
-            <td class="p-3">Gold, Iron, Copper</td>
-            <td class="p-3 text-amber-300">Tungsten, Titanium</td>
-            <td class="p-3 text-abyss-cyan font-bold">Rhenium, Osmium, Hafnium</td>
+            <td class="p-3 text-slate-300 font-sans">African Capitals</td>
+            <td class="p-3 text-amber-300 font-sans"><em>Nairobi, Cairo, Cape Town</em></td>
+            <td class="p-3 text-cyan-300 font-sans"><em>Gitega, Yamoussoukro, Moroni</em></td>
           </tr>
         </tbody>
       </table>
     </div>
 
-    <h2>How to Escape the Trap</h2>
-    <p>
-      Whenever your mind produces an answer that brings an immediate smirk of intellectual superiority, pause. Ask yourself: <em>"Did this answer get featured in a popular trivia quiz recently?"</em> If yes, dig one level deeper into regional archives.
-    </p>
-
-    <div class="mt-12 p-8 rounded-3xl bg-abyss-card border border-white/10 text-center not-prose space-y-4">
-      <h3 class="text-2xl font-black text-white">Test Your Instincts</h3>
-      <p class="text-xs text-slate-300 max-w-md mx-auto">
-        Can you evade the trap across 7 consecutive rounds?
+    <!-- Bottom CTA Bar -->
+    <div class="mt-12 p-8 rounded-3xl bg-abyss-card border border-cyan-500/30 text-center not-prose space-y-4 shadow-xl">
+      <h3 class="text-2xl font-black text-white">Bypass the Trap Today</h3>
+      <p class="text-xs text-slate-400 max-w-md mx-auto">
+        Train your mind to dig deeper into true Hadal obscurity without consensus bottlenecks.
       </p>
-      <a href="/#game" class="inline-block px-6 py-3 rounded-2xl bg-abyss-cyan text-abyss-dark font-extrabold text-sm hover:scale-105 transition-all">
-        Play Today's Daily Trench Dive ⚓
-      </a>
+      <div class="flex items-center justify-center gap-3">
+        <a href="/#game" class="px-6 py-3 rounded-xl bg-gradient-to-r from-cyan-400 to-blue-500 text-slate-950 font-black text-xs hover:scale-105 transition-all shadow-lg shadow-cyan-500/20">
+          Play Daily Dive Now ⚓
+        </a>
+        <a href="/7000m-words-list" class="px-6 py-3 rounded-xl bg-white/5 hover:bg-white/10 text-white font-bold text-xs border border-white/10 transition-all">
+          View Safe Word List
+        </a>
+      </div>
     </div>
   </article>
 </Layout>

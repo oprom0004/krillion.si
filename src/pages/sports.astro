@@ -1,33 +1,185 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import KrillionArena from '../components/KrillionArena.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
+import IconSports from '../components/icons/IconSports.astro';
+
+const breadcrumbs = [
+  { label: 'Home', href: '/' },
+  { label: 'Themed Packs', href: '/#variants' },
+  { label: 'Sports & Athletics' }
+];
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How to score high in Krillion Sports Pack?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "In Krillion Sports, avoid global modern megastars (Messi, Ronaldo, LeBron James, Usain Bolt). Instead, recall vintage Olympic champions from the 1920-1970s, minor league trophy holders, or niche athletics record breakers."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What are common traps in sports prompts?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Submitting reigning champions or viral superstars like Michael Jordan or Tiger Woods will trigger heavy collision penalties and score less than 100m depth."
+      }
+    }
+  ]
+};
 ---
 
 <Layout
-  title="Play Krillion Sports & Athletics Pack | Rare Sports Trivia - Krillion.si"
-  description="Play Krillion's Sports & Athletics themed pack. Unearth obscure Olympic medalists, historical Champions League contenders, and forgotten athletic records."
+  title="Krillion Sports Pack | Play Athletic Reverse Trivia Online"
+  description="Play Krillion Sports & Athletics pack online for free. Plunge to 7,000m depth by naming forgotten Olympic champions, historic medalists, and niche athletics record holders."
+  schema={faqSchema}
 >
-  <div class="py-6 px-3 sm:px-6 lg:px-8 max-w-7xl mx-auto space-y-6">
-    <div class="text-center space-y-2">
-      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-950/40 border border-cyan-500/30 text-abyss-cyan text-xs font-bold">
-        <span>⚽ THEMED PACK • SPORTS & ATHLETICS</span>
+  <div class="py-6 px-3 sm:px-6 lg:px-8 max-w-7xl mx-auto space-y-8">
+    <div class="space-y-3">
+      <Breadcrumb items={breadcrumbs} />
+      
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pt-2">
+        <div class="space-y-1.5">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-950/60 border border-cyan-500/30 text-cyan-400 text-xs font-bold font-mono">
+            <IconSports class="w-3.5 h-3.5" />
+            <span>THEMED VAULT • SPORTS & ATHLETICS</span>
+          </div>
+          <h1 class="text-3xl sm:text-4xl font-black text-white tracking-tight">
+            Krillion Sports & Olympic Champions
+          </h1>
+          <p class="text-slate-400 text-xs sm:text-sm max-w-3xl leading-relaxed">
+            <strong class="text-white">Direct Definition:</strong> The Sports Pack evaluates knowledge across international football tournaments, Olympic gold medalists, tennis Grand Slam champions, and legendary athletic records.
+          </p>
+        </div>
+
+        <div class="flex sm:flex-col items-center sm:items-end justify-between sm:justify-center p-3 rounded-2xl bg-abyss-card border border-cyan-500/20 text-right">
+          <span class="text-[10px] text-slate-400 font-mono uppercase tracking-wider">Target Threshold</span>
+          <span class="text-xl font-black text-cyan-400 font-mono">7,000m Trench</span>
+        </div>
       </div>
-      <h1 class="text-3xl sm:text-4xl font-black text-white tracking-tight">
-        Krillion Sports & Athletics Pack
-      </h1>
-      <p class="text-slate-400 text-xs sm:text-sm max-w-xl mx-auto">
-        Plunge past obvious superstar athletes and test your obscure international sporting recall.
-      </p>
     </div>
 
-    <KrillionArena modeUrl="https://www.krillion.org/play/sports/" />
+    <!-- Playable Game Viewport -->
+    <KrillionArena
+      modeUrl="https://www.krillion.org/play/sports/"
+      modeTitle="Krillion Sports & Athletics Pack"
+      badgeText="SPORTS PACK ⚽"
+    />
 
-    <!-- Editorial strategy section for SEO -->
-    <section class="mt-12 p-8 rounded-3xl bg-abyss-card border border-white/5 space-y-4">
-      <h2 class="text-xl font-bold text-white">Sports 7,000m Strategy & Tips</h2>
-      <p class="text-xs text-slate-300 leading-relaxed">
-        Avoid modern mainstream sports icons like Messi, Ronaldo, LeBron, or Usain Bolt. Look for historical Olympic gold medalists from smaller delegations, or pre-war football championships.
-      </p>
-    </section>
+    <!-- SEO & GEO Editorial -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 pt-4">
+      <div class="lg:col-span-2 space-y-8">
+        <!-- Rarity Matrix Table -->
+        <div class="p-6 sm:p-8 rounded-3xl bg-abyss-card border border-white/10 space-y-5">
+          <div class="flex items-center justify-between">
+            <h2 class="text-xl font-bold text-white flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-cyan-400"></span>
+              <span>Sports Rarity Matrix: Champions & Medalists</span>
+            </h2>
+            <span class="text-[11px] font-mono text-cyan-400/80 bg-cyan-950/50 px-2 py-0.5 rounded border border-cyan-500/20">Prompt: Olympic Gold Medalists</span>
+          </div>
+
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs border-collapse">
+              <thead>
+                <tr class="border-b border-white/10 text-slate-400 font-mono">
+                  <th class="py-2.5 px-3">Depth Zone</th>
+                  <th class="py-2.5 px-3">Answer Examples</th>
+                  <th class="py-2.5 px-3">Estimated Rarity</th>
+                  <th class="py-2.5 px-3">Depth Yield</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-white/5 font-mono">
+                <tr class="bg-emerald-950/20 text-emerald-300">
+                  <td class="py-3 px-3 font-bold">🌊 Hadal Trench</td>
+                  <td class="py-3 px-3 font-sans"><em>Fanny Blankers-Koen</em>, <em>Kip Keino</em>, <em>Waldemar Cierpinski</em></td>
+                  <td class="py-3 px-3">&lt; 1.0%</td>
+                  <td class="py-3 px-3 font-bold">+950m ~ 1,000m</td>
+                </tr>
+                <tr class="bg-cyan-950/20 text-cyan-300">
+                  <td class="py-3 px-3 font-bold">⚓ Abyssal Zone</td>
+                  <td class="py-3 px-3 font-sans"><em>Emil Zátopek</em>, <em>Abebe Bikila</em>, <em>Lasse Virén</em></td>
+                  <td class="py-3 px-3">2.5% ~ 5.5%</td>
+                  <td class="py-3 px-3 font-bold">+700m ~ 860m</td>
+                </tr>
+                <tr class="bg-amber-950/20 text-amber-300">
+                  <td class="py-3 px-3 font-bold">⚠️ Bathyal Shelf</td>
+                  <td class="py-3 px-3 font-sans"><em>Carl Lewis</em>, <em>Mo Farah</em>, <em>Jesse Owens</em></td>
+                  <td class="py-3 px-3">12.0% ~ 24.0%</td>
+                  <td class="py-3 px-3 font-bold">+280m ~ 490m</td>
+                </tr>
+                <tr class="bg-rose-950/20 text-rose-300">
+                  <td class="py-3 px-3 font-bold">🚨 Surface Trap</td>
+                  <td class="py-3 px-3 font-sans"><em>Usain Bolt</em>, <em>Michael Phelps</em>, <em>Simone Biles</em></td>
+                  <td class="py-3 px-3">&gt; 42%</td>
+                  <td class="py-3 px-3 font-bold">0m ~ 80m</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- FAQ Section -->
+        <div class="p-6 sm:p-8 rounded-3xl bg-abyss-card border border-white/10 space-y-4">
+          <h2 class="text-xl font-bold text-white">Frequently Asked Questions</h2>
+          <div class="space-y-4 pt-2">
+            {faqSchema.mainEntity.map(faq => (
+              <div class="p-4 rounded-2xl bg-white/5 border border-white/5 space-y-2">
+                <h3 class="text-sm font-bold text-cyan-300">{faq.name}</h3>
+                <p class="text-xs text-slate-300 leading-relaxed">{faq.acceptedAnswer.text}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column -->
+      <div class="space-y-6">
+        <div class="p-6 rounded-3xl bg-gradient-to-br from-amber-950/40 via-abyss-card to-abyss-card border border-amber-500/30 space-y-3">
+          <div class="flex items-center gap-2 text-amber-400 text-xs font-bold">
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a7 7 0 0 0-7 7c0 2.38 1.19 4.47 3 5.74V17a2 2 0 0 0 2 2h4a2 2 0 0 0 2-2v-2.26c1.81-1.27 3-3.36 3-5.74a7 7 0 0 0-7-7Z"/><path d="M9 21h6"/></svg>
+            <span>Live Daily Hints</span>
+          </div>
+          <h3 class="text-base font-bold text-white">KrillionHints.com Solver</h3>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            Get progressive clues and validated answer stats for today's daily trench categories.
+          </p>
+          <a
+            href="https://krillionhints.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="block w-full py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-black text-xs text-center transition-colors shadow-lg shadow-amber-500/20"
+          >
+            Access KrillionHints.com ↗
+          </a>
+        </div>
+
+        <div class="p-6 rounded-3xl bg-abyss-card border border-white/10 space-y-3">
+          <h3 class="text-sm font-bold text-white uppercase tracking-wider font-mono">Other Themed Packs</h3>
+          <div class="space-y-2 text-xs">
+            <a href="/movies" class="block p-2.5 rounded-xl bg-white/5 hover:bg-cyan-500/10 hover:text-cyan-400 border border-white/5 transition-all">
+              🎬 Cinema & Academy Awards
+            </a>
+            <a href="/geography" class="block p-2.5 rounded-xl bg-white/5 hover:bg-cyan-500/10 hover:text-cyan-400 border border-white/5 transition-all">
+              🌍 Geography & Sovereign Enclaves
+            </a>
+            <a href="/history" class="block p-2.5 rounded-xl bg-white/5 hover:bg-cyan-500/10 hover:text-cyan-400 border border-white/5 transition-all">
+              🏛️ World History & Empires
+            </a>
+            <a href="/language" class="block p-2.5 rounded-xl bg-white/5 hover:bg-cyan-500/10 hover:text-cyan-400 border border-white/5 transition-all">
+              📖 Language & Literature Classics
+            </a>
+            <a href="/science" class="block p-2.5 rounded-xl bg-white/5 hover:bg-cyan-500/10 hover:text-cyan-400 border border-white/5 transition-all">
+              🧪 Science & Periodic Elements
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </Layout>

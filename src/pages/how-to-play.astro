@@ -1,45 +1,90 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
+
+const breadcrumbs = [
+  { label: 'Home', href: '/' },
+  { label: 'How to Play' }
+];
+
+const howToSchema = {
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "How to Play Krillion Reverse-Trivia Game",
+  "description": "Step-by-step instructions on how to dive past 7,000 meters in the Krillion reverse-trivia game by submitting valid, low-frequency answers.",
+  "totalTime": "PT3M",
+  "step": [
+    {
+      "@type": "HowToStep",
+      "position": 1,
+      "name": "Read the Category Prompt",
+      "text": "Inspect the open category prompt (e.g. Roman Emperors, Sovereign Nations, or Oscar Winners) displayed on the submarine console."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 2,
+      "name": "Filter Out the First-Thought Consensus",
+      "text": "Identify the most popular answers that 80% of casual players will guess first (such as Julius Caesar, France, or Titanic) and deliberately discard them."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 3,
+      "name": "Submit a Valid Obscure Candidate",
+      "text": "Type a verifiable, low-frequency historical, geographical, or scientific fact that qualifies under the prompt criteria."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 4,
+      "name": "Accumulate Trench Depth Across 7 Rounds",
+      "text": "Score up to 1,000 meters per round to achieve the maximum 7,000-meter Hadal Abyss Dive."
+    }
+  ]
+};
 ---
 
 <Layout
   title="How to Play Krillion: Official Rules, Scoring Algorithm & Depth Guide - Krillion.si"
   description="Master the official rules of Krillion. Learn how reverse-trivia mechanics work, how ocean trench depth is calculated, and step-by-step instructions to plunge past 7,000 meters."
+  schema={howToSchema}
 >
-  <article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 prose prose-invert prose-cyan">
-    <div class="mb-8">
-      <div class="text-xs font-bold uppercase tracking-wider text-abyss-cyan mb-2">Rules & Game Guide</div>
+  <article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10 prose prose-invert prose-cyan">
+    <div class="not-prose mb-8 space-y-3">
+      <Breadcrumb items={breadcrumbs} />
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-950/60 border border-cyan-500/30 text-cyan-400 text-xs font-bold font-mono">
+        <span>OFFICIAL RULEBOOK & SCORING ALGORITHM</span>
+      </div>
       <h1 class="text-3xl sm:text-4xl md:text-5xl font-black text-white leading-tight">
-        How to Play Krillion: Rules, Mechanics & Scoring Algorithm
+        How to Play Krillion: Rules, Mechanics & Depth Curves
       </h1>
-      <p class="text-slate-400 text-sm mt-3">
-        Official Documentation • Updated October 2026 • 6 min read
+      <p class="text-slate-400 text-xs sm:text-sm">
+        Published by Krillion Strategy Guild • Updated 2026 • 5 min read
       </p>
     </div>
 
-    <!-- Quick Rules Summary Box (Optimized for AI & Snippets) -->
-    <div class="bg-abyss-card border border-cyan-500/30 rounded-2xl p-6 my-8 not-prose space-y-3">
-      <h3 class="text-base font-bold text-white flex items-center gap-2">
-        <span>📋</span> Quick Summary: Krillion at a Glance
+    <!-- Quick Rules Summary Box -->
+    <div class="bg-abyss-card border border-cyan-500/30 rounded-3xl p-6 my-8 not-prose space-y-3 shadow-lg shadow-cyan-950/20">
+      <h3 class="text-base font-bold text-white flex items-center gap-2 font-mono">
+        <svg class="w-4 h-4 text-cyan-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        <span>Krillion at a Glance (Quick Summary)</span>
       </h3>
       <ul class="space-y-2 text-xs text-slate-300">
-        <li><strong>Objective:</strong> Reach maximum depth (up to 7,000 meters per prompt, 49,000m total) across 7 category prompts.</li>
-        <li><strong>Core Rule:</strong> Valid answers are scored by <em>rarity</em>. Popular answers score shallow; obscure answers plunge deepest.</li>
-        <li><strong>Time Limit:</strong> 60 seconds per prompt. Unanswered prompts score 0m.</li>
-        <li><strong>Game Modes:</strong> Daily Dive (1 synchronized set every 24h) and Endless Dive (unlimited free practice).</li>
+        <li><strong>Core Objective:</strong> Reach maximum depth (up to 1,000m per round, 7,000m total depth) across 7 rapid category prompts.</li>
+        <li><strong>Scoring Mechanism:</strong> Depth is directly proportional to <em>answer rarity</em> among global participants. Popular answers drown at the surface; rare verified answers plunge to the Hadal abyss.</li>
+        <li><strong>Turn Clock:</strong> Approximately 20 seconds per prompt. Blank submissions score 0m.</li>
+        <li><strong>Game Modes:</strong> Daily Dive (1 synchronized global challenge every 24h) and Endless Mode (unlimited practice).</li>
       </ul>
     </div>
 
     <h2>Step-by-Step Gameplay Walkthrough</h2>
     <ol>
       <li>
-        <strong>Read the Category Prompt:</strong> Each round presents a prompt from history, geography, science, literature, or popular culture (e.g., <em>"A sovereign nation located in the Southern Hemisphere"</em>).
+        <strong>Read the Category Prompt:</strong> Each round presents a prompt from history, geography, science, literature, or cinema (e.g. <em>"A sovereign nation located in the Southern Hemisphere"</em>).
       </li>
       <li>
-        <strong>Analyze the Crowd Consensus:</strong> Ask yourself what answer 80% of players will type first (e.g., <em>Australia</em> or <em>Brazil</em>). Discard it immediately!
+        <strong>Analyze the Crowd Consensus:</strong> Ask yourself what answer 80% of players will type first (e.g. <em>Australia</em> or <em>Brazil</em>). Discard it immediately!
       </li>
       <li>
-        <strong>Submit a Valid Obscure Answer:</strong> Type an answer that is factually accurate but recalled by only a tiny minority of participants (e.g., <em>Nauru</em> or <em>Tuvalu</em>).
+        <strong>Submit a Valid Obscure Answer:</strong> Type an answer that is factually accurate but recalled by only a tiny minority of participants (e.g. <em>Nauru</em> or <em>Tuvalu</em>).
       </li>
       <li>
         <strong>Receive Depth Evaluation:</strong> The engine scores your depth based on real-time community frequency logs.
@@ -51,68 +96,60 @@ import Layout from '../layouts/Layout.astro';
 
     <h2>The Depth Scoring Algorithm Explained</h2>
     <p>
-      Unlike binary trivia where answers are either right or wrong, Krillion implements a multi-tiered algorithmic depth curve:
+      Unlike binary trivia where answers are simply right or wrong, Krillion implements a multi-tiered algorithmic depth curve:
     </p>
 
     <div class="not-prose my-6 overflow-x-auto">
       <table class="w-full text-xs text-left bg-abyss-card rounded-2xl border border-white/10 overflow-hidden">
-        <thead class="bg-white/5 uppercase text-slate-400">
+        <thead class="bg-white/5 uppercase text-slate-400 font-mono">
           <tr>
             <th class="p-3">Depth Tier</th>
             <th class="p-3">Frequency Percentile</th>
-            <th class="p-3">Badge</th>
-            <th class="p-3">Player Verdict</th>
+            <th class="p-3">Classification</th>
+            <th class="p-3">Verdict</th>
           </tr>
         </thead>
-        <tbody class="divide-y divide-white/5">
+        <tbody class="divide-y divide-white/5 font-mono">
           <tr>
-            <td class="p-3 font-semibold text-blue-400">0m - 1,500m</td>
+            <td class="p-3 font-semibold text-blue-400">0m - 200m</td>
             <td class="p-3 text-slate-300">&gt; 35% of players</td>
-            <td class="p-3 font-mono">🌊 Surface Floater</td>
-            <td class="p-3 text-slate-400">Valid, but swallowed by the crowd consensus.</td>
+            <td class="p-3 font-sans font-bold">🌊 Surface Floater</td>
+            <td class="p-3 text-slate-400 font-sans">Valid, but swallowed by the crowd consensus.</td>
           </tr>
           <tr>
-            <td class="p-3 font-semibold text-amber-400">2,500m - 4,500m</td>
-            <td class="p-3 text-slate-300">5% - 35% of players</td>
-            <td class="p-3 font-mono text-amber-300">⚠️ Too-Clever Trap</td>
-            <td class="p-3 text-slate-400">Clever answer, but dozens of other smart players had the same idea.</td>
+            <td class="p-3 font-semibold text-amber-400">300m - 600m</td>
+            <td class="p-3 text-slate-300">8% - 35% of players</td>
+            <td class="p-3 font-sans font-bold text-amber-300">⚠️ Too-Clever Trap</td>
+            <td class="p-3 text-slate-400 font-sans">Clever answer, but dozens of other smart players had the same idea.</td>
           </tr>
           <tr>
-            <td class="p-3 font-semibold text-cyan-300">5,000m - 6,500m</td>
-            <td class="p-3 text-slate-300">0.5% - 5% of players</td>
-            <td class="p-3 font-mono">⚓ Twilight Sinker</td>
-            <td class="p-3 text-slate-400">High-tier trivia recollection. Rare and deep.</td>
+            <td class="p-3 font-semibold text-cyan-300">700m - 900m</td>
+            <td class="p-3 text-slate-300">1.5% - 8% of players</td>
+            <td class="p-3 font-sans font-bold">⚓ Abyssal Sinker</td>
+            <td class="p-3 text-slate-400 font-sans">Genuine rarity with very few daily participants guessing it.</td>
           </tr>
           <tr>
-            <td class="p-3 font-semibold text-abyss-cyan">7,000m (Max)</td>
-            <td class="p-3 text-slate-300">&lt; 0.05% of players</td>
-            <td class="p-3 font-mono text-abyss-cyan font-bold">👑 Hadal Abyss</td>
-            <td class="p-3 text-slate-400">Flawless obscure knowledge. Maximum possible round score.</td>
+            <td class="p-3 font-semibold text-cyan-400">920m - 1,000m</td>
+            <td class="p-3 text-slate-300">&lt; 1.5% of players</td>
+            <td class="p-3 font-sans font-bold text-cyan-400">👑 Hadal Crown</td>
+            <td class="p-3 text-slate-400 font-sans">Ultra-niche valid archival footnote. Maximum depth achieved.</td>
           </tr>
         </tbody>
       </table>
     </div>
 
-    <h2>Frequently Asked Questions</h2>
-    <div class="space-y-4 not-prose my-6">
-      <div class="p-4 rounded-xl bg-white/5 border border-white/5">
-        <h4 class="font-bold text-white text-sm">What happens if my answer is factually incorrect?</h4>
-        <p class="text-xs text-slate-400 mt-1">If an answer is incorrect or unverified, you score 0 meters for that prompt and receive a missed depth penalty.</p>
-      </div>
-      <div class="p-4 rounded-xl bg-white/5 border border-white/5">
-        <h4 class="font-bold text-white text-sm">Can I play Krillion more than once per day?</h4>
-        <p class="text-xs text-slate-400 mt-1">Yes! While the official Daily Dive resets every 24 hours, you can play unlimited rounds in our <a href="/endless" class="text-abyss-cyan underline">Endless Practice Mode</a> without any lockout.</p>
-      </div>
-    </div>
-
-    <div class="mt-12 p-8 rounded-3xl bg-abyss-card border border-cyan-500/30 text-center not-prose space-y-4">
+    <!-- Bottom CTA Bar -->
+    <div class="mt-12 p-8 rounded-3xl bg-abyss-card border border-cyan-500/30 text-center not-prose space-y-4 shadow-xl">
       <h3 class="text-2xl font-black text-white">Put the Rules Into Practice</h3>
-      <div class="flex flex-wrap justify-center gap-4 pt-2">
-        <a href="/daily" class="px-6 py-3 rounded-2xl bg-gradient-to-r from-abyss-cyan to-blue-600 text-abyss-dark font-extrabold text-sm hover:scale-105 transition-all">
-          Play Today's Daily Dive ⚓
+      <p class="text-xs text-slate-400 max-w-md mx-auto">
+        Test your instincts against today's global trench challenge.
+      </p>
+      <div class="flex items-center justify-center gap-3">
+        <a href="/#game" class="px-6 py-3 rounded-xl bg-gradient-to-r from-cyan-400 to-blue-500 text-slate-950 font-black text-xs hover:scale-105 transition-all shadow-lg shadow-cyan-500/20">
+          Play Daily Dive Now ⚓
         </a>
-        <a href="/how-to-dive-7000m" class="px-6 py-3 rounded-2xl bg-white/10 hover:bg-white/20 text-white font-bold text-sm transition-all border border-white/10">
-          Advanced 7,000m Strategy Guide →
+        <a href="/endless" class="px-6 py-3 rounded-xl bg-white/5 hover:bg-white/10 text-white font-bold text-xs border border-white/10 transition-all">
+          Endless Practice Mode
         </a>
       </div>
     </div>

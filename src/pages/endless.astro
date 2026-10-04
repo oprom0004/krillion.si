@@ -1,25 +1,90 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import KrillionArena from '../components/KrillionArena.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
+
+const breadcrumbs = [
+  { label: 'Home', href: '/' },
+  { label: 'Endless Practice Mode' }
+];
+
+const endlessFaqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is Krillion Endless Mode?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Krillion Endless Mode is an unconstrained practice chamber where you can play unlimited consecutive trivia rounds without waiting for the 24-hour daily reset."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is Endless Mode free to play?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, Endless Mode is completely free and requires no account or registration."
+      }
+    }
+  ]
+};
 ---
 
 <Layout
-  title="Play Krillion Endless Mode | Unlimited Practice Trench Diver - Krillion.si"
-  description="Practice Krillion without daily waiting periods. Endless randomized trivia prompts from history, geography, science, and cinema to sharpen your 7,000m abyssal intuition."
+  title="Play Krillion Endless Mode | Unlimited Reverse Trivia Practice - Krillion.si"
+  description="Play unlimited Krillion rounds in Endless practice mode. Hone your second-tier pivot strategies and category depth without 24-hour daily limits."
+  schema={endlessFaqSchema}
 >
-  <div class="py-10 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto space-y-6">
-    <div class="text-center space-y-2">
-      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-950/40 border border-cyan-500/30 text-abyss-cyan text-xs font-bold">
-        <span>♾️ UNLIMITED PRACTICE CHAMBER</span>
+  <div class="py-6 px-3 sm:px-6 lg:px-8 max-w-7xl mx-auto space-y-6">
+    <div class="space-y-3">
+      <Breadcrumb items={breadcrumbs} />
+
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pt-2">
+        <div class="space-y-1.5">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-950/60 border border-cyan-500/30 text-cyan-400 text-xs font-bold font-mono">
+            <span>UNLIMITED TRENCH PRACTICE</span>
+          </div>
+          <h1 class="text-3xl sm:text-4xl font-black text-white tracking-tight">
+            Krillion Endless Practice Sinker
+          </h1>
+          <p class="text-slate-400 text-xs sm:text-sm max-w-2xl leading-relaxed">
+            No daily wait times, no 24-hour locks. Hone your rare-candidate recall across continuous randomized prompt sets.
+          </p>
+        </div>
+
+        <div class="flex sm:flex-col items-center sm:items-end justify-between sm:justify-center p-3 rounded-2xl bg-abyss-card border border-cyan-500/20 text-right">
+          <span class="text-[10px] text-slate-400 font-mono uppercase tracking-wider">Session Limit</span>
+          <span class="text-lg font-black text-cyan-400 font-mono">Unlimited Rounds</span>
+        </div>
       </div>
-      <h1 class="text-3xl sm:text-4xl font-black text-white tracking-tight">
-        Krillion Endless Trench Dive
-      </h1>
-      <p class="text-slate-400 text-xs sm:text-sm max-w-lg mx-auto">
-        No 24-hour lockouts. Train your mind to identify ultra-rare answers before playing the official Daily challenge.
-      </p>
     </div>
 
-    <KrillionArena initialMode="endless" />
+    <!-- Direct Arena -->
+    <KrillionArena
+      modeUrl="https://www.krillion.org/play/endless/"
+      modeTitle="Krillion Endless Practice Mode"
+      badgeText="ENDLESS PRACTICE ♾️"
+    />
+
+    <!-- Practice Strategy Notes -->
+    <div class="p-6 rounded-3xl bg-abyss-card border border-white/10 space-y-3">
+      <h3 class="text-base font-bold text-white">How to Use Endless Mode to Improve Daily Scores</h3>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs text-slate-300">
+        <div class="p-4 rounded-2xl bg-white/5 space-y-1">
+          <span class="font-bold text-cyan-400 font-mono">1. Test Obscure Footnotes</span>
+          <p>Experiment with fringe candidates (minor historical treaties, rare metals) to see if the engine recognizes them without risking your daily rank.</p>
+        </div>
+        <div class="p-4 rounded-2xl bg-white/5 space-y-1">
+          <span class="font-bold text-cyan-400 font-mono">2. Master the 20s Clock</span>
+          <p>Train your reflex to immediately discard 1st-tier famous names and anchor on 2nd-tier obscure candidates within 5 seconds.</p>
+        </div>
+        <div class="p-4 rounded-2xl bg-white/5 space-y-1">
+          <span class="font-bold text-cyan-400 font-mono">3. Calibrate Crowd Overlap</span>
+          <p>Learn which answers you assume are obscure but actually fall into the 3,000m "Too-Clever" crowd trap.</p>
+        </div>
+      </div>
+    </div>
   </div>
 </Layout>

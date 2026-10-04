@@ -1,28 +1,51 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
+
+const breadcrumbs = [
+  { label: 'Home', href: '/' },
+  { label: '7,000m Strategy Guide' }
+];
+
+const strategySchema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "How to Reach 7,000m in Krillion: The Definitive Abyssal Playbook",
+  "description": "Master the art of scoring 7,000 meters in Krillion reverse trivia by applying the second-tier cognitive pivot and category rarity frameworks.",
+  "author": {
+    "@type": "Organization",
+    "name": "Krillion Strategy Guild"
+  }
+};
 ---
 
 <Layout
   title="How to Reach 7,000m in Krillion | Master Abyssal Strategy Guide - Krillion.si"
   description="Master the art of scoring 7,000 meters in Krillion. Learn how reverse-trivia scoring functions, how to avoid common crowds, and the mental frameworks for true obscurity."
+  schema={strategySchema}
 >
-  <article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 prose prose-invert prose-cyan">
-    <div class="mb-8">
-      <div class="text-xs font-bold uppercase tracking-wider text-abyss-cyan mb-2">Strategy Masterclass</div>
+  <article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10 prose prose-invert prose-cyan">
+    <div class="not-prose mb-8 space-y-3">
+      <Breadcrumb items={breadcrumbs} />
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-950/60 border border-cyan-500/30 text-cyan-400 text-xs font-bold font-mono">
+        <span>STRATEGY MASTERCLASS</span>
+      </div>
       <h1 class="text-3xl sm:text-4xl md:text-5xl font-black text-white leading-tight">
         How to Reach 7,000m in Krillion: The Definitive Abyssal Playbook
       </h1>
-      <p class="text-slate-400 text-sm mt-3">
-        By Krillion Archival Research Team • Updated October 2026 • 6 min read
+      <p class="text-slate-400 text-xs sm:text-sm">
+        By Krillion Strategy Guild • Updated 2026 • 6 min read
       </p>
     </div>
 
-    <div class="bg-abyss-card border border-cyan-500/30 rounded-2xl p-6 my-8 not-prose space-y-3">
-      <h3 class="text-base font-bold text-white flex items-center gap-2">
-        <span>⚓</span> Core Principle of Krillion
+    <!-- Core Principle Capsule -->
+    <div class="bg-abyss-card border border-cyan-500/30 rounded-3xl p-6 my-8 not-prose space-y-3 shadow-lg shadow-cyan-950/20">
+      <h3 class="text-base font-bold text-white flex items-center gap-2 font-mono">
+        <svg class="w-4 h-4 text-cyan-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v4"/><path d="M10 2h4"/><path d="M2 13a7 7 0 0 0 14 0c0-1.5-.5-3-2-4H7c-1.5 1-2 2.5-2 4"/><path d="M16 13h5a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1h-5"/></svg>
+        <span>The Core Principle of Reverse Trivia</span>
       </h3>
-      <p class="text-xs text-slate-300 leading-relaxed">
-        Krillion reverses ordinary trivia. In conventional trivia (like Jeopardy or Trivia Crack), answering fast with the famous correct answer wins points. In Krillion, the more players who provide your answer, the shallower you remain. <strong>Obscurity + Validity = 7,000m Depth.</strong>
+      <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+        Krillion reverses ordinary trivia. In conventional quiz games, entering the most famous correct answer wins points. In Krillion, the more players who provide your answer, the shallower you remain. <strong>Factual Validity + Mathematical Rarity = 7,000m Hadal Depth.</strong>
       </p>
     </div>
 
@@ -31,10 +54,10 @@ import Layout from '../layouts/Layout.astro';
       Every prompt in Krillion sorts player answers into distinct depth strata based on community answer distribution:
     </p>
     <ul>
-      <li><strong>0m - 1,500m (Surface Waters):</strong> Obvious pop-culture entries. Examples: Answering <em>Augustus</em> for Roman Emperor, or <em>Brazil</em> for Southern Hemisphere nation.</li>
-      <li><strong>2,000m - 4,500m (The Too-Clever Trap):</strong> Answers that feel intellectual and unique to an above-average trivia player, but are shared by thousands of other smart players. Examples: Answering <em>Titus Andronicus</em> for Shakespeare plays or <em>Tungsten</em> for transition metals.</li>
-      <li><strong>5,000m - 6,500m (Twilight Bathyal):</strong> Genuinely rare candidates that require secondary historical recollection.</li>
-      <li><strong>7,000m (The Hadal Abyss):</strong> Obscure historical or geographical footnotes verified by the database, chosen by fewer than 0.05% of active participants.</li>
+      <li><strong>0m - 200m (Surface Waters):</strong> Obvious pop-culture entries. Examples: Answering <em>Augustus</em> for Roman Emperor, or <em>Brazil</em> for Southern Hemisphere nation.</li>
+      <li><strong>300m - 600m (The Too-Clever Trap):</strong> Answers that feel intellectual and unique to an above-average trivia player, but are shared by thousands of other smart players. Examples: Answering <em>Titus Andronicus</em> for Shakespeare plays or <em>Tungsten</em> for transition metals.</li>
+      <li><strong>700m - 900m (Twilight Bathyal):</strong> Genuinely rare candidates that require secondary historical recollection (e.g. <em>Diocletian</em> or <em>Kyrgyzstan</em>).</li>
+      <li><strong>920m - 1,000m (The Hadal Abyss):</strong> Obscure historical or geographical footnotes verified by the database, chosen by fewer than 1% of active participants.</li>
     </ul>
 
     <h2>2. The "Second-Tier Pivot" Technique</h2>
@@ -58,17 +81,23 @@ import Layout from '../layouts/Layout.astro';
       Look for brief reigns during times of turmoil. In Rome, skip the Pax Romana emperors and choose third-century crisis figures such as <em>Majorian</em>, <em>Didius Julianus</em>, or <em>Pupienus</em>.
     </p>
 
-    <div class="mt-12 p-8 rounded-3xl bg-gradient-to-r from-abyss-card to-cyan-950/40 border border-white/10 text-center not-prose space-y-4">
-      <h3 class="text-2xl font-black text-white">Ready to Put Strategy into Practice?</h3>
-      <p class="text-xs text-slate-300 max-w-md mx-auto">
-        Test your new mental frameworks in our unlimited Endless Practice arena.
+    <h3>Periodic Elements Prompts</h3>
+    <p>
+      Bypass precious metals (Gold, Silver, Platinum) and basic gases. Dive straight to inner transition metals and rare lanthanides: <em>Rhenium</em>, <em>Hafnium</em>, <em>Ytterbium</em>, or <em>Thulium</em>.
+    </p>
+
+    <!-- Bottom CTA Bar -->
+    <div class="mt-12 p-8 rounded-3xl bg-abyss-card border border-cyan-500/30 text-center not-prose space-y-4 shadow-xl">
+      <h3 class="text-2xl font-black text-white">Apply the Hadal Strategy</h3>
+      <p class="text-xs text-slate-400 max-w-md mx-auto">
+        Put the second-tier pivot technique to the test in today's daily trench dive.
       </p>
-      <div class="flex justify-center gap-4 pt-2">
-        <a href="/endless" class="px-6 py-3 rounded-2xl bg-abyss-cyan text-abyss-dark font-extrabold text-sm hover:scale-105 transition-all">
-          Launch Endless Dive ♾️
+      <div class="flex items-center justify-center gap-3">
+        <a href="/#game" class="px-6 py-3 rounded-xl bg-gradient-to-r from-cyan-400 to-blue-500 text-slate-950 font-black text-xs hover:scale-105 transition-all shadow-lg shadow-cyan-500/20">
+          Play Daily Dive Now ⚓
         </a>
-        <a href="https://krillionhints.com" target="_blank" rel="noopener" class="px-6 py-3 rounded-2xl bg-white/10 hover:bg-white/20 text-white font-bold text-sm transition-all">
-          Daily Hints Solver ↗
+        <a href="/7000m-words-list" class="px-6 py-3 rounded-xl bg-white/5 hover:bg-white/10 text-white font-bold text-xs border border-white/10 transition-all">
+          Browse 7,000m Word List
         </a>
       </div>
     </div>

@@ -1,33 +1,185 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import KrillionArena from '../components/KrillionArena.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
+import IconScience from '../components/icons/IconScience.astro';
+
+const breadcrumbs = [
+  { label: 'Home', href: '/' },
+  { label: 'Themed Packs', href: '/#variants' },
+  { label: 'Science & Periodic Elements' }
+];
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How to achieve 7,000m depth in the Krillion Science Pack?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "When prompted with elements, anatomical terms, or Nobel physics winners, avoid universal answers like Hydrogen, Oxygen, or Albert Einstein. Select transition metals (e.g., Rhenium, Hafnium, Tantalum, Erbium) or lesser-known scientific discoveries."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What are the biggest crowd traps in Science prompts?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Gold, Iron, Helium, Isaac Newton, and Marie Curie are submitted by high percentages of players, delivering negligible depth (under 120m)."
+      }
+    }
+  ]
+};
 ---
 
 <Layout
-  title="Play Krillion Science & Chemistry Pack | Periodic Elements Trivia - Krillion.si"
-  description="Play Krillion's Science & Chemistry themed pack. Guess rare transition metals, deep-sea hadal species, and obscure Nobel laureates in Physics."
+  title="Krillion Science & Periodic Elements Pack | Play Science Reverse Trivia"
+  description="Play Krillion Science pack online for free. Plunge to 7,000m depth by naming obscure periodic elements, hadal marine organisms, and Nobel laureates."
+  schema={faqSchema}
 >
-  <div class="py-6 px-3 sm:px-6 lg:px-8 max-w-7xl mx-auto space-y-6">
-    <div class="text-center space-y-2">
-      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-950/40 border border-cyan-500/30 text-abyss-cyan text-xs font-bold">
-        <span>🧪 THEMED PACK • SCIENCE & CHEMISTRY</span>
+  <div class="py-6 px-3 sm:px-6 lg:px-8 max-w-7xl mx-auto space-y-8">
+    <div class="space-y-3">
+      <Breadcrumb items={breadcrumbs} />
+      
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pt-2">
+        <div class="space-y-1.5">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-950/60 border border-cyan-500/30 text-cyan-400 text-xs font-bold font-mono">
+            <IconScience class="w-3.5 h-3.5" />
+            <span>THEMED VAULT • SCIENCE & ELEMENTS</span>
+          </div>
+          <h1 class="text-3xl sm:text-4xl font-black text-white tracking-tight">
+            Krillion Science & Periodic Elements
+          </h1>
+          <p class="text-slate-400 text-xs sm:text-sm max-w-3xl leading-relaxed">
+            <strong class="text-white">Direct Definition:</strong> The Science Pack evaluates knowledge across the periodic table, planetary astronomy, cellular biology, and physics laureates. Obscure yet verified terms lead directly to hadal trench depths.
+          </p>
+        </div>
+
+        <div class="flex sm:flex-col items-center sm:items-end justify-between sm:justify-center p-3 rounded-2xl bg-abyss-card border border-cyan-500/20 text-right">
+          <span class="text-[10px] text-slate-400 font-mono uppercase tracking-wider">Target Threshold</span>
+          <span class="text-xl font-black text-cyan-400 font-mono">7,000m Trench</span>
+        </div>
       </div>
-      <h1 class="text-3xl sm:text-4xl font-black text-white tracking-tight">
-        Krillion Science & Chemistry Pack
-      </h1>
-      <p class="text-slate-400 text-xs sm:text-sm max-w-xl mx-auto">
-        Test your obscure scientific recall across chemistry, physics, and marine biology.
-      </p>
     </div>
 
-    <KrillionArena modeUrl="https://www.krillion.org/play/science/" />
+    <!-- Playable Game Viewport -->
+    <KrillionArena
+      modeUrl="https://www.krillion.org/play/science/"
+      modeTitle="Krillion Science & Periodic Elements Pack"
+      badgeText="SCIENCE PACK 🧪"
+    />
 
-    <!-- Editorial strategy section for SEO -->
-    <section class="mt-12 p-8 rounded-3xl bg-abyss-card border border-white/5 space-y-4">
-      <h2 class="text-xl font-bold text-white">Science 7,000m Strategy & Tips</h2>
-      <p class="text-xs text-slate-300 leading-relaxed">
-        Transition metal prompts: skip Gold, Iron, Copper (0m) and Tungsten/Titanium (3,000m trap). Score maximum depth with <em>Rhenium</em>, <em>Osmium</em>, <em>Iridium</em>, <em>Hafnium</em>, or <em>Technetium</em>.
-      </p>
-    </section>
+    <!-- SEO & GEO Editorial -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 pt-4">
+      <div class="lg:col-span-2 space-y-8">
+        <!-- Rarity Matrix Table -->
+        <div class="p-6 sm:p-8 rounded-3xl bg-abyss-card border border-white/10 space-y-5">
+          <div class="flex items-center justify-between">
+            <h2 class="text-xl font-bold text-white flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-cyan-400"></span>
+              <span>Science Rarity Matrix: Periodic Elements</span>
+            </h2>
+            <span class="text-[11px] font-mono text-cyan-400/80 bg-cyan-950/50 px-2 py-0.5 rounded border border-cyan-500/20">Prompt: Chemical Elements</span>
+          </div>
+
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs border-collapse">
+              <thead>
+                <tr class="border-b border-white/10 text-slate-400 font-mono">
+                  <th class="py-2.5 px-3">Depth Zone</th>
+                  <th class="py-2.5 px-3">Answer Examples</th>
+                  <th class="py-2.5 px-3">Estimated Rarity</th>
+                  <th class="py-2.5 px-3">Depth Yield</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-white/5 font-mono">
+                <tr class="bg-emerald-950/20 text-emerald-300">
+                  <td class="py-3 px-3 font-bold">🌊 Hadal Trench</td>
+                  <td class="py-3 px-3 font-sans"><em>Rhenium</em>, <em>Hafnium</em>, <em>Tantalum</em>, <em>Praseodymium</em></td>
+                  <td class="py-3 px-3">&lt; 0.8%</td>
+                  <td class="py-3 px-3 font-bold">+960m ~ 1,000m</td>
+                </tr>
+                <tr class="bg-cyan-950/20 text-cyan-300">
+                  <td class="py-3 px-3 font-bold">⚓ Abyssal Zone</td>
+                  <td class="py-3 px-3 font-sans"><em>Molybdenum</em>, <em>Ruthenium</em>, <em>Bismuth</em>, <em>Indium</em></td>
+                  <td class="py-3 px-3">2.0% ~ 5.0%</td>
+                  <td class="py-3 px-3 font-bold">+720m ~ 880m</td>
+                </tr>
+                <tr class="bg-amber-950/20 text-amber-300">
+                  <td class="py-3 px-3 font-bold">⚠️ Bathyal Shelf</td>
+                  <td class="py-3 px-3 font-sans"><em>Mercury</em>, <em>Platinum</em>, <em>Titanium</em>, <em>Lead</em></td>
+                  <td class="py-3 px-3">10.0% ~ 20.0%</td>
+                  <td class="py-3 px-3 font-bold">+310m ~ 500m</td>
+                </tr>
+                <tr class="bg-rose-950/20 text-rose-300">
+                  <td class="py-3 px-3 font-bold">🚨 Surface Trap</td>
+                  <td class="py-3 px-3 font-sans"><em>Hydrogen</em>, <em>Oxygen</em>, <em>Carbon</em>, <em>Gold</em>, <em>Iron</em></td>
+                  <td class="py-3 px-3">&gt; 40%</td>
+                  <td class="py-3 px-3 font-bold">0m ~ 80m</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- FAQ Section -->
+        <div class="p-6 sm:p-8 rounded-3xl bg-abyss-card border border-white/10 space-y-4">
+          <h2 class="text-xl font-bold text-white">Frequently Asked Questions</h2>
+          <div class="space-y-4 pt-2">
+            {faqSchema.mainEntity.map(faq => (
+              <div class="p-4 rounded-2xl bg-white/5 border border-white/5 space-y-2">
+                <h3 class="text-sm font-bold text-cyan-300">{faq.name}</h3>
+                <p class="text-xs text-slate-300 leading-relaxed">{faq.acceptedAnswer.text}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column -->
+      <div class="space-y-6">
+        <div class="p-6 rounded-3xl bg-gradient-to-br from-amber-950/40 via-abyss-card to-abyss-card border border-amber-500/30 space-y-3">
+          <div class="flex items-center gap-2 text-amber-400 text-xs font-bold">
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a7 7 0 0 0-7 7c0 2.38 1.19 4.47 3 5.74V17a2 2 0 0 0 2 2h4a2 2 0 0 0 2-2v-2.26c1.81-1.27 3-3.36 3-5.74a7 7 0 0 0-7-7Z"/><path d="M9 21h6"/></svg>
+            <span>Live Science Hints</span>
+          </div>
+          <h3 class="text-base font-bold text-white">KrillionHints.com Solver</h3>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            Get accurate clues, periodic table helpers, and safe candidate terms.
+          </p>
+          <a
+            href="https://krillionhints.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="block w-full py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-black text-xs text-center transition-colors shadow-lg shadow-amber-500/20"
+          >
+            Access Hints & Solver ↗
+          </a>
+        </div>
+
+        <div class="p-6 rounded-3xl bg-abyss-card border border-white/10 space-y-3">
+          <h3 class="text-sm font-bold text-white uppercase tracking-wider font-mono">Other Themed Packs</h3>
+          <div class="space-y-2 text-xs">
+            <a href="/movies" class="block p-2.5 rounded-xl bg-white/5 hover:bg-cyan-500/10 hover:text-cyan-400 border border-white/5 transition-all">
+              🎬 Cinema & Academy Awards
+            </a>
+            <a href="/geography" class="block p-2.5 rounded-xl bg-white/5 hover:bg-cyan-500/10 hover:text-cyan-400 border border-white/5 transition-all">
+              🌍 Geography & Sovereign Enclaves
+            </a>
+            <a href="/history" class="block p-2.5 rounded-xl bg-white/5 hover:bg-cyan-500/10 hover:text-cyan-400 border border-white/5 transition-all">
+              🏛️ World History & Empires
+            </a>
+            <a href="/sports" class="block p-2.5 rounded-xl bg-white/5 hover:bg-cyan-500/10 hover:text-cyan-400 border border-white/5 transition-all">
+              ⚽ Sports & Olympic Champions
+            </a>
+            <a href="/language" class="block p-2.5 rounded-xl bg-white/5 hover:bg-cyan-500/10 hover:text-cyan-400 border border-white/5 transition-all">
+              📖 Language & Literature Classics
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </Layout>

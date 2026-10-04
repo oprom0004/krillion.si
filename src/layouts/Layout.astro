@@ -4,14 +4,56 @@ interface Props {
   description?: string;
   canonical?: string;
   ogImage?: string;
+  schema?: Record<string, any>;
 }
 
 const {
   title = "Krillion.si | Play Krillion Online - Daily Abyss Dive & Endless Mode",
   description = "Play Krillion online for free on Krillion.si. Dive deeper into the ocean trench by guessing the rarest, least obvious answers. Features Daily Dive, Endless practice, and 7,000m abyssal guides.",
   canonical = Astro.url.href,
-  ogImage = "/og-image.jpg"
+  ogImage = "/og-image.jpg",
+  schema
 } = Astro.props;
+
+const siteUrl = "https://krillion.si";
+const currentUrl = canonical.startsWith("http") ? canonical : `${siteUrl}${canonical}`;
+
+const defaultSchema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": `${siteUrl}/#website`,
+      "url": siteUrl,
+      "name": "Krillion.si",
+      "description": "Play Krillion reverse-trivia trench game online. Master 7,000m abyssal dives.",
+      "publisher": {
+        "@type": "Organization",
+        "name": "Krillion.si Research Guild",
+        "url": siteUrl
+      }
+    },
+    {
+      "@type": "VideoGame",
+      "@id": `${siteUrl}/#game`,
+      "name": "Krillion",
+      "url": siteUrl,
+      "description": "A viral daily reverse-trivia word game where players plunge into a deep ocean trench by naming the rarest, least common valid answers across 7 categories.",
+      "genre": ["Reverse Trivia", "Word Game", "Puzzle", "Educational"],
+      "gamePlatform": ["Web Browser", "Mobile Browser", "Desktop"],
+      "operatingSystem": "Any",
+      "applicationCategory": "Game",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock"
+      }
+    }
+  ]
+};
+
+const finalSchema = schema || defaultSchema;
 ---
 
 <!doctype html>
@@ -24,21 +66,27 @@ const {
 
     <title>{title}</title>
     <meta name="description" content={description} />
-    <link rel="canonical" href={canonical} />
+    <meta name="keywords" content="Krillion, Krillion game, Krillion online, Krillion daily dive, Krillion endless mode, reverse trivia game, 7000m depth trivia, Krillion hints, Krillion solver" />
+    <meta name="author" content="Krillion.si Strategy Guild" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <meta name="theme-color" content="#030814" />
+    <link rel="canonical" href={currentUrl} />
 
     <!-- Open Graph / Social -->
     <meta property="og:type" content="website" />
-    <meta property="og:url" content={canonical} />
+    <meta property="og:url" content={currentUrl} />
+    <meta property="og:site_name" content="Krillion.si" />
+    <meta property="og:locale" content="en_US" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:image" content={new URL(ogImage, Astro.site)} />
+    <meta property="og:image" content={new URL(ogImage, Astro.site || siteUrl)} />
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:url" content={canonical} />
+    <meta property="twitter:url" content={currentUrl} />
     <meta property="twitter:title" content={title} />
     <meta property="twitter:description" content={description} />
-    <meta property="twitter:image" content={new URL(ogImage, Astro.site)} />
+    <meta property="twitter:image" content={new URL(ogImage, Astro.site || siteUrl)} />
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -47,52 +95,77 @@ const {
       href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap"
       rel="stylesheet"
     />
+
+    <!-- JSON-LD Structured Data for SEO & GEO -->
+    <script type="application/ld+json" set:html={JSON.stringify(finalSchema)} />
   </head>
-  <body class="bg-abyss-bg text-slate-100 min-h-screen flex flex-col font-sans selection:bg-abyss-cyan selection:text-abyss-dark">
+  <body class="bg-[#030814] text-slate-100 min-h-screen flex flex-col font-sans selection:bg-cyan-500 selection:text-slate-950 relative antialiased">
+    <!-- Submarine Ambient Background Glow -->
+    <div class="fixed inset-0 pointer-events-none -z-10 overflow-hidden">
+      <div class="absolute -top-40 left-1/2 -translate-x-1/2 w-[1000px] h-[450px] bg-gradient-to-b from-cyan-600/10 via-blue-900/5 to-transparent blur-3xl rounded-full"></div>
+      <div class="absolute bottom-0 right-0 w-[500px] h-[500px] bg-blue-950/20 blur-3xl rounded-full"></div>
+    </div>
+
     <!-- Navigation Header -->
-    <header class="sticky top-0 z-50 backdrop-blur-md bg-abyss-dark/80 border-b border-white/10">
+    <header class="sticky top-0 z-50 backdrop-blur-md bg-[#030814]/85 border-b border-white/10 transition-all">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-        <a href="/" class="flex items-center gap-2 group">
-          <span class="text-2xl font-black tracking-tight text-white flex items-center gap-1.5">
-            <span class="text-abyss-cyan">KRILLION</span><span class="text-xs font-bold px-2 py-0.5 rounded-full bg-abyss-cyan/20 text-abyss-cyan border border-abyss-cyan/30">.SI</span>
+        <!-- Logo -->
+        <a href="/" class="flex items-center gap-2.5 group">
+          <div class="w-8 h-8 rounded-xl bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center shadow-[0_0_15px_rgba(6,182,212,0.4)] group-hover:scale-105 transition-transform">
+            <svg class="w-4.5 h-4.5 text-slate-950" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 2v4" />
+              <path d="M10 2h4" />
+              <path d="M2 13a7 7 0 0 0 14 0c0-1.5-.5-3-2-4H7c-1.5 1-2 2.5-2 4" />
+              <path d="M16 13h5a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1h-5" />
+            </svg>
+          </div>
+          <span class="text-xl sm:text-2xl font-black tracking-tight text-white flex items-center gap-1">
+            <span>KRILLION</span><span class="text-xs font-extrabold px-1.5 py-0.5 rounded-md bg-cyan-500/20 text-cyan-400 border border-cyan-500/30">.SI</span>
           </span>
         </a>
 
         <!-- Desktop Navigation -->
-        <nav class="hidden md:flex items-center gap-6 text-sm font-semibold">
-          <a href="/#game" class="text-slate-300 hover:text-abyss-cyan transition-colors flex items-center gap-1">
-            <span>🎮 Play Daily</span>
+        <nav class="hidden lg:flex items-center gap-5 text-xs font-semibold">
+          <a href="/#game" class="text-slate-300 hover:text-cyan-400 transition-colors flex items-center gap-1.5">
+            <svg class="w-3.5 h-3.5 text-cyan-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>
+            <span>Daily Dive</span>
           </a>
-          <a href="/endless" class="text-slate-300 hover:text-abyss-cyan transition-colors flex items-center gap-1">
-            <span>♾️ Endless Mode</span>
+          <a href="/endless" class="text-slate-300 hover:text-cyan-400 transition-colors flex items-center gap-1.5">
+            <svg class="w-3.5 h-3.5 text-cyan-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18.178 8c5.096 0 5.096 8 0 8-5.095 0-7.133-8-12.739-8-4.585 0-4.585 8 0 8 5.606 0 7.644-8 12.74-8z"/></svg>
+            <span>Endless Practice</span>
           </a>
-          <a href="/what-is" class="text-slate-300 hover:text-abyss-cyan transition-colors">
+          <a href="/what-is" class="text-slate-300 hover:text-cyan-400 transition-colors">
             What is Krillion?
           </a>
-          <a href="/how-to-dive-7000m" class="text-slate-300 hover:text-abyss-cyan transition-colors">
-            7,000m Strategy
+          <a href="/how-to-dive-7000m" class="text-slate-300 hover:text-cyan-400 transition-colors">
+            7,000m Guide
           </a>
-          <a href="/too-clever-trap" class="text-slate-300 hover:text-abyss-cyan transition-colors">
+          <a href="/too-clever-trap" class="text-slate-300 hover:text-cyan-400 transition-colors">
             Trap Avoidance
           </a>
           <a
             href="https://krillionhints.com"
             target="_blank"
             rel="noopener noreferrer"
-            class="text-xs bg-white/5 hover:bg-white/10 text-amber-300 border border-amber-500/30 px-3 py-1.5 rounded-lg flex items-center gap-1.5 transition-all shadow-sm"
+            class="text-xs bg-amber-500/10 hover:bg-amber-500/20 text-amber-300 border border-amber-500/30 px-3 py-1.5 rounded-lg flex items-center gap-1.5 transition-all shadow-sm"
           >
-            <span>💡 Today's Hints & Solver</span>
-            <span class="text-[10px] bg-amber-500/20 px-1 rounded">External</span>
+            <svg class="w-3.5 h-3.5 text-amber-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 2a7 7 0 0 0-7 7c0 2.38 1.19 4.47 3 5.74V17a2 2 0 0 0 2 2h4a2 2 0 0 0 2-2v-2.26c1.81-1.27 3-3.36 3-5.74a7 7 0 0 0-7-7Z" />
+              <path d="M9 21h6" />
+            </svg>
+            <span>Daily Hints & Solver</span>
+            <span class="text-[9px] bg-amber-500/30 px-1 py-0.5 rounded font-mono">External</span>
           </a>
         </nav>
 
         <!-- Play Quick Action -->
-        <div class="flex items-center gap-3">
+        <div class="flex items-center gap-2">
           <a
             href="/#game"
-            class="px-4 py-2 rounded-xl bg-gradient-to-r from-abyss-cyan to-blue-600 text-abyss-dark font-extrabold text-sm shadow-lg shadow-abyss-cyan/20 hover:shadow-abyss-cyan/40 hover:scale-[1.02] active:scale-[0.98] transition-all"
+            class="px-4 py-2 rounded-xl bg-gradient-to-r from-cyan-400 via-cyan-500 to-blue-500 text-slate-950 font-black text-xs shadow-lg shadow-cyan-500/20 hover:shadow-cyan-500/40 hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center gap-1.5"
           >
-            Dive Now ⚓
+            <span>Submerge Now</span>
+            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
           </a>
         </div>
       </div>
@@ -104,64 +177,77 @@ const {
     </main>
 
     <!-- Footer -->
-    <footer class="bg-abyss-card border-t border-white/5 py-12 text-slate-400 text-sm">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-4 gap-8">
-        <div class="space-y-3">
+    <footer class="bg-[#02050e] border-t border-white/5 py-14 text-slate-400 text-sm">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-4 gap-10">
+        <!-- Brand Info -->
+        <div class="space-y-3.5">
           <div class="flex items-center gap-2">
-            <span class="text-xl font-black text-white">KRILLION<span class="text-abyss-cyan">.SI</span></span>
+            <span class="text-xl font-black text-white">KRILLION<span class="text-cyan-400">.SI</span></span>
           </div>
           <p class="text-xs leading-relaxed text-slate-400">
-            The sovereign digital sanctuary for reverse-trivia divers. Test your knowledge rarity, evade crowd traps, and plunge to 7,000 meters in the abyssal trench.
+            The sovereign digital research portal for reverse-trivia divers. Master community rarity distributions, evade crowd traps, and plunge to the 7,000-meter hadal trench.
           </p>
-          <div class="text-xs text-slate-500">
-            © {new Date().getFullYear()} Krillion.si. Inspired by Krillion & deep-sea trivia culture.
+          <div class="text-[11px] text-slate-500">
+            © {new Date().getFullYear()} Krillion.si Strategy Guild. Daily reset at 00:00 UTC.
           </div>
         </div>
 
+        <!-- Themed Packs -->
         <div>
-          <h4 class="text-white font-bold text-xs uppercase tracking-wider mb-3">Modes & Themed Packs</h4>
+          <h4 class="text-white font-bold text-xs uppercase tracking-wider mb-3.5 flex items-center gap-1.5">
+            <span class="w-1.5 h-1.5 rounded-full bg-cyan-400"></span>
+            <span>Themed Vaults & Packs</span>
+          </h4>
           <ul class="space-y-2 text-xs">
-            <li><a href="/daily" class="hover:text-abyss-cyan transition-colors">Daily Trench Dive (7 Prompts)</a></li>
-            <li><a href="/endless" class="hover:text-abyss-cyan transition-colors">Endless Sinker (Practice Mode)</a></li>
-            <li><a href="/movies" class="hover:text-abyss-cyan transition-colors">🎬 Cinema & Oscars Pack</a></li>
-            <li><a href="/geography" class="hover:text-abyss-cyan transition-colors">🌍 Geography & Enclaves Pack</a></li>
-            <li><a href="/history" class="hover:text-abyss-cyan transition-colors">🏛️ History & Empires Pack</a></li>
-            <li><a href="/sports" class="hover:text-abyss-cyan transition-colors">⚽ Sports & Athletics Pack</a></li>
-            <li><a href="/language" class="hover:text-abyss-cyan transition-colors">📖 Language & Literature Pack</a></li>
-            <li><a href="/science" class="hover:text-abyss-cyan transition-colors">🧪 Science & Elements Pack</a></li>
+            <li><a href="/movies" class="hover:text-cyan-400 transition-colors">Cinema & Academy Awards</a></li>
+            <li><a href="/geography" class="hover:text-cyan-400 transition-colors">Geography & Sovereign Enclaves</a></li>
+            <li><a href="/history" class="hover:text-cyan-400 transition-colors">World History & Emperors</a></li>
+            <li><a href="/sports" class="hover:text-cyan-400 transition-colors">Sports & Olympic Champions</a></li>
+            <li><a href="/language" class="hover:text-cyan-400 transition-colors">Language & Literature Classics</a></li>
+            <li><a href="/science" class="hover:text-cyan-400 transition-colors">Science & Periodic Elements</a></li>
           </ul>
         </div>
 
+        <!-- Knowledge & Guides -->
         <div>
-          <h4 class="text-white font-bold text-xs uppercase tracking-wider mb-3">Knowledge & Guides</h4>
+          <h4 class="text-white font-bold text-xs uppercase tracking-wider mb-3.5 flex items-center gap-1.5">
+            <span class="w-1.5 h-1.5 rounded-full bg-cyan-400"></span>
+            <span>Stratagem & Documentation</span>
+          </h4>
           <ul class="space-y-2 text-xs">
-            <li><a href="/what-is" class="hover:text-abyss-cyan transition-colors">What is Krillion?</a></li>
-            <li><a href="/how-to-play" class="hover:text-abyss-cyan transition-colors">Official Rules & Mechanics</a></li>
-            <li><a href="/7000m-words-list" class="hover:text-abyss-cyan transition-colors">7,000m Cheat Sheet & Word List</a></li>
-            <li><a href="/when-does-krillion-reset" class="hover:text-abyss-cyan transition-colors">Daily Reset Time & Countdown</a></li>
-            <li><a href="/krillion-alternatives" class="hover:text-abyss-cyan transition-colors">Games Like Krillion (Top Picks)</a></li>
-            <li><a href="/how-to-dive-7000m" class="hover:text-abyss-cyan transition-colors">How to Reach 7,000m Depth</a></li>
-            <li><a href="/too-clever-trap" class="hover:text-abyss-cyan transition-colors">Bypassing the "Too-Clever" Trap</a></li>
+            <li><a href="/what-is" class="hover:text-cyan-400 transition-colors">What is Krillion? (Overview)</a></li>
+            <li><a href="/how-to-play" class="hover:text-cyan-400 transition-colors">Official Rules & Depth Mechanics</a></li>
+            <li><a href="/7000m-words-list" class="hover:text-cyan-400 transition-colors">7,000m Cheat Sheet Word List</a></li>
+            <li><a href="/when-does-krillion-reset" class="hover:text-cyan-400 transition-colors">Daily Reset Countdown (UTC)</a></li>
+            <li><a href="/krillion-alternatives" class="hover:text-cyan-400 transition-colors">Games Like Krillion (Top 5)</a></li>
+            <li><a href="/how-to-dive-7000m" class="hover:text-cyan-400 transition-colors">How to Dive 7,000m Strategy</a></li>
+            <li><a href="/too-clever-trap" class="hover:text-cyan-400 transition-colors">Bypassing the "Too-Clever" Trap</a></li>
           </ul>
         </div>
 
+        <!-- Sister Platforms & Legal -->
         <div>
-          <h4 class="text-white font-bold text-xs uppercase tracking-wider mb-3">Sister Platforms</h4>
-          <ul class="space-y-2 text-xs">
+          <h4 class="text-white font-bold text-xs uppercase tracking-wider mb-3.5 flex items-center gap-1.5">
+            <span class="w-1.5 h-1.5 rounded-full bg-cyan-400"></span>
+            <span>Allied Trivia Network</span>
+          </h4>
+          <ul class="space-y-2.5 text-xs">
             <li>
-              <a href="https://krillionhints.com" target="_blank" rel="noopener" class="text-amber-400 hover:text-amber-300 font-semibold flex items-center gap-1">
-                <span>KrillionHints.com (Daily Clues & Solver)</span> ↗
+              <a href="https://krillionhints.com" target="_blank" rel="noopener" class="text-amber-400 hover:text-amber-300 font-semibold flex items-center gap-1 group">
+                <span>KrillionHints.com (Daily Clues & Solver)</span>
+                <span class="group-hover:translate-x-0.5 transition-transform">↗</span>
               </a>
             </li>
             <li>
-              <a href="https://ubg766.com" target="_blank" rel="noopener" class="hover:text-abyss-cyan flex items-center gap-1">
-                <span>UBG766 (Unblocked HTML5 Games)</span> ↗
+              <a href="https://ubg766.com" target="_blank" rel="noopener" class="text-slate-300 hover:text-cyan-400 flex items-center gap-1 group">
+                <span>UBG766 (Unblocked HTML5 Games)</span>
+                <span class="group-hover:translate-x-0.5 transition-transform">↗</span>
               </a>
             </li>
           </ul>
-          <div class="mt-4 pt-3 border-t border-white/5 flex gap-4 text-xs text-slate-500">
-            <a href="/privacy" class="hover:underline">Privacy Policy</a>
-            <a href="/terms" class="hover:underline">Terms of Service</a>
+          <div class="mt-6 pt-4 border-t border-white/5 flex gap-4 text-xs text-slate-500">
+            <a href="/privacy" class="hover:text-slate-300 transition-colors">Privacy Policy</a>
+            <a href="/terms" class="hover:text-slate-300 transition-colors">Terms of Service</a>
           </div>
         </div>
       </div>

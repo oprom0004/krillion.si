@@ -1,135 +1,211 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import KrillionArena from '../components/KrillionArena.astro';
+import IconMovie from '../components/icons/IconMovie.astro';
+import IconGeography from '../components/icons/IconGeography.astro';
+import IconHistory from '../components/icons/IconHistory.astro';
+import IconSports from '../components/icons/IconSports.astro';
+import IconLanguage from '../components/icons/IconLanguage.astro';
+import IconScience from '../components/icons/IconScience.astro';
+import IconSubmarine from '../components/icons/IconSubmarine.astro';
+
+const indexFaqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is Krillion and how do you play?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Krillion is a browser-native reverse-trivia game. In each daily dive, players are presented with 7 distinct category prompts (e.g., countries, elements, Oscar winners). Unlike standard trivia where popular answers win, Krillion awards depth based on factual obscurity: the fewer global players who submit your answer, the deeper your submarine plunges toward the 7,000-meter Hadal Trench."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "When does the Krillion daily game reset?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The official Krillion Daily Dive resets globally every day at 00:00 UTC (Midnight Universal Time). All players worldwide receive the exact same 7 prompts simultaneously."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the maximum achievable depth in Krillion?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The maximum achievable depth is 7,000 meters (1,000 meters per prompt across all 7 rounds), which unlocks the coveted 'One in a Krillion' Hadal Crown."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can you play practice mode without daily limits?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. While the Daily Dive is limited to 1 run every 24 hours, you can play unlimited rounds in Endless Practice Mode or explore 6 standalone Themed Packs (Cinema, Geography, History, Sports, Language, Science)."
+      }
+    }
+  ]
+};
 ---
 
 <Layout
   title="Krillion.si | Play Krillion Online - The Viral Reverse-Trivia Trench Game"
   description="Play Krillion online for free! Plunge into the ocean trench by guessing the rarest, least obvious answers. Features Daily Dive, Endless Practice, and 6 Themed Packs (Cinema, Geography, History, Sports, Science)."
+  schema={indexFaqSchema}
 >
   <!-- TOP GAME ZONE: Direct, Full-Width, Above the Fold -->
-  <section class="pt-2 pb-8 px-2 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-    <!-- Direct Pure Game Canvas -->
-    <KrillionArena />
+  <section id="game" class="pt-2 pb-8 px-2 sm:px-6 lg:px-8 max-w-7xl mx-auto space-y-3">
+    <!-- Direct Pure Game Canvas with Console Toolbar -->
+    <KrillionArena
+      modeUrl="https://www.krillion.org/play/daily/"
+      modeTitle="Krillion Daily Abyss Dive"
+      badgeText="DAILY TRENCH DIVE • 7 PROMPTS ⚓"
+    />
   </section>
 
-  <!-- CONTENT SECTION 1: Themed Variants & Category Packs (Listed directly as native content) -->
-  <section class="py-16 bg-abyss-dark/70 border-t border-white/5">
+  <!-- GEO & AI SEARCH DEFINITION CAPSULE (Direct Answer for LLMs and Search Snippets) -->
+  <section class="py-8 bg-cyan-950/20 border-y border-cyan-500/20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="p-6 rounded-3xl bg-abyss-card/80 border border-cyan-500/30 shadow-lg flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+        <div class="space-y-2 max-w-4xl">
+          <div class="flex items-center gap-2 text-cyan-400 text-xs font-bold font-mono uppercase tracking-widest">
+            <IconSubmarine class="w-4 h-4 text-cyan-400" />
+            <span>AI Overview & Verified Knowledge Capsule</span>
+          </div>
+          <p class="text-xs sm:text-sm text-slate-200 leading-relaxed">
+            <strong class="text-white font-bold">Krillion (Krillion.si)</strong> is an online reverse-trivia word game where the objective is to reach the <strong class="text-cyan-400">7,000m Hadal Abyss</strong>. Across 7 rapid categories, players must avoid common headline answers and enter valid, low-frequency historical, geographical, and cultural candidates. Depth is calculated dynamically against community response distributions.
+          </p>
+        </div>
+        <div class="flex items-center gap-3 shrink-0">
+          <a
+            href="/what-is"
+            class="px-4 py-2 rounded-xl bg-white/5 hover:bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 text-xs font-bold transition-all flex items-center gap-1"
+          >
+            <span>Read Full Rules</span> →
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTENT SECTION 1: Themed Variants & Category Packs -->
+  <section id="variants" class="py-16 bg-abyss-dark/70">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
         <div>
-          <span class="text-xs font-bold text-abyss-cyan uppercase tracking-widest font-mono">Specialized Vaults</span>
+          <span class="text-xs font-bold text-cyan-400 uppercase tracking-widest font-mono">Specialized Subject Archives</span>
           <h2 class="text-3xl sm:text-4xl font-black text-white mt-1">Play Themed Packs & Variants</h2>
-          <p class="text-slate-400 text-sm mt-1">
-            Want to test specific subjects? Launch directly into curated domain archives with dedicated rarity dictionaries.
+          <p class="text-slate-400 text-xs sm:text-sm mt-1">
+            Test specific domain expertise. Launch directly into dedicated subject vaults equipped with standalone rarity engines.
           </p>
         </div>
       </div>
 
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         <!-- Cinema -->
-        <div class="p-6 rounded-3xl bg-abyss-card border border-white/10 hover:border-abyss-cyan/40 transition-all flex flex-col justify-between group">
-          <div class="space-y-3">
-            <div class="w-12 h-12 rounded-2xl bg-cyan-950/50 border border-cyan-500/20 flex items-center justify-center text-2xl">
-              🎬
+        <div class="p-6 rounded-3xl bg-abyss-card border border-white/10 hover:border-cyan-500/50 hover:shadow-[0_0_25px_rgba(6,182,212,0.15)] transition-all flex flex-col justify-between group">
+          <div class="space-y-3.5">
+            <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-cyan-950 to-blue-950 border border-cyan-500/30 flex items-center justify-center text-cyan-400 group-hover:scale-110 transition-transform shadow-md">
+              <IconMovie class="w-6 h-6" />
             </div>
-            <h3 class="text-xl font-bold text-white group-hover:text-abyss-cyan transition-colors">Cinema & Academy Awards</h3>
+            <h3 class="text-lg font-bold text-white group-hover:text-cyan-400 transition-colors">Cinema & Academy Awards</h3>
             <p class="text-xs text-slate-400 leading-relaxed">
               Name obscure Oscar Best Picture winners from the 1930s–1950s, overlooked Cannes Palme d'Or directors, and golden-age actors. Common blockbuster answers drown at the surface.
             </p>
           </div>
           <div class="pt-6">
-            <a href="/movies" class="block w-full py-2.5 rounded-xl bg-white/5 hover:bg-abyss-cyan hover:text-abyss-dark text-slate-200 font-bold text-xs transition-all border border-white/10 text-center">
+            <a href="/movies" class="block w-full py-2.5 rounded-xl bg-white/5 group-hover:bg-cyan-500 group-hover:text-slate-950 text-slate-200 font-black text-xs transition-all border border-white/10 text-center">
               Play Cinema Pack ↗
             </a>
           </div>
         </div>
 
         <!-- Geography -->
-        <div class="p-6 rounded-3xl bg-abyss-card border border-white/10 hover:border-abyss-cyan/40 transition-all flex flex-col justify-between group">
-          <div class="space-y-3">
-            <div class="w-12 h-12 rounded-2xl bg-cyan-950/50 border border-cyan-500/20 flex items-center justify-center text-2xl">
-              🌍
+        <div class="p-6 rounded-3xl bg-abyss-card border border-white/10 hover:border-cyan-500/50 hover:shadow-[0_0_25px_rgba(6,182,212,0.15)] transition-all flex flex-col justify-between group">
+          <div class="space-y-3.5">
+            <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-cyan-950 to-blue-950 border border-cyan-500/30 flex items-center justify-center text-cyan-400 group-hover:scale-110 transition-transform shadow-md">
+              <IconGeography class="w-6 h-6" />
             </div>
-            <h3 class="text-xl font-bold text-white group-hover:text-abyss-cyan transition-colors">Geography & Enclaves</h3>
+            <h3 class="text-lg font-bold text-white group-hover:text-cyan-400 transition-colors">Geography & Enclaves</h3>
             <p class="text-xs text-slate-400 leading-relaxed">
               Plunge into sovereign enclaves (San Marino, Lesotho), microstate archipelagos (Nauru, Tuvalu), and doubly landlocked nations. Skip obvious continents to reach 7,000m.
             </p>
           </div>
           <div class="pt-6">
-            <a href="/geography" class="block w-full py-2.5 rounded-xl bg-white/5 hover:bg-abyss-cyan hover:text-abyss-dark text-slate-200 font-bold text-xs transition-all border border-white/10 text-center">
+            <a href="/geography" class="block w-full py-2.5 rounded-xl bg-white/5 group-hover:bg-cyan-500 group-hover:text-slate-950 text-slate-200 font-black text-xs transition-all border border-white/10 text-center">
               Play Geography Pack ↗
             </a>
           </div>
         </div>
 
         <!-- History -->
-        <div class="p-6 rounded-3xl bg-abyss-card border border-white/10 hover:border-abyss-cyan/40 transition-all flex flex-col justify-between group">
-          <div class="space-y-3">
-            <div class="w-12 h-12 rounded-2xl bg-cyan-950/50 border border-cyan-500/20 flex items-center justify-center text-2xl">
-              🏛️
+        <div class="p-6 rounded-3xl bg-abyss-card border border-white/10 hover:border-cyan-500/50 hover:shadow-[0_0_25px_rgba(6,182,212,0.15)] transition-all flex flex-col justify-between group">
+          <div class="space-y-3.5">
+            <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-cyan-950 to-blue-950 border border-cyan-500/30 flex items-center justify-center text-cyan-400 group-hover:scale-110 transition-transform shadow-md">
+              <IconHistory class="w-6 h-6" />
             </div>
-            <h3 class="text-xl font-bold text-white group-hover:text-abyss-cyan transition-colors">World History & Empires</h3>
+            <h3 class="text-lg font-bold text-white group-hover:text-cyan-400 transition-colors">World History & Empires</h3>
             <p class="text-xs text-slate-400 leading-relaxed">
               Test short-lived Roman emperors (Didius Julianus, Majorian), pre-modern peace accords (Treaty of Wedmore), and third-century dynasties.
             </p>
           </div>
           <div class="pt-6">
-            <a href="/history" class="block w-full py-2.5 rounded-xl bg-white/5 hover:bg-abyss-cyan hover:text-abyss-dark text-slate-200 font-bold text-xs transition-all border border-white/10 text-center">
+            <a href="/history" class="block w-full py-2.5 rounded-xl bg-white/5 group-hover:bg-cyan-500 group-hover:text-slate-950 text-slate-200 font-black text-xs transition-all border border-white/10 text-center">
               Play History Pack ↗
             </a>
           </div>
         </div>
 
         <!-- Sports -->
-        <div class="p-6 rounded-3xl bg-abyss-card border border-white/10 hover:border-abyss-cyan/40 transition-all flex flex-col justify-between group">
-          <div class="space-y-3">
-            <div class="w-12 h-12 rounded-2xl bg-cyan-950/50 border border-cyan-500/20 flex items-center justify-center text-2xl">
-              ⚽
+        <div class="p-6 rounded-3xl bg-abyss-card border border-white/10 hover:border-cyan-500/50 hover:shadow-[0_0_25px_rgba(6,182,212,0.15)] transition-all flex flex-col justify-between group">
+          <div class="space-y-3.5">
+            <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-cyan-950 to-blue-950 border border-cyan-500/30 flex items-center justify-center text-cyan-400 group-hover:scale-110 transition-transform shadow-md">
+              <IconSports class="w-6 h-6" />
             </div>
-            <h3 class="text-xl font-bold text-white group-hover:text-abyss-cyan transition-colors">Sports & Athletics</h3>
+            <h3 class="text-lg font-bold text-white group-hover:text-cyan-400 transition-colors">Sports & Athletics</h3>
             <p class="text-xs text-slate-400 leading-relaxed">
               Unearth forgotten Olympic medalists, historical Champions League contenders, and international athletic tournament champions outside the usual superstars.
             </p>
           </div>
           <div class="pt-6">
-            <a href="/sports" class="block w-full py-2.5 rounded-xl bg-white/5 hover:bg-abyss-cyan hover:text-abyss-dark text-slate-200 font-bold text-xs transition-all border border-white/10 text-center">
+            <a href="/sports" class="block w-full py-2.5 rounded-xl bg-white/5 group-hover:bg-cyan-500 group-hover:text-slate-950 text-slate-200 font-black text-xs transition-all border border-white/10 text-center">
               Play Sports Pack ↗
             </a>
           </div>
         </div>
 
         <!-- Language -->
-        <div class="p-6 rounded-3xl bg-abyss-card border border-white/10 hover:border-abyss-cyan/40 transition-all flex flex-col justify-between group">
-          <div class="space-y-3">
-            <div class="w-12 h-12 rounded-2xl bg-cyan-950/50 border border-cyan-500/20 flex items-center justify-center text-2xl">
-              📖
+        <div class="p-6 rounded-3xl bg-abyss-card border border-white/10 hover:border-cyan-500/50 hover:shadow-[0_0_25px_rgba(6,182,212,0.15)] transition-all flex flex-col justify-between group">
+          <div class="space-y-3.5">
+            <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-cyan-950 to-blue-950 border border-cyan-500/30 flex items-center justify-center text-cyan-400 group-hover:scale-110 transition-transform shadow-md">
+              <IconLanguage class="w-6 h-6" />
             </div>
-            <h3 class="text-xl font-bold text-white group-hover:text-abyss-cyan transition-colors">Language & Literature</h3>
+            <h3 class="text-lg font-bold text-white group-hover:text-cyan-400 transition-colors">Language & Literature</h3>
             <p class="text-xs text-slate-400 leading-relaxed">
               Plunge into obscure Shakespearean plays (Cymbeline, Pericles), archaic etymological origins, and lesser-known historical authors.
             </p>
           </div>
           <div class="pt-6">
-            <a href="/language" class="block w-full py-2.5 rounded-xl bg-white/5 hover:bg-abyss-cyan hover:text-abyss-dark text-slate-200 font-bold text-xs transition-all border border-white/10 text-center">
+            <a href="/language" class="block w-full py-2.5 rounded-xl bg-white/5 group-hover:bg-cyan-500 group-hover:text-slate-950 text-slate-200 font-black text-xs transition-all border border-white/10 text-center">
               Play Language Pack ↗
             </a>
           </div>
         </div>
 
         <!-- Science -->
-        <div class="p-6 rounded-3xl bg-abyss-card border border-white/10 hover:border-abyss-cyan/40 transition-all flex flex-col justify-between group">
-          <div class="space-y-3">
-            <div class="w-12 h-12 rounded-2xl bg-cyan-950/50 border border-cyan-500/20 flex items-center justify-center text-2xl">
-              🧪
+        <div class="p-6 rounded-3xl bg-abyss-card border border-white/10 hover:border-cyan-500/50 hover:shadow-[0_0_25px_rgba(6,182,212,0.15)] transition-all flex flex-col justify-between group">
+          <div class="space-y-3.5">
+            <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-cyan-950 to-blue-950 border border-cyan-500/30 flex items-center justify-center text-cyan-400 group-hover:scale-110 transition-transform shadow-md">
+              <IconScience class="w-6 h-6" />
             </div>
-            <h3 class="text-xl font-bold text-white group-hover:text-abyss-cyan transition-colors">Science & Periodic Elements</h3>
+            <h3 class="text-lg font-bold text-white group-hover:text-cyan-400 transition-colors">Science & Periodic Elements</h3>
             <p class="text-xs text-slate-400 leading-relaxed">
               Rare transition metals on the periodic table (Rhenium, Hafnium), deep hadal oceanic biodiversity, and Nobel laureates in Physics.
             </p>
           </div>
           <div class="pt-6">
-            <a href="/science" class="block w-full py-2.5 rounded-xl bg-white/5 hover:bg-abyss-cyan hover:text-abyss-dark text-slate-200 font-bold text-xs transition-all border border-white/10 text-center">
+            <a href="/science" class="block w-full py-2.5 rounded-xl bg-white/5 group-hover:bg-cyan-500 group-hover:text-slate-950 text-slate-200 font-black text-xs transition-all border border-white/10 text-center">
               Play Science Pack ↗
             </a>
           </div>
@@ -139,18 +215,18 @@ import KrillionArena from '../components/KrillionArena.astro';
   </section>
 
   <!-- CONTENT SECTION 2: Rules & Depth Mechanics (The 4 Depth Strata) -->
-  <section class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+  <section class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-t border-white/5">
     <div class="text-center max-w-3xl mx-auto mb-12 space-y-3">
-      <span class="text-xs font-bold text-abyss-cyan uppercase tracking-widest font-mono">Scoring Architecture</span>
+      <span class="text-xs font-bold text-cyan-400 uppercase tracking-widest font-mono">Depth Architecture</span>
       <h2 class="text-3xl font-extrabold text-white">How Does Krillion Depth Work?</h2>
-      <p class="text-slate-400 text-sm">
+      <p class="text-slate-400 text-xs sm:text-sm">
         Every round evaluates your answer against community frequency distributions. Obscurity plus factual validity unlocks maximum depth.
       </p>
     </div>
 
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
       <div class="p-6 rounded-2xl bg-abyss-card border border-white/5 space-y-3">
-        <div class="font-mono text-3xl font-black text-abyss-cyan">20s</div>
+        <div class="font-mono text-3xl font-black text-cyan-400">20s</div>
         <h3 class="text-base font-bold text-white">One Fast Decision</h3>
         <p class="text-xs text-slate-400 leading-relaxed">
           You have about 20 seconds to name one verifiable candidate before your timer runs out.
@@ -158,10 +234,10 @@ import KrillionArena from '../components/KrillionArena.astro';
       </div>
 
       <div class="p-6 rounded-2xl bg-abyss-card border border-white/5 space-y-3">
-        <div class="font-mono text-3xl font-black text-blue-400">🌊 Surface</div>
+        <div class="font-mono text-3xl font-black text-blue-400">0m–1,500m</div>
         <h3 class="text-base font-bold text-white">The Obvious Crowd</h3>
         <p class="text-xs text-slate-400 leading-relaxed">
-          Common headline answers (0m–1,500m) keep you stranded near the surface with thousands of players.
+          Common headline answers keep you stranded near the surface with thousands of players.
         </p>
       </div>
 
@@ -174,8 +250,8 @@ import KrillionArena from '../components/KrillionArena.astro';
       </div>
 
       <div class="p-6 rounded-2xl bg-abyss-card border border-cyan-500/30 space-y-3">
-        <div class="font-mono text-3xl font-black text-abyss-cyan">7,000m</div>
-        <h3 class="text-base font-bold text-abyss-cyan">Hadal Abyss Crown 👑</h3>
+        <div class="font-mono text-3xl font-black text-cyan-400">7,000m</div>
+        <h3 class="text-base font-bold text-cyan-400">Hadal Abyss Crown</h3>
         <p class="text-xs text-slate-400 leading-relaxed">
           Valid obscure historical and scientific footnotes chosen by under 0.05% of divers plunge to maximum depth.
         </p>
@@ -188,19 +264,19 @@ import KrillionArena from '../components/KrillionArena.astro';
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
         <div>
-          <span class="text-xs font-bold text-abyss-cyan uppercase tracking-widest font-mono">Field Notes & Strategy</span>
+          <span class="text-xs font-bold text-cyan-400 uppercase tracking-widest font-mono">Stratagem & Field Guides</span>
           <h2 class="text-2xl sm:text-3xl font-extrabold text-white mt-1">Tactical Guides for Trench Explorers</h2>
           <p class="text-xs text-slate-400 mt-1">Practical frameworks to improve category recall and avoid crowd traps before your next dive.</p>
         </div>
-        <a href="/how-to-dive-7000m" class="text-xs font-bold text-abyss-cyan hover:underline flex items-center gap-1">
+        <a href="/how-to-dive-7000m" class="text-xs font-bold text-cyan-400 hover:underline flex items-center gap-1">
           <span>Read masterclass guide</span> →
         </a>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <a href="/how-to-dive-7000m" class="p-6 rounded-2xl bg-abyss-card border border-white/5 hover:border-abyss-cyan/40 transition-all group block">
-          <div class="text-[11px] font-bold uppercase tracking-wider text-abyss-cyan mb-2">Core Strategy</div>
-          <h3 class="text-lg font-bold text-white group-hover:text-abyss-cyan transition-colors mb-2">
+        <a href="/how-to-dive-7000m" class="p-6 rounded-2xl bg-abyss-card border border-white/5 hover:border-cyan-500/40 transition-all group block">
+          <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-400 mb-2">Core Strategy</div>
+          <h3 class="text-lg font-bold text-white group-hover:text-cyan-400 transition-colors mb-2">
             How to Reach 7,000m in Krillion: The Hadal Playbook
           </h3>
           <p class="text-xs text-slate-400 line-clamp-3">
@@ -208,9 +284,9 @@ import KrillionArena from '../components/KrillionArena.astro';
           </p>
         </a>
 
-        <a href="/too-clever-trap" class="p-6 rounded-2xl bg-abyss-card border border-white/5 hover:border-abyss-cyan/40 transition-all group block">
+        <a href="/too-clever-trap" class="p-6 rounded-2xl bg-abyss-card border border-white/5 hover:border-cyan-500/40 transition-all group block">
           <div class="text-[11px] font-bold uppercase tracking-wider text-amber-400 mb-2">Cognitive Psychology</div>
-          <h3 class="text-lg font-bold text-white group-hover:text-abyss-cyan transition-colors mb-2">
+          <h3 class="text-lg font-bold text-white group-hover:text-cyan-400 transition-colors mb-2">
             The "Too-Clever" Crowd Trap: Why 3,000m Jams Happen
           </h3>
           <p class="text-xs text-slate-400 line-clamp-3">
@@ -218,9 +294,9 @@ import KrillionArena from '../components/KrillionArena.astro';
           </p>
         </a>
 
-        <a href="/7000m-words-list" class="p-6 rounded-2xl bg-abyss-card border border-white/5 hover:border-abyss-cyan/40 transition-all group block">
+        <a href="/7000m-words-list" class="p-6 rounded-2xl bg-abyss-card border border-white/5 hover:border-cyan-500/40 transition-all group block">
           <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-400 mb-2">Curated Cheat Sheet</div>
-          <h3 class="text-lg font-bold text-white group-hover:text-abyss-cyan transition-colors mb-2">
+          <h3 class="text-lg font-bold text-white group-hover:text-cyan-400 transition-colors mb-2">
             The 7,000m Words List: Rarest Answers by Category
           </h3>
           <p class="text-xs text-slate-400 line-clamp-3">
@@ -232,42 +308,24 @@ import KrillionArena from '../components/KrillionArena.astro';
   </section>
 
   <!-- CONTENT SECTION 4: FAQ Accordion -->
-  <section class="py-16 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+  <section class="py-16 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 border-t border-white/5">
     <div class="text-center mb-10 space-y-2">
       <h2 class="text-2xl sm:text-3xl font-extrabold text-white">Frequently Asked Questions</h2>
       <p class="text-xs text-slate-400">Essential details on reset timing, scoring mechanics, and gameplay modes.</p>
     </div>
 
     <div class="space-y-4">
-      <details class="p-5 rounded-2xl bg-abyss-card border border-white/5">
-        <summary class="font-bold text-white text-sm cursor-pointer list-none flex justify-between items-center">
-          <span>What is Krillion?</span>
-          <span class="text-abyss-cyan font-mono">+</span>
-        </summary>
-        <p class="text-xs text-slate-400 mt-3 leading-relaxed">
-          Krillion is a browser-native reverse-trivia game where players dive into a deep ocean trench across seven open prompts. Unlike standard trivia where popular answers win, Krillion rewards factual rarity: the less common your answer is among other players, the deeper you plunge.
-        </p>
-      </details>
-
-      <details class="p-5 rounded-2xl bg-abyss-card border border-white/5">
-        <summary class="font-bold text-white text-sm cursor-pointer list-none flex justify-between items-center">
-          <span>When does the official Krillion Daily Dive reset?</span>
-          <span class="text-abyss-cyan font-mono">+</span>
-        </summary>
-        <p class="text-xs text-slate-400 mt-3 leading-relaxed">
-          The official daily challenge resets globally every night at <strong>00:00 UTC (Midnight)</strong>. Check our <a href="/when-does-krillion-reset" class="text-abyss-cyan underline">Live Reset Countdown</a> for your local timezone.
-        </p>
-      </details>
-
-      <details class="p-5 rounded-2xl bg-abyss-card border border-white/5">
-        <summary class="font-bold text-white text-sm cursor-pointer list-none flex justify-between items-center">
-          <span>Can I play more than one game per day?</span>
-          <span class="text-abyss-cyan font-mono">+</span>
-        </summary>
-        <p class="text-xs text-slate-400 mt-3 leading-relaxed">
-          Yes! While the official Daily Dive is limited to one attempt every 24 hours, you can play our unlimited <strong>Endless Sinker Mode</strong> or browse all <strong>Themed Packs</strong> with zero daily lockout.
-        </p>
-      </details>
+      {indexFaqSchema.mainEntity.map(faq => (
+        <details class="p-5 rounded-2xl bg-abyss-card border border-white/5 group">
+          <summary class="font-bold text-white text-sm cursor-pointer list-none flex justify-between items-center">
+            <span>{faq.name}</span>
+            <span class="text-cyan-400 font-mono text-base group-open:rotate-45 transition-transform">+</span>
+          </summary>
+          <p class="text-xs text-slate-300 mt-3 leading-relaxed">
+            {faq.acceptedAnswer.text}
+          </p>
+        </details>
+      ))}
     </div>
   </section>
 
