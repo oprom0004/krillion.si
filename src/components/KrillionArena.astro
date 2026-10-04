@@ -1,46 +1,76 @@
 ---
 interface Props {
-  initialMode?: 'daily' | 'endless' | 'lobby';
+  initialMode?: 'daily' | 'endless' | 'movies' | 'geography' | 'history' | 'sports' | 'language' | 'science';
 }
 
 const { initialMode = 'daily' } = Astro.props;
 ---
 
-<div id="krillion-arena" class="relative w-full max-w-5xl mx-auto rounded-3xl bg-abyss-card/95 border border-white/10 p-3 sm:p-6 backdrop-blur-xl shadow-2xl shadow-black/80">
-  <!-- Game Mode Controls & Direct Launchers -->
-  <div class="flex flex-wrap items-center justify-between gap-3 pb-4 border-b border-white/10">
-    <!-- Main Direct Play Modes -->
-    <div class="flex flex-wrap items-center gap-1.5 sm:gap-2 bg-abyss-dark/80 p-1.5 rounded-2xl border border-white/5">
-      <button
-        id="btn-play-daily"
-        class="px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all bg-abyss-cyan text-abyss-dark shadow-lg shadow-abyss-cyan/20 flex items-center gap-1.5"
-      >
-        <span>⚡ Daily Dive (Direct Play)</span>
-      </button>
-      <button
-        id="btn-play-endless"
-        class="px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all text-slate-400 hover:text-white flex items-center gap-1.5"
-      >
-        <span>♾️ Endless Mode</span>
-      </button>
-      <button
-        id="btn-play-lobby"
-        class="px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all text-slate-400 hover:text-white flex items-center gap-1.5"
-      >
-        <span>🗂️ Packs & Themes</span>
-      </button>
+<div id="krillion-arena" class="relative w-full max-w-6xl mx-auto rounded-3xl bg-abyss-card/95 border border-white/10 p-3 sm:p-6 backdrop-blur-xl shadow-2xl shadow-black/80">
+  <!-- Mode Switcher Bar -->
+  <div class="flex flex-col gap-3 pb-4 border-b border-white/10">
+    <div class="flex flex-wrap items-center justify-between gap-3">
+      <!-- Main Primary Modes -->
+      <div class="flex flex-wrap items-center gap-1.5 sm:gap-2 bg-abyss-dark/80 p-1.5 rounded-2xl border border-white/5">
+        <button
+          id="btn-mode-daily"
+          data-mode="daily"
+          class="mode-pill px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all bg-abyss-cyan text-abyss-dark shadow-lg shadow-abyss-cyan/20 flex items-center gap-1.5"
+        >
+          <span>⚡ Daily Dive</span>
+        </button>
+        <button
+          id="btn-mode-endless"
+          data-mode="endless"
+          class="mode-pill px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all text-slate-400 hover:text-white flex items-center gap-1.5"
+        >
+          <span>♾️ Endless Mode</span>
+        </button>
+        <button
+          id="btn-mode-lobby"
+          data-mode="lobby"
+          class="mode-pill px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all text-slate-400 hover:text-white flex items-center gap-1.5"
+        >
+          <span>🗂️ All Packs Lobby</span>
+        </button>
+      </div>
+
+      <!-- Controls -->
+      <div class="flex items-center gap-2 text-xs">
+        <span class="text-emerald-400 hidden sm:flex items-center gap-1 font-mono text-[11px]">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> Direct Play
+        </span>
+        <button
+          id="btn-fullscreen-toggle"
+          class="text-slate-300 hover:text-white px-3 py-1.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-xs font-semibold flex items-center gap-1 transition-all"
+        >
+          <span>⛶</span> Fullscreen
+        </button>
+      </div>
     </div>
 
-    <!-- Quick Status / Badge / Fullscreen -->
-    <div class="flex items-center gap-2 sm:gap-3 text-xs">
-      <span class="text-emerald-400 hidden sm:flex items-center gap-1 font-mono text-[11px]">
-        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> Instant Engine
+    <!-- Themed Pack Quick Switcher Bar -->
+    <div class="flex items-center gap-2 overflow-x-auto pb-1 pt-1 text-xs scrollbar-none">
+      <span class="text-[11px] font-bold uppercase tracking-wider text-slate-500 whitespace-nowrap pl-1">
+        Featured Packs:
       </span>
-      <button
-        id="btn-fullscreen-toggle"
-        class="text-slate-300 hover:text-white px-3 py-1.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-xs font-semibold flex items-center gap-1 transition-all"
-      >
-        <span>⛶</span> Fullscreen
+      <button data-mode="movies" class="pack-pill px-3 py-1 rounded-lg bg-white/5 hover:bg-white/10 text-slate-300 hover:text-abyss-cyan border border-white/5 whitespace-nowrap transition-all">
+        🎬 Cinema & Oscars
+      </button>
+      <button data-mode="geography" class="pack-pill px-3 py-1 rounded-lg bg-white/5 hover:bg-white/10 text-slate-300 hover:text-abyss-cyan border border-white/5 whitespace-nowrap transition-all">
+        🌍 Geography & Enclaves
+      </button>
+      <button data-mode="history" class="pack-pill px-3 py-1 rounded-lg bg-white/5 hover:bg-white/10 text-slate-300 hover:text-abyss-cyan border border-white/5 whitespace-nowrap transition-all">
+        🏛️ World History & Empires
+      </button>
+      <button data-mode="sports" class="pack-pill px-3 py-1 rounded-lg bg-white/5 hover:bg-white/10 text-slate-300 hover:text-abyss-cyan border border-white/5 whitespace-nowrap transition-all">
+        ⚽ Sports & Athletics
+      </button>
+      <button data-mode="language" class="pack-pill px-3 py-1 rounded-lg bg-white/5 hover:bg-white/10 text-slate-300 hover:text-abyss-cyan border border-white/5 whitespace-nowrap transition-all">
+        📖 Language & Vocabulary
+      </button>
+      <button data-mode="science" class="pack-pill px-3 py-1 rounded-lg bg-white/5 hover:bg-white/10 text-slate-300 hover:text-abyss-cyan border border-white/5 whitespace-nowrap transition-all">
+        🧪 Science & Chemistry
       </button>
     </div>
   </div>
@@ -50,7 +80,7 @@ const { initialMode = 'daily' } = Astro.props;
     <div
       id="game-frame-container"
       class="relative w-full rounded-2xl overflow-hidden border border-cyan-500/30 bg-[#030814] shadow-2xl transition-all"
-      style="height: clamp(620px, 80vh, 850px);"
+      style="height: clamp(640px, 82vh, 880px);"
     >
       <iframe
         id="krillion-direct-frame"
@@ -62,15 +92,15 @@ const { initialMode = 'daily' } = Astro.props;
       ></iframe>
     </div>
 
-    <!-- Quick Footer Bar under Game -->
+    <!-- Status Bar under Game -->
     <div class="mt-3 flex flex-wrap items-center justify-between text-xs text-slate-400 px-1 gap-2">
       <div class="flex items-center gap-2">
-        <span class="text-abyss-cyan font-semibold">Active Mode:</span>
-        <span id="label-active-mode" class="text-slate-200 font-mono">Today's 7-Question Daily Dive</span>
+        <span class="text-abyss-cyan font-semibold">Active Arena:</span>
+        <span id="label-active-mode" class="text-slate-200 font-mono font-medium">Today's 7-Question Daily Dive</span>
       </div>
       <div class="flex items-center gap-3">
         <a href="/how-to-dive-7000m" class="text-slate-400 hover:text-abyss-cyan transition-colors underline">
-          7,000m Strategy
+          7,000m Strategy Guide
         </a>
         <span class="text-slate-600">•</span>
         <a href="https://krillionhints.com" target="_blank" rel="noopener" class="text-amber-400 hover:text-amber-300 font-semibold underline">
@@ -82,43 +112,72 @@ const { initialMode = 'daily' } = Astro.props;
 </div>
 
 <script>
-  const btnDaily = document.getElementById('btn-play-daily');
-  const btnEndless = document.getElementById('btn-play-endless');
-  const btnLobby = document.getElementById('btn-play-lobby');
   const frame = document.getElementById('krillion-direct-frame') as HTMLIFrameElement;
   const labelMode = document.getElementById('label-active-mode');
   const btnFullscreen = document.getElementById('btn-fullscreen-toggle');
   const frameContainer = document.getElementById('game-frame-container');
+  const modePills = document.querySelectorAll('.mode-pill');
+  const packPills = document.querySelectorAll('.pack-pill');
 
-  const modes = [
-    { id: 'daily', url: 'https://www.krillion.org/play/daily/', btn: btnDaily, label: "Today's 7-Question Daily Dive" },
-    { id: 'endless', url: 'https://www.krillion.org/play/endless/', btn: btnEndless, label: 'Endless Trench Dive (Unlimited)' },
-    { id: 'lobby', url: 'https://www.krillion.org/play/', btn: btnLobby, label: 'Themes & Expansion Packs Lobby' },
-  ];
+  const modeMap: Record<string, { url: string; label: string }> = {
+    daily: { url: 'https://www.krillion.org/play/daily/', label: "Today's 7-Question Daily Dive" },
+    endless: { url: 'https://www.krillion.org/play/endless/', label: 'Endless Trench Dive (Unlimited Mode)' },
+    lobby: { url: 'https://www.krillion.org/play/', label: 'All Themes & Packs Selection Lobby' },
+    movies: { url: 'https://www.krillion.org/play/movies/', label: 'Cinema & Academy Awards Themed Pack' },
+    geography: { url: 'https://www.krillion.org/play/geography/', label: 'World Geography & Microstate Pack' },
+    history: { url: 'https://www.krillion.org/play/history/', label: 'Empires & World History Pack' },
+    sports: { url: 'https://www.krillion.org/play/sports/', label: 'Athletics & World Sports Pack' },
+    language: { url: 'https://www.krillion.org/play/language/', label: 'Language & Etymology Pack' },
+    science: { url: 'https://www.krillion.org/play/science/', label: 'Science & Periodic Elements Pack' },
+  };
 
-  function setGameMode(modeId: string) {
-    const target = modes.find(m => m.id === modeId) || modes[0];
+  function selectMode(key: string) {
+    const config = modeMap[key] || modeMap['daily'];
 
-    modes.forEach(m => {
-      m.btn?.classList.remove('bg-abyss-cyan', 'text-abyss-dark', 'shadow-lg', 'shadow-abyss-cyan/20');
-      m.btn?.classList.add('text-slate-400');
+    // Update Main Pills
+    modePills.forEach(btn => {
+      if (btn.getAttribute('data-mode') === key) {
+        btn.classList.add('bg-abyss-cyan', 'text-abyss-dark', 'shadow-lg', 'shadow-abyss-cyan/20');
+        btn.classList.remove('text-slate-400');
+      } else {
+        btn.classList.remove('bg-abyss-cyan', 'text-abyss-dark', 'shadow-lg', 'shadow-abyss-cyan/20');
+        btn.classList.add('text-slate-400');
+      }
     });
 
-    target.btn?.classList.add('bg-abyss-cyan', 'text-abyss-dark', 'shadow-lg', 'shadow-abyss-cyan/20');
-    target.btn?.classList.remove('text-slate-400');
+    // Update Pack Pills
+    packPills.forEach(btn => {
+      if (btn.getAttribute('data-mode') === key) {
+        btn.classList.add('bg-abyss-cyan/20', 'text-abyss-cyan', 'border-abyss-cyan/40');
+        btn.classList.remove('text-slate-300');
+      } else {
+        btn.classList.remove('bg-abyss-cyan/20', 'text-abyss-cyan', 'border-abyss-cyan/40');
+        btn.classList.add('text-slate-300');
+      }
+    });
 
-    if (frame && frame.src !== target.url) {
-      frame.src = target.url;
+    if (frame && frame.src !== config.url) {
+      frame.src = config.url;
     }
 
     if (labelMode) {
-      labelMode.textContent = target.label;
+      labelMode.textContent = config.label;
     }
   }
 
-  btnDaily?.addEventListener('click', () => setGameMode('daily'));
-  btnEndless?.addEventListener('click', () => setGameMode('endless'));
-  btnLobby?.addEventListener('click', () => setGameMode('lobby'));
+  modePills.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const mode = btn.getAttribute('data-mode') || 'daily';
+      selectMode(mode);
+    });
+  });
+
+  packPills.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const mode = btn.getAttribute('data-mode') || 'daily';
+      selectMode(mode);
+    });
+  });
 
   btnFullscreen?.addEventListener('click', () => {
     if (frameContainer?.requestFullscreen) {
@@ -128,11 +187,11 @@ const { initialMode = 'daily' } = Astro.props;
     }
   });
 
-  // Check current URL pathname to set default
+  // URL hash or path check
   const path = window.location.pathname;
   if (path.includes('endless')) {
-    setGameMode('endless');
+    selectMode('endless');
   } else {
-    setGameMode('daily');
+    selectMode('daily');
   }
 </script>
