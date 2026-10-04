@@ -7,96 +7,142 @@ import KrillionArena from '../components/KrillionArena.astro';
   title="Krillion.si | Play Krillion Online - The Viral Reverse-Trivia Trench Game"
   description="Play Krillion online for free! Plunge into the ocean trench by guessing the rarest, least obvious answers. Features Daily Dive, Endless Practice, and 6 Themed Packs (Cinema, Geography, History, Sports, Science)."
 >
-  <!-- Screen 1: Minimal Hero + Direct Playable Arena (All in First Viewport) -->
-  <section class="pt-4 pb-10 px-3 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-    <!-- Compact Headline -->
-    <div class="text-center mb-3 space-y-1">
-      <div class="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-abyss-card border border-abyss-cyan/30 text-abyss-cyan text-[11px] font-bold tracking-wide">
-        <span class="w-1.5 h-1.5 rounded-full bg-abyss-cyan animate-pulse"></span>
-        <span>DAILY TRENCH DIVE LIVE • GUESS THE RAREST ANSWER</span>
-      </div>
-      <h1 class="text-2xl sm:text-3xl md:text-4xl font-black text-white tracking-tight">
-        Krillion: The Reverse-Trivia Game Where Common Answers Drown
-      </h1>
-      <p class="text-xs sm:text-sm text-slate-400 max-w-2xl mx-auto">
-        Name the verifiable, rarest answer that nobody else remembers to plunge down to the 7,000m Hadal Abyss.
-      </p>
-    </div>
-
-    <!-- Direct Playable Arena -->
-    <KrillionArena initialMode="daily" />
+  <!-- TOP GAME ZONE: Direct, Full-Width, Above the Fold -->
+  <section class="pt-2 pb-8 px-2 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+    <!-- Direct Pure Game Canvas -->
+    <KrillionArena />
   </section>
 
-  <!-- Screen 2+: Rich Editorial Content & Ecosystem -->
-
-  <!-- Themed Packs Showcase (Turned into Native Content Cards) -->
-  <section class="py-16 bg-abyss-dark/60 border-t border-white/5">
+  <!-- CONTENT SECTION 1: Themed Variants & Category Packs (Listed directly as native content) -->
+  <section class="py-16 bg-abyss-dark/70 border-t border-white/5">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="max-w-3xl mb-10">
-        <span class="text-xs font-bold text-abyss-cyan uppercase tracking-widest font-mono">Variants & Expansion Packs</span>
-        <h2 class="text-2xl sm:text-3xl font-extrabold text-white mt-1">Specialized Trench Categories</h2>
-        <p class="text-slate-400 text-sm mt-1">
-          Mastered the general Daily Dive? Plunge into dedicated subject archives with custom rarity curves.
-        </p>
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
+        <div>
+          <span class="text-xs font-bold text-abyss-cyan uppercase tracking-widest font-mono">Specialized Vaults</span>
+          <h2 class="text-3xl sm:text-4xl font-black text-white mt-1">Play Themed Packs & Variants</h2>
+          <p class="text-slate-400 text-sm mt-1">
+            Want to test specific subjects? Launch directly into curated domain archives with dedicated rarity dictionaries.
+          </p>
+        </div>
       </div>
 
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-        <div class="p-6 rounded-2xl bg-abyss-card border border-white/5 hover:border-abyss-cyan/40 transition-all group">
-          <div class="text-2xl mb-2">🎬</div>
-          <h3 class="text-lg font-bold text-white group-hover:text-abyss-cyan transition-colors">Cinema & Academy Awards</h3>
-          <p class="text-xs text-slate-400 mt-1 leading-relaxed">
-            Test obscure directors, Best Picture winners from the golden era, and overlooked film festival nominees.
-          </p>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Cinema -->
+        <div class="p-6 rounded-3xl bg-abyss-card border border-white/10 hover:border-abyss-cyan/40 transition-all flex flex-col justify-between group">
+          <div class="space-y-3">
+            <div class="w-12 h-12 rounded-2xl bg-cyan-950/50 border border-cyan-500/20 flex items-center justify-center text-2xl">
+              🎬
+            </div>
+            <h3 class="text-xl font-bold text-white group-hover:text-abyss-cyan transition-colors">Cinema & Academy Awards</h3>
+            <p class="text-xs text-slate-400 leading-relaxed">
+              Name obscure Oscar Best Picture winners from the 1930s–1950s, overlooked Cannes Palme d'Or directors, and golden-age actors. Common blockbuster answers drown at the surface.
+            </p>
+          </div>
+          <div class="pt-6">
+            <button onclick="document.getElementById('krillion-direct-frame').src='https://www.krillion.org/play/movies/'; window.scrollTo({top:0, behavior:'smooth'});" class="w-full py-2.5 rounded-xl bg-white/5 hover:bg-abyss-cyan hover:text-abyss-dark text-slate-200 font-bold text-xs transition-all border border-white/10 text-center">
+              Play Cinema Pack ↗
+            </button>
+          </div>
         </div>
 
-        <div class="p-6 rounded-2xl bg-abyss-card border border-white/5 hover:border-abyss-cyan/40 transition-all group">
-          <div class="text-2xl mb-2">🌍</div>
-          <h3 class="text-lg font-bold text-white group-hover:text-abyss-cyan transition-colors">Geography & Enclaves</h3>
-          <p class="text-xs text-slate-400 mt-1 leading-relaxed">
-            Target landlocked nations, microstate enclaves, overseas territories, and sub-Antarctic islands.
-          </p>
+        <!-- Geography -->
+        <div class="p-6 rounded-3xl bg-abyss-card border border-white/10 hover:border-abyss-cyan/40 transition-all flex flex-col justify-between group">
+          <div class="space-y-3">
+            <div class="w-12 h-12 rounded-2xl bg-cyan-950/50 border border-cyan-500/20 flex items-center justify-center text-2xl">
+              🌍
+            </div>
+            <h3 class="text-xl font-bold text-white group-hover:text-abyss-cyan transition-colors">Geography & Enclaves</h3>
+            <p class="text-xs text-slate-400 leading-relaxed">
+              Plunge into sovereign enclaves (San Marino, Lesotho), microstate archipelagos (Nauru, Tuvalu), and doubly landlocked nations. Skip obvious continents to reach 7,000m.
+            </p>
+          </div>
+          <div class="pt-6">
+            <button onclick="document.getElementById('krillion-direct-frame').src='https://www.krillion.org/play/geography/'; window.scrollTo({top:0, behavior:'smooth'});" class="w-full py-2.5 rounded-xl bg-white/5 hover:bg-abyss-cyan hover:text-abyss-dark text-slate-200 font-bold text-xs transition-all border border-white/10 text-center">
+              Play Geography Pack ↗
+            </button>
+          </div>
         </div>
 
-        <div class="p-6 rounded-2xl bg-abyss-card border border-white/5 hover:border-abyss-cyan/40 transition-all group">
-          <div class="text-2xl mb-2">🏛️</div>
-          <h3 class="text-lg font-bold text-white group-hover:text-abyss-cyan transition-colors">World History & Empires</h3>
-          <p class="text-xs text-slate-400 mt-1 leading-relaxed">
-            Short-reigning Roman emperors, obscure Bronze Age peace treaties, and pre-modern dynasty successions.
-          </p>
+        <!-- History -->
+        <div class="p-6 rounded-3xl bg-abyss-card border border-white/10 hover:border-abyss-cyan/40 transition-all flex flex-col justify-between group">
+          <div class="space-y-3">
+            <div class="w-12 h-12 rounded-2xl bg-cyan-950/50 border border-cyan-500/20 flex items-center justify-center text-2xl">
+              🏛️
+            </div>
+            <h3 class="text-xl font-bold text-white group-hover:text-abyss-cyan transition-colors">World History & Empires</h3>
+            <p class="text-xs text-slate-400 leading-relaxed">
+              Test short-lived Roman emperors (Didius Julianus, Majorian), pre-modern peace accords (Treaty of Wedmore), and third-century dynasties.
+            </p>
+          </div>
+          <div class="pt-6">
+            <button onclick="document.getElementById('krillion-direct-frame').src='https://www.krillion.org/play/history/'; window.scrollTo({top:0, behavior:'smooth'});" class="w-full py-2.5 rounded-xl bg-white/5 hover:bg-abyss-cyan hover:text-abyss-dark text-slate-200 font-bold text-xs transition-all border border-white/10 text-center">
+              Play History Pack ↗
+            </button>
+          </div>
         </div>
 
-        <div class="p-6 rounded-2xl bg-abyss-card border border-white/5 hover:border-abyss-cyan/40 transition-all group">
-          <div class="text-2xl mb-2">⚽</div>
-          <h3 class="text-lg font-bold text-white group-hover:text-abyss-cyan transition-colors">Sports & Athletics</h3>
-          <p class="text-xs text-slate-400 mt-1 leading-relaxed">
-            Olympic medalists from non-powerhouse nations, historic club transfers, and forgotten athletic records.
-          </p>
+        <!-- Sports -->
+        <div class="p-6 rounded-3xl bg-abyss-card border border-white/10 hover:border-abyss-cyan/40 transition-all flex flex-col justify-between group">
+          <div class="space-y-3">
+            <div class="w-12 h-12 rounded-2xl bg-cyan-950/50 border border-cyan-500/20 flex items-center justify-center text-2xl">
+              ⚽
+            </div>
+            <h3 class="text-xl font-bold text-white group-hover:text-abyss-cyan transition-colors">Sports & Athletics</h3>
+            <p class="text-xs text-slate-400 leading-relaxed">
+              Unearth forgotten Olympic medalists, historical Champions League contenders, and international athletic tournament champions outside the usual superstars.
+            </p>
+          </div>
+          <div class="pt-6">
+            <button onclick="document.getElementById('krillion-direct-frame').src='https://www.krillion.org/play/sports/'; window.scrollTo({top:0, behavior:'smooth'});" class="w-full py-2.5 rounded-xl bg-white/5 hover:bg-abyss-cyan hover:text-abyss-dark text-slate-200 font-bold text-xs transition-all border border-white/10 text-center">
+              Play Sports Pack ↗
+            </button>
+          </div>
         </div>
 
-        <div class="p-6 rounded-2xl bg-abyss-card border border-white/5 hover:border-abyss-cyan/40 transition-all group">
-          <div class="text-2xl mb-2">📖</div>
-          <h3 class="text-lg font-bold text-white group-hover:text-abyss-cyan transition-colors">Language & Literature</h3>
-          <p class="text-xs text-slate-400 mt-1 leading-relaxed">
-            Obscure Shakespearean folios, Nobel laureates in Literature, and archaic linguistic roots.
-          </p>
+        <!-- Language -->
+        <div class="p-6 rounded-3xl bg-abyss-card border border-white/10 hover:border-abyss-cyan/40 transition-all flex flex-col justify-between group">
+          <div class="space-y-3">
+            <div class="w-12 h-12 rounded-2xl bg-cyan-950/50 border border-cyan-500/20 flex items-center justify-center text-2xl">
+              📖
+            </div>
+            <h3 class="text-xl font-bold text-white group-hover:text-abyss-cyan transition-colors">Language & Literature</h3>
+            <p class="text-xs text-slate-400 leading-relaxed">
+              Plunge into obscure Shakespearean plays (Cymbeline, Pericles), archaic etymological origins, and lesser-known historical authors.
+            </p>
+          </div>
+          <div class="pt-6">
+            <button onclick="document.getElementById('krillion-direct-frame').src='https://www.krillion.org/play/language/'; window.scrollTo({top:0, behavior:'smooth'});" class="w-full py-2.5 rounded-xl bg-white/5 hover:bg-abyss-cyan hover:text-abyss-dark text-slate-200 font-bold text-xs transition-all border border-white/10 text-center">
+              Play Language Pack ↗
+            </button>
+          </div>
         </div>
 
-        <div class="p-6 rounded-2xl bg-abyss-card border border-white/5 hover:border-abyss-cyan/40 transition-all group">
-          <div class="text-2xl mb-2">🧪</div>
-          <h3 class="text-lg font-bold text-white group-hover:text-abyss-cyan transition-colors">Science & Periodic Elements</h3>
-          <p class="text-xs text-slate-400 mt-1 leading-relaxed">
-            Rare transition metals, deep-sea abyssal organisms, and Nobel Physics laureates beyond Einstein.
-          </p>
+        <!-- Science -->
+        <div class="p-6 rounded-3xl bg-abyss-card border border-white/10 hover:border-abyss-cyan/40 transition-all flex flex-col justify-between group">
+          <div class="space-y-3">
+            <div class="w-12 h-12 rounded-2xl bg-cyan-950/50 border border-cyan-500/20 flex items-center justify-center text-2xl">
+              🧪
+            </div>
+            <h3 class="text-xl font-bold text-white group-hover:text-abyss-cyan transition-colors">Science & Periodic Elements</h3>
+            <p class="text-xs text-slate-400 leading-relaxed">
+              Rare transition metals on the periodic table (Rhenium, Hafnium), deep hadal oceanic biodiversity, and Nobel laureates in Physics.
+            </p>
+          </div>
+          <div class="pt-6">
+            <button onclick="document.getElementById('krillion-direct-frame').src='https://www.krillion.org/play/science/'; window.scrollTo({top:0, behavior:'smooth'});" class="w-full py-2.5 rounded-xl bg-white/5 hover:bg-abyss-cyan hover:text-abyss-dark text-slate-200 font-bold text-xs transition-all border border-white/10 text-center">
+              Play Science Pack ↗
+            </button>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- SECTION: Rules & Depth Mechanics -->
+  <!-- CONTENT SECTION 2: Rules & Depth Mechanics (The 4 Depth Strata) -->
   <section class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="text-center max-w-3xl mx-auto mb-12 space-y-3">
       <span class="text-xs font-bold text-abyss-cyan uppercase tracking-widest font-mono">Scoring Architecture</span>
-      <h2 class="text-2xl sm:text-3xl font-extrabold text-white">How Does Krillion Depth Work?</h2>
+      <h2 class="text-3xl font-extrabold text-white">How Does Krillion Depth Work?</h2>
       <p class="text-slate-400 text-sm">
         Every round evaluates your answer against community frequency distributions. Obscurity plus factual validity unlocks maximum depth.
       </p>
@@ -137,7 +183,7 @@ import KrillionArena from '../components/KrillionArena.astro';
     </div>
   </section>
 
-  <!-- SECTION: Field Guides (Editorial Authority) -->
+  <!-- CONTENT SECTION 3: Field Notes & Strategic Guides -->
   <section class="py-16 bg-abyss-dark/40 border-t border-white/5">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
@@ -185,7 +231,7 @@ import KrillionArena from '../components/KrillionArena.astro';
     </div>
   </section>
 
-  <!-- SECTION: FAQ Accordion -->
+  <!-- CONTENT SECTION 4: FAQ Accordion -->
   <section class="py-16 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="text-center mb-10 space-y-2">
       <h2 class="text-2xl sm:text-3xl font-extrabold text-white">Frequently Asked Questions</h2>

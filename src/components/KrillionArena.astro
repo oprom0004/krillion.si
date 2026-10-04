@@ -1,120 +1,22 @@
 ---
-interface Props {
-  initialMode?: 'daily' | 'endless' | 'lobby';
-}
-
-const { initialMode = 'daily' } = Astro.props;
+// Direct Pure Game Frame without outer wrapper bars
 ---
 
-<div id="krillion-arena" class="relative w-full max-w-6xl mx-auto rounded-2xl bg-abyss-card/95 border border-cyan-500/25 p-2 sm:p-3 backdrop-blur-xl shadow-2xl shadow-black/80">
-  <!-- Minimalist Integrated Control Bar -->
-  <div class="flex items-center justify-between gap-2 px-2 py-1.5 border-b border-white/10 text-xs">
-    <!-- Quick Mode Selectors -->
-    <div class="flex items-center gap-1 sm:gap-2">
-      <span class="text-[11px] font-bold text-slate-400 uppercase tracking-wider hidden sm:inline">Mode:</span>
-      <button
-        id="btn-mode-daily"
-        data-mode="daily"
-        class="mode-pill px-3 py-1 rounded-lg font-bold text-xs bg-abyss-cyan text-abyss-dark shadow-sm transition-all"
-      >
-        ⚡ Daily Dive
-      </button>
-      <button
-        id="btn-mode-endless"
-        data-mode="endless"
-        class="mode-pill px-3 py-1 rounded-lg font-medium text-xs text-slate-300 hover:text-white hover:bg-white/5 transition-all"
-      >
-        ♾️ Endless
-      </button>
-      <button
-        id="btn-mode-lobby"
-        data-mode="lobby"
-        class="mode-pill px-2.5 py-1 rounded-lg font-medium text-xs text-slate-400 hover:text-white hover:bg-white/5 transition-all"
-      >
-        🗂️ Packs
-      </button>
-    </div>
-
-    <!-- Right-side status and actions -->
-    <div class="flex items-center gap-3">
-      <span class="text-slate-400 text-[11px] hidden md:inline">
-        Score: <strong class="text-abyss-cyan">10m / point</strong>
-      </span>
-      <button
-        id="btn-fullscreen-toggle"
-        class="px-2.5 py-1 rounded-lg bg-white/5 hover:bg-white/10 text-slate-300 hover:text-white border border-white/10 text-[11px] font-semibold flex items-center gap-1 transition-all"
-      >
-        <span>⛶</span> Fullscreen
-      </button>
-    </div>
-  </div>
-
-  <!-- Direct Embedded Game Viewport -->
-  <div class="w-full mt-2">
-    <div
-      id="game-frame-container"
-      class="relative w-full rounded-xl overflow-hidden border border-white/10 bg-[#030814]"
-      style="height: clamp(620px, calc(100vh - 140px), 820px);"
-    >
-      <iframe
-        id="krillion-direct-frame"
-        src="https://www.krillion.org/play/daily/"
-        title="Krillion Play Arena"
-        class="w-full h-full border-0 bg-[#030814]"
-        allow="fullscreen; clipboard-write; autoplay"
-        loading="eager"
-      ></iframe>
-    </div>
-  </div>
+<div id="game-frame-container" class="relative w-full rounded-2xl overflow-hidden border border-cyan-500/30 bg-[#030814] shadow-2xl" style="height: clamp(620px, 86vh, 880px);">
+  <iframe
+    id="krillion-direct-frame"
+    src="https://www.krillion.org/play/daily/"
+    title="Play Krillion"
+    class="w-full h-full border-0 bg-[#030814]"
+    allow="fullscreen; clipboard-write; autoplay"
+    loading="eager"
+  ></iframe>
 </div>
 
 <script>
   const frame = document.getElementById('krillion-direct-frame') as HTMLIFrameElement;
-  const btnFullscreen = document.getElementById('btn-fullscreen-toggle');
-  const frameContainer = document.getElementById('game-frame-container');
-  const modePills = document.querySelectorAll('.mode-pill');
-
-  const modeMap: Record<string, string> = {
-    daily: 'https://www.krillion.org/play/daily/',
-    endless: 'https://www.krillion.org/play/endless/',
-    lobby: 'https://www.krillion.org/play/',
-  };
-
-  function selectMode(key: string) {
-    const url = modeMap[key] || modeMap['daily'];
-
-    modePills.forEach(btn => {
-      if (btn.getAttribute('data-mode') === key) {
-        btn.classList.add('bg-abyss-cyan', 'text-abyss-dark', 'font-bold', 'shadow-sm');
-        btn.classList.remove('text-slate-300', 'text-slate-400');
-      } else {
-        btn.classList.remove('bg-abyss-cyan', 'text-abyss-dark', 'font-bold', 'shadow-sm');
-        btn.classList.add('text-slate-300');
-      }
-    });
-
-    if (frame && frame.src !== url) {
-      frame.src = url;
-    }
-  }
-
-  modePills.forEach(btn => {
-    btn.addEventListener('click', () => {
-      const mode = btn.getAttribute('data-mode') || 'daily';
-      selectMode(mode);
-    });
-  });
-
-  btnFullscreen?.addEventListener('click', () => {
-    if (frameContainer?.requestFullscreen) {
-      frameContainer.requestFullscreen();
-    } else if (frame?.requestFullscreen) {
-      frame.requestFullscreen();
-    }
-  });
-
-  // URL check
-  if (window.location.pathname.includes('endless')) {
-    selectMode('endless');
+  const path = window.location.pathname;
+  if (path.includes('endless')) {
+    if (frame) frame.src = 'https://www.krillion.org/play/endless/';
   }
 </script>
