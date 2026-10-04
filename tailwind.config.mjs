@@ -6,11 +6,13 @@ export default {
     extend: {
       colors: {
         'abyss': {
+          bg: '#020611',
           darkest: '#020611',
           dark: '#061325',
           card: '#0a1d36',
           border: 'rgba(0, 242, 254, 0.18)',
           hover: '#0e2748',
+          cyan: '#00f2fe',
         },
         'krill': {
           cyan: '#00f2fe',
@@ -23,8 +25,8 @@ export default {
         },
       },
       fontFamily: {
-        sans: ['Inter', 'system-ui', 'sans-serif'],
-        mono: ['JetBrains Mono', 'monospace'],
+        sans: ['"Plus Jakarta Sans"', 'Inter', 'system-ui', 'sans-serif'],
+        mono: ['"JetBrains Mono"', 'monospace'],
         pixel: ['VT323', 'monospace'],
       },
       boxShadow: {

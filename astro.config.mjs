@@ -5,9 +5,7 @@ import sitemap from '@astrojs/sitemap';
 export default defineConfig({
   site: 'https://krillion.si',
   integrations: [
-    tailwind({
-      applyBaseStyles: false,
-    }),
+    tailwind(),
     sitemap({
       filter: (page) => !page.includes('/404'),
     }),
