@@ -1,207 +1,80 @@
 ---
 interface Props {
-  initialMode?: 'org' | 'daily' | 'endless';
+  initialMode?: 'daily' | 'endless' | 'lobby';
 }
 
-const { initialMode = 'org' } = Astro.props;
+const { initialMode = 'daily' } = Astro.props;
 ---
 
-<div id="krillion-arena" class="relative w-full max-w-5xl mx-auto rounded-3xl bg-abyss-card/90 border border-white/10 p-4 sm:p-6 backdrop-blur-xl shadow-2xl shadow-black/80">
-  <!-- Mode Switcher Bar -->
-  <div class="flex flex-wrap items-center justify-between gap-4 pb-4 border-b border-white/10">
-    <div class="flex items-center gap-1.5 sm:gap-2 bg-abyss-dark/70 p-1.5 rounded-2xl border border-white/5">
+<div id="krillion-arena" class="relative w-full max-w-5xl mx-auto rounded-3xl bg-abyss-card/95 border border-white/10 p-3 sm:p-6 backdrop-blur-xl shadow-2xl shadow-black/80">
+  <!-- Game Mode Controls & Direct Launchers -->
+  <div class="flex flex-wrap items-center justify-between gap-3 pb-4 border-b border-white/10">
+    <!-- Main Direct Play Modes -->
+    <div class="flex flex-wrap items-center gap-1.5 sm:gap-2 bg-abyss-dark/80 p-1.5 rounded-2xl border border-white/5">
       <button
-        id="tab-btn-org"
-        class="px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-bold transition-all bg-abyss-cyan text-abyss-dark shadow-md flex items-center gap-1.5"
+        id="btn-play-daily"
+        class="px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all bg-abyss-cyan text-abyss-dark shadow-lg shadow-abyss-cyan/20 flex items-center gap-1.5"
       >
-        <span>⚡ Krillion Original Engine</span>
+        <span>⚡ Daily Dive (Direct Play)</span>
       </button>
       <button
-        id="tab-btn-daily"
-        class="px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-bold transition-all text-slate-400 hover:text-white flex items-center gap-1.5"
+        id="btn-play-endless"
+        class="px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all text-slate-400 hover:text-white flex items-center gap-1.5"
       >
-        <span>📅 Daily Dive</span>
+        <span>♾️ Endless Mode</span>
       </button>
       <button
-        id="tab-btn-endless"
-        class="px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-bold transition-all text-slate-400 hover:text-white flex items-center gap-1.5"
+        id="btn-play-lobby"
+        class="px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all text-slate-400 hover:text-white flex items-center gap-1.5"
       >
-        <span>♾️ Endless Practice</span>
+        <span>🗂️ Packs & Themes</span>
       </button>
     </div>
 
-    <!-- Quick Status / Badge -->
-    <div class="flex items-center gap-3 text-xs">
-      <span class="text-emerald-400 flex items-center gap-1 font-mono">
-        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> Live Sync
+    <!-- Quick Status / Badge / Fullscreen -->
+    <div class="flex items-center gap-2 sm:gap-3 text-xs">
+      <span class="text-emerald-400 hidden sm:flex items-center gap-1 font-mono text-[11px]">
+        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> Instant Engine
       </span>
-      <button id="btn-fullscreen" class="text-slate-400 hover:text-white px-2 py-1 rounded bg-white/5 border border-white/10 text-[11px]">
-        ⛶ Fullscreen
+      <button
+        id="btn-fullscreen-toggle"
+        class="text-slate-300 hover:text-white px-3 py-1.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-xs font-semibold flex items-center gap-1 transition-all"
+      >
+        <span>⛶</span> Fullscreen
       </button>
     </div>
   </div>
 
-  <!-- CONTAINER 1: krillion.org iframe Container (Default) -->
-  <div id="view-org-iframe" class="w-full mt-4 transition-all">
-    <div class="relative w-full rounded-2xl overflow-hidden border border-white/10 bg-[#030814] shadow-inner" style="height: 680px;">
+  <!-- Direct Game Viewport -->
+  <div class="w-full mt-4">
+    <div
+      id="game-frame-container"
+      class="relative w-full rounded-2xl overflow-hidden border border-cyan-500/30 bg-[#030814] shadow-2xl transition-all"
+      style="height: clamp(620px, 80vh, 850px);"
+    >
       <iframe
-        id="krillion-org-frame"
-        src="https://www.krillion.org/play/"
-        title="Krillion Play Arena"
-        class="w-full h-full border-0"
-        allow="fullscreen"
-        loading="lazy"
+        id="krillion-direct-frame"
+        src="https://www.krillion.org/play/daily/"
+        title="Krillion Direct Game Viewport"
+        class="w-full h-full border-0 bg-[#030814]"
+        allow="fullscreen; clipboard-write; autoplay"
+        loading="eager"
       ></iframe>
     </div>
-    <div class="mt-3 flex items-center justify-between text-xs text-slate-400 px-1">
-      <span>Official full game engine embedded seamlessly. Multiple themes & packs available.</span>
-      <a href="/endless" class="text-abyss-cyan hover:underline">Switch to Endless Practice →</a>
-    </div>
-  </div>
 
-  <!-- CONTAINER 2: Built-in Native Trench Diver (Daily & Endless) -->
-  <div id="view-native-arena" class="hidden mt-4">
-    <!-- Depth & Question Counter -->
-    <div class="flex items-center justify-between gap-4 pb-4 text-xs sm:text-sm">
-      <div class="flex items-center gap-1.5 text-slate-400">
-        <span>Prompt:</span>
-        <span id="prompt-counter" class="font-mono font-bold text-white">1 / 7</span>
+    <!-- Quick Footer Bar under Game -->
+    <div class="mt-3 flex flex-wrap items-center justify-between text-xs text-slate-400 px-1 gap-2">
+      <div class="flex items-center gap-2">
+        <span class="text-abyss-cyan font-semibold">Active Mode:</span>
+        <span id="label-active-mode" class="text-slate-200 font-mono">Today's 7-Question Daily Dive</span>
       </div>
-      <div class="flex items-center gap-1.5 bg-cyan-950/40 border border-cyan-500/30 px-3 py-1 rounded-xl">
-        <span class="text-slate-400">Total Depth:</span>
-        <span id="total-depth" class="font-mono font-extrabold text-abyss-cyan">0m</span>
-      </div>
-    </div>
-
-    <!-- Ocean Trench Depth Visual Meter -->
-    <div class="my-4">
-      <div class="flex justify-between text-[11px] font-mono text-slate-400 mb-1.5">
-        <span>0m Surface (Sunlight)</span>
-        <span class="text-amber-300">3,000m Twilight Trap</span>
-        <span class="text-abyss-cyan font-bold">7,000m Hadal Abyss 👑</span>
-      </div>
-      <div class="w-full h-3 bg-abyss-dark rounded-full overflow-hidden p-0.5 border border-white/10 relative">
-        <div
-          id="progress-meter-bar"
-          class="h-full rounded-full bg-gradient-to-r from-blue-500 via-cyan-400 to-emerald-400 transition-all duration-700 ease-out"
-          style="width: 0%;"
-        ></div>
-      </div>
-    </div>
-
-    <!-- Active Prompt Card -->
-    <div id="game-active-card" class="space-y-6">
-      <div class="space-y-2">
-        <div class="flex items-center justify-between">
-          <span id="prompt-category" class="text-xs font-bold uppercase tracking-widest text-abyss-cyan">
-            Geography
-          </span>
-          <span id="timer-badge" class="font-mono text-xs font-bold text-slate-400 bg-black/40 px-2.5 py-1 rounded-full border border-white/5">
-            ⏱️ 60s
-          </span>
-        </div>
-        <h2 id="prompt-title" class="text-xl sm:text-2xl md:text-3xl font-extrabold text-white tracking-tight leading-snug">
-          Loading challenge prompt...
-        </h2>
-        <p id="prompt-hint" class="text-sm text-slate-400 italic">
-          Clue loading...
-        </p>
-      </div>
-
-      <!-- Input Form -->
-      <form id="answer-form" class="space-y-4">
-        <div class="relative">
-          <input
-            type="text"
-            id="user-answer-input"
-            placeholder="Type your rarest, most obscure answer here..."
-            autocomplete="off"
-            autocorrect="off"
-            spellcheck="false"
-            class="w-full bg-abyss-dark/90 border-2 border-white/15 focus:border-abyss-cyan focus:ring-4 focus:ring-abyss-cyan/20 rounded-2xl px-5 py-4 text-base sm:text-lg text-white font-medium placeholder-slate-500 outline-none transition-all pr-32"
-          />
-          <button
-            type="submit"
-            id="btn-dive-submit"
-            class="absolute right-2 top-2 bottom-2 px-6 rounded-xl bg-gradient-to-r from-abyss-cyan to-blue-600 text-abyss-dark font-extrabold text-sm sm:text-base hover:scale-105 active:scale-95 transition-all shadow-md flex items-center gap-1.5"
-          >
-            <span>Plunge</span>
-            <span>⚓</span>
-          </button>
-        </div>
-
-        <div class="flex items-center justify-between text-xs text-slate-400 px-1">
-          <span>💡 Rule: Common answers score shallow depth. Niche & obscure valid answers plunge deepest.</span>
-          <button type="button" id="btn-skip-prompt" class="text-slate-400 hover:text-slate-200 underline">
-            Skip Prompt
-          </button>
-        </div>
-      </form>
-
-      <!-- Turn Feedback Box -->
-      <div id="feedback-panel" class="hidden p-4 rounded-2xl border transition-all animate-fadeIn">
-        <div class="flex items-start justify-between gap-4">
-          <div>
-            <div id="feedback-badge" class="inline-block text-xs font-black uppercase px-2.5 py-0.5 rounded-full mb-1"></div>
-            <h4 id="feedback-title" class="text-lg font-bold text-white"></h4>
-            <p id="feedback-desc" class="text-xs text-slate-300 mt-1"></p>
-          </div>
-          <div class="text-right flex-shrink-0">
-            <span id="feedback-depth-gain" class="font-mono text-2xl font-black text-white"></span>
-            <div class="text-[10px] text-slate-400">Depth Gained</div>
-          </div>
-        </div>
-        <button
-          id="btn-next-prompt"
-          class="mt-4 w-full py-2.5 rounded-xl bg-white/10 hover:bg-white/20 text-white font-bold text-sm transition-all text-center block"
-        >
-          Next Prompt →
-        </button>
-      </div>
-    </div>
-
-    <!-- Final Results Modal -->
-    <div id="results-modal" class="hidden text-center space-y-6 py-6">
-      <div class="w-16 h-16 mx-auto rounded-full bg-abyss-cyan/20 border border-abyss-cyan/40 flex items-center justify-center text-3xl">
-        🌊
-      </div>
-      <div class="space-y-2">
-        <div class="inline-block px-3 py-1 rounded-full bg-abyss-cyan/10 border border-abyss-cyan/30 text-abyss-cyan text-xs font-bold uppercase tracking-wider">
-          Dive Complete
-        </div>
-        <h3 class="text-3xl sm:text-4xl font-black text-white tracking-tight">
-          You Reached <span id="final-depth-number" class="text-abyss-cyan">0m</span>
-        </h3>
-        <p id="final-verdict-text" class="text-slate-300 text-sm max-w-md mx-auto">
-          Calculating abyssal ranking...
-        </p>
-      </div>
-
-      <div class="max-w-xl mx-auto bg-abyss-dark/70 rounded-2xl border border-white/10 p-4 overflow-hidden text-left">
-        <h4 class="text-xs font-bold uppercase tracking-widest text-slate-400 mb-3">Trench Log Breakdown</h4>
-        <div id="results-breakdown-list" class="space-y-2 text-xs"></div>
-      </div>
-
-      <div class="flex flex-wrap items-center justify-center gap-3 pt-4">
-        <button
-          id="btn-share-result"
-          class="px-6 py-3 rounded-2xl bg-gradient-to-r from-abyss-cyan to-blue-600 text-abyss-dark font-extrabold text-sm shadow-xl shadow-abyss-cyan/20 hover:scale-105 active:scale-95 transition-all flex items-center gap-2"
-        >
-          <span>📋 Copy Result Emojis</span>
-        </button>
-        <button
-          id="btn-restart-game"
-          class="px-6 py-3 rounded-2xl bg-white/10 hover:bg-white/20 text-white font-bold text-sm transition-all border border-white/10"
-        >
-          🔄 Play Again (Endless)
-        </button>
-        <a
-          href="https://krillionhints.com"
-          target="_blank"
-          rel="noopener"
-          class="px-6 py-3 rounded-2xl bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 font-bold text-sm transition-all border border-amber-500/30 flex items-center gap-1.5"
-        >
-          <span>💡 Study Hints on KrillionHints.com</span> ↗
+      <div class="flex items-center gap-3">
+        <a href="/how-to-dive-7000m" class="text-slate-400 hover:text-abyss-cyan transition-colors underline">
+          7,000m Strategy
+        </a>
+        <span class="text-slate-600">•</span>
+        <a href="https://krillionhints.com" target="_blank" rel="noopener" class="text-amber-400 hover:text-amber-300 font-semibold underline">
+          Today's Hints & Solver ↗
         </a>
       </div>
     </div>
@@ -209,276 +82,57 @@ const { initialMode = 'org' } = Astro.props;
 </div>
 
 <script>
-  import { evaluateAnswer, getDailyPrompts, getEndlessBatch, type QuestionPrompt, type AnswerEvaluation } from '../lib/gameEngine';
+  const btnDaily = document.getElementById('btn-play-daily');
+  const btnEndless = document.getElementById('btn-play-endless');
+  const btnLobby = document.getElementById('btn-play-lobby');
+  const frame = document.getElementById('krillion-direct-frame') as HTMLIFrameElement;
+  const labelMode = document.getElementById('label-active-mode');
+  const btnFullscreen = document.getElementById('btn-fullscreen-toggle');
+  const frameContainer = document.getElementById('game-frame-container');
 
-  let currentTab: 'org' | 'daily' | 'endless' = 'org';
-  let prompts: QuestionPrompt[] = [];
-  let currentIndex = 0;
-  let accumulatedDepth = 0;
-  let timerInterval: any = null;
-  let timeLeft = 60;
-  let diveLog: { prompt: QuestionPrompt; eval: AnswerEvaluation }[] = [];
+  const modes = [
+    { id: 'daily', url: 'https://www.krillion.org/play/daily/', btn: btnDaily, label: "Today's 7-Question Daily Dive" },
+    { id: 'endless', url: 'https://www.krillion.org/play/endless/', btn: btnEndless, label: 'Endless Trench Dive (Unlimited)' },
+    { id: 'lobby', url: 'https://www.krillion.org/play/', btn: btnLobby, label: 'Themes & Expansion Packs Lobby' },
+  ];
 
-  // DOM Elements
-  const tabBtnOrg = document.getElementById('tab-btn-org');
-  const tabBtnDaily = document.getElementById('tab-btn-daily');
-  const tabBtnEndless = document.getElementById('tab-btn-endless');
-  const viewOrg = document.getElementById('view-org-iframe');
-  const viewNative = document.getElementById('view-native-arena');
-  const frameOrg = document.getElementById('krillion-org-frame') as HTMLIFrameElement;
-  const btnFullscreen = document.getElementById('btn-fullscreen');
+  function setGameMode(modeId: string) {
+    const target = modes.find(m => m.id === modeId) || modes[0];
 
-  // Native Arena DOM
-  const elCounter = document.getElementById('prompt-counter');
-  const elTotalDepth = document.getElementById('total-depth');
-  const elProgressBar = document.getElementById('progress-meter-bar');
-  const elCategory = document.getElementById('prompt-category');
-  const elTitle = document.getElementById('prompt-title');
-  const elHint = document.getElementById('prompt-hint');
-  const elTimer = document.getElementById('timer-badge');
-  const elInput = document.getElementById('user-answer-input') as HTMLInputElement;
-  const elForm = document.getElementById('answer-form');
-  const elFeedback = document.getElementById('feedback-panel');
-  const elFeedbackBadge = document.getElementById('feedback-badge');
-  const elFeedbackTitle = document.getElementById('feedback-title');
-  const elFeedbackDesc = document.getElementById('feedback-desc');
-  const elFeedbackGain = document.getElementById('feedback-depth-gain');
-  const btnNext = document.getElementById('btn-next-prompt');
-  const btnSkip = document.getElementById('btn-skip-prompt');
-  const cardActive = document.getElementById('game-active-card');
-  const cardResults = document.getElementById('results-modal');
-  const finalDepthNum = document.getElementById('final-depth-number');
-  const finalVerdict = document.getElementById('final-verdict-text');
-  const breakdownList = document.getElementById('results-breakdown-list');
-  const btnShare = document.getElementById('btn-share-result');
-  const btnRestart = document.getElementById('btn-restart-game');
-
-  function switchTab(target: 'org' | 'daily' | 'endless') {
-    currentTab = target;
-
-    // Reset styles
-    [tabBtnOrg, tabBtnDaily, tabBtnEndless].forEach(btn => {
-      btn?.classList.remove('bg-abyss-cyan', 'text-abyss-dark', 'shadow-md');
-      btn?.classList.add('text-slate-400');
+    modes.forEach(m => {
+      m.btn?.classList.remove('bg-abyss-cyan', 'text-abyss-dark', 'shadow-lg', 'shadow-abyss-cyan/20');
+      m.btn?.classList.add('text-slate-400');
     });
 
-    if (target === 'org') {
-      tabBtnOrg?.classList.add('bg-abyss-cyan', 'text-abyss-dark', 'shadow-md');
-      tabBtnOrg?.classList.remove('text-slate-400');
-      viewOrg?.classList.remove('hidden');
-      viewNative?.classList.add('hidden');
-      clearInterval(timerInterval);
-    } else {
-      const activeBtn = target === 'daily' ? tabBtnDaily : tabBtnEndless;
-      activeBtn?.classList.add('bg-abyss-cyan', 'text-abyss-dark', 'shadow-md');
-      activeBtn?.classList.remove('text-slate-400');
-      viewOrg?.classList.add('hidden');
-      viewNative?.classList.remove('hidden');
-      initNativeGame(target);
+    target.btn?.classList.add('bg-abyss-cyan', 'text-abyss-dark', 'shadow-lg', 'shadow-abyss-cyan/20');
+    target.btn?.classList.remove('text-slate-400');
+
+    if (frame && frame.src !== target.url) {
+      frame.src = target.url;
+    }
+
+    if (labelMode) {
+      labelMode.textContent = target.label;
     }
   }
 
-  function initNativeGame(mode: 'daily' | 'endless') {
-    currentIndex = 0;
-    accumulatedDepth = 0;
-    diveLog = [];
-    prompts = mode === 'daily' ? getDailyPrompts() : getEndlessBatch(7);
-
-    cardActive?.classList.remove('hidden');
-    cardResults?.classList.add('hidden');
-    elFeedback?.classList.add('hidden');
-    if (elForm) elForm.style.display = 'block';
-
-    updateDisplay();
-    startTimer();
-  }
-
-  function startTimer() {
-    clearInterval(timerInterval);
-    timeLeft = 60;
-    if (elTimer) elTimer.textContent = `⏱️ ${timeLeft}s`;
-    
-    timerInterval = setInterval(() => {
-      timeLeft--;
-      if (elTimer) elTimer.textContent = `⏱️ ${timeLeft}s`;
-      if (timeLeft <= 0) {
-        clearInterval(timerInterval);
-        submitAnswer('');
-      }
-    }, 1000);
-  }
-
-  function updateDisplay() {
-    if (currentIndex >= prompts.length) {
-      finishGame();
-      return;
-    }
-
-    const currentPrompt = prompts[currentIndex];
-    if (elCounter) elCounter.textContent = `${currentIndex + 1} / ${prompts.length}`;
-    if (elTotalDepth) elTotalDepth.textContent = `${accumulatedDepth.toLocaleString()}m`;
-    
-    const pct = Math.min(100, Math.round((accumulatedDepth / 49000) * 100));
-    if (elProgressBar) elProgressBar.style.width = `${pct}%`;
-
-    if (elCategory) elCategory.textContent = currentPrompt.category;
-    if (elTitle) elTitle.textContent = currentPrompt.prompt;
-    if (elHint) elHint.textContent = `💡 Hint: ${currentPrompt.clue}`;
-    if (elInput) {
-      elInput.value = '';
-      elInput.focus();
-    }
-  }
-
-  function submitAnswer(raw: string) {
-    clearInterval(timerInterval);
-    const prompt = prompts[currentIndex];
-    const evaluation = evaluateAnswer(prompt, raw);
-    
-    accumulatedDepth += evaluation.depthMeters;
-    diveLog.push({ prompt, eval: evaluation });
-
-    if (elForm) elForm.style.display = 'none';
-    if (elFeedback) {
-      elFeedback.classList.remove('hidden');
-      
-      if (evaluation.tier === 'abyssal') {
-        elFeedback.className = 'p-4 rounded-2xl border border-cyan-500/40 bg-cyan-950/40 transition-all';
-        if (elFeedbackBadge) {
-          elFeedbackBadge.className = 'inline-block text-xs font-black uppercase px-2.5 py-0.5 rounded-full mb-1 bg-abyss-cyan text-abyss-dark';
-          elFeedbackBadge.textContent = '7,000m Abyssal Gold 👑';
-        }
-        try {
-          // @ts-ignore
-          if (window.confetti) window.confetti({ particleCount: 80, spread: 60, origin: { y: 0.6 } });
-        } catch(e) {}
-      } else if (evaluation.tier === 'mid') {
-        elFeedback.className = 'p-4 rounded-2xl border border-amber-500/30 bg-amber-950/30 transition-all';
-        if (elFeedbackBadge) {
-          elFeedbackBadge.className = 'inline-block text-xs font-black uppercase px-2.5 py-0.5 rounded-full mb-1 bg-amber-400 text-black';
-          elFeedbackBadge.textContent = 'Too-Clever Trap ⚠️';
-        }
-      } else if (evaluation.tier === 'surface') {
-        elFeedback.className = 'p-4 rounded-2xl border border-blue-500/30 bg-blue-950/30 transition-all';
-        if (elFeedbackBadge) {
-          elFeedbackBadge.className = 'inline-block text-xs font-black uppercase px-2.5 py-0.5 rounded-full mb-1 bg-blue-400 text-black';
-          elFeedbackBadge.textContent = 'Surface Crowd Floater 🌊';
-        }
-      } else {
-        elFeedback.className = 'p-4 rounded-2xl border border-red-500/30 bg-red-950/30 transition-all';
-        if (elFeedbackBadge) {
-          elFeedbackBadge.className = 'inline-block text-xs font-black uppercase px-2.5 py-0.5 rounded-full mb-1 bg-red-500 text-white';
-          elFeedbackBadge.textContent = 'Missed Depth ❌';
-        }
-      }
-
-      if (elFeedbackTitle) elFeedbackTitle.textContent = evaluation.tierLabel;
-      if (elFeedbackDesc) elFeedbackDesc.textContent = evaluation.message;
-      if (elFeedbackGain) elFeedbackGain.textContent = `+${evaluation.depthMeters.toLocaleString()}m`;
-    }
-  }
-
-  function nextPrompt() {
-    currentIndex++;
-    elFeedback?.classList.add('hidden');
-    if (elForm) elForm.style.display = 'block';
-    updateDisplay();
-    if (currentIndex < prompts.length) {
-      startTimer();
-    }
-  }
-
-  function finishGame() {
-    cardActive?.classList.add('hidden');
-    cardResults?.classList.remove('hidden');
-
-    if (finalDepthNum) finalDepthNum.textContent = `${accumulatedDepth.toLocaleString()}m`;
-    
-    let verdict = '';
-    if (accumulatedDepth >= 40000) {
-      verdict = '🏆 Hadal Trench Master! You evaded every crowd trap and tapped into the deep dark archive of obscure trivia!';
-    } else if (accumulatedDepth >= 25000) {
-      verdict = '⚓ Solid Deep Trench Diver! You dipped into rare waters, though a couple of smart traps slowed your sink.';
-    } else {
-      verdict = '🌊 Shallow Waters. You floated with the crowd on common answers. Study the guides on KrillionHints.com to plumb deeper!';
-    }
-    if (finalVerdict) finalVerdict.textContent = verdict;
-
-    if (breakdownList) {
-      breakdownList.innerHTML = diveLog.map((item, idx) => `
-        <div class="flex items-center justify-between p-2 rounded-xl bg-white/5 border border-white/5">
-          <div class="truncate pr-2">
-            <span class="text-slate-400 mr-1.5 font-mono">#${idx + 1}</span>
-            <span class="font-medium text-slate-200">${item.eval.rawAnswer || 'Skipped'}</span>
-            <span class="text-[10px] text-slate-500 block truncate">${item.prompt.category}</span>
-          </div>
-          <div class="font-mono font-bold text-right flex-shrink-0 ${item.eval.depthMeters >= 6000 ? 'text-abyss-cyan' : item.eval.depthMeters >= 2500 ? 'text-amber-300' : 'text-blue-300'}">
-            ${item.eval.depthMeters}m
-          </div>
-        </div>
-      `).join('');
-    }
-
-    try {
-      // @ts-ignore
-      if (window.confetti && accumulatedDepth >= 25000) {
-        // @ts-ignore
-        window.confetti({ particleCount: 150, spread: 80 });
-      }
-    } catch(e) {}
-  }
-
-  // Event Listeners
-  tabBtnOrg?.addEventListener('click', () => switchTab('org'));
-  tabBtnDaily?.addEventListener('click', () => switchTab('daily'));
-  tabBtnEndless?.addEventListener('click', () => switchTab('endless'));
+  btnDaily?.addEventListener('click', () => setGameMode('daily'));
+  btnEndless?.addEventListener('click', () => setGameMode('endless'));
+  btnLobby?.addEventListener('click', () => setGameMode('lobby'));
 
   btnFullscreen?.addEventListener('click', () => {
-    if (currentTab === 'org' && frameOrg) {
-      if (frameOrg.requestFullscreen) {
-        frameOrg.requestFullscreen();
-      }
-    } else {
-      const el = document.getElementById('krillion-arena');
-      if (el?.requestFullscreen) {
-        el.requestFullscreen();
-      }
+    if (frameContainer?.requestFullscreen) {
+      frameContainer.requestFullscreen();
+    } else if (frame?.requestFullscreen) {
+      frame.requestFullscreen();
     }
   });
 
-  elForm?.addEventListener('submit', (e) => {
-    e.preventDefault();
-    if (elInput) submitAnswer(elInput.value);
-  });
-
-  btnSkip?.addEventListener('click', () => submitAnswer(''));
-  btnNext?.addEventListener('click', () => nextPrompt());
-  btnRestart?.addEventListener('click', () => initNativeGame('endless'));
-
-  btnShare?.addEventListener('click', () => {
-    const emojis = diveLog.map(d => {
-      if (d.eval.depthMeters >= 6000) return '👑';
-      if (d.eval.depthMeters >= 2500) return '⚠️';
-      if (d.eval.depthMeters > 0) return '🌊';
-      return '❌';
-    }).join('');
-
-    const shareText = `Krillion.si Trench Dive ⚓\nDepth: ${accumulatedDepth.toLocaleString()}m / 49,000m\n${emojis}\nPlunge into rare trivia at https://krillion.si`;
-
-    if (navigator.clipboard) {
-      navigator.clipboard.writeText(shareText).then(() => {
-        alert('Copied to clipboard!\n\n' + shareText);
-      });
-    }
-  });
-
-  // Check URL pathname for default tab
+  // Check current URL pathname to set default
   const path = window.location.pathname;
   if (path.includes('endless')) {
-    switchTab('endless');
-  } else if (path.includes('daily')) {
-    switchTab('daily');
+    setGameMode('endless');
   } else {
-    switchTab('org');
+    setGameMode('daily');
   }
 </script>
