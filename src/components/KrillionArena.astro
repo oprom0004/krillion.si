@@ -12,10 +12,10 @@ const {
 } = Astro.props;
 ---
 
-<div class="space-y-2">
+<div class="space-y-2" id="krillion-arena-wrapper">
   <!-- Submarine Command Bar / Controls -->
   <div class="flex flex-wrap items-center justify-between gap-2 px-4 py-2.5 rounded-2xl bg-abyss-card/90 border border-cyan-500/20 backdrop-blur-md text-xs shadow-lg">
-    <!-- Left: Status Indicator -->
+    <!-- Left: Status Indicator & Active Mode Badge -->
     <div class="flex items-center gap-3">
       <span class="flex items-center gap-1.5 font-mono text-[11px] text-emerald-400">
         <span class="relative flex h-2 w-2">
@@ -25,7 +25,7 @@ const {
         <span>UPLINK: ONLINE</span>
       </span>
       <span class="hidden sm:inline-block w-px h-3 bg-white/10"></span>
-      <span class="px-2.5 py-0.5 rounded-full bg-cyan-950/60 border border-cyan-500/30 text-abyss-cyan font-bold text-[10px] tracking-wide uppercase">
+      <span id="arena-mode-badge" class="px-2.5 py-0.5 rounded-full bg-cyan-950/60 border border-cyan-500/30 text-cyan-400 font-bold text-[10px] tracking-wide uppercase transition-all">
         {badgeText}
       </span>
     </div>
@@ -35,7 +35,7 @@ const {
       <button
         id="btn-reload-game"
         type="button"
-        class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-white/5 hover:bg-white/10 text-slate-300 hover:text-white border border-white/10 transition-colors text-[11px] font-medium"
+        class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-white/5 hover:bg-white/10 text-slate-300 hover:text-white border border-white/10 transition-colors text-[11px] font-medium cursor-pointer"
         title="Reload Game Frame"
       >
         <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -50,7 +50,7 @@ const {
       <button
         id="btn-fullscreen-game"
         type="button"
-        class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-cyan-500/10 hover:bg-cyan-500/20 text-abyss-cyan border border-cyan-500/30 transition-colors text-[11px] font-bold"
+        class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-400 border border-cyan-500/30 transition-colors text-[11px] font-bold cursor-pointer"
         title="Toggle Fullscreen"
       >
         <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -100,6 +100,7 @@ const {
   const iframe = document.getElementById('krillion-direct-frame') as HTMLIFrameElement;
   const reloadBtn = document.getElementById('btn-reload-game');
   const fullScreenBtn = document.getElementById('btn-fullscreen-game');
+  const badgeEl = document.getElementById('arena-mode-badge');
 
   if (reloadBtn && iframe) {
     reloadBtn.addEventListener('click', () => {
@@ -122,4 +123,31 @@ const {
       }
     });
   }
+
+  // Global switch function for homepage Quick Play buttons
+  (window as any).switchKrillionArena = function(url: string, badgeName: string) {
+    if (iframe && url) {
+      if (iframe.src !== url) {
+        iframe.src = url;
+      }
+      if (badgeEl && badgeName) {
+        badgeEl.textContent = badgeName;
+      }
+      const target = document.getElementById('game') || container;
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+  };
+
+  // Wire all quick play buttons on the page
+  document.addEventListener('click', (e) => {
+    const btn = (e.target as HTMLElement)?.closest('[data-switch-mode]');
+    if (btn) {
+      e.preventDefault();
+      const url = btn.getAttribute('data-switch-mode') || '';
+      const badge = btn.getAttribute('data-badge-name') || '';
+      (window as any).switchKrillionArena?.(url, badge);
+    }
+  });
 </script>

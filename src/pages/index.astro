@@ -106,17 +106,39 @@ const indexFaqSchema = {
         <!-- Cinema -->
         <div class="p-6 rounded-3xl bg-abyss-card border border-white/10 hover:border-cyan-500/50 hover:shadow-[0_0_25px_rgba(6,182,212,0.15)] transition-all flex flex-col justify-between group">
           <div class="space-y-3.5">
-            <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-cyan-950 to-blue-950 border border-cyan-500/30 flex items-center justify-center text-cyan-400 group-hover:scale-110 transition-transform shadow-md">
-              <IconMovie class="w-6 h-6" />
+            <div class="flex items-center justify-between">
+              <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-cyan-950 to-blue-950 border border-cyan-500/30 flex items-center justify-center text-cyan-400 group-hover:scale-110 transition-transform shadow-md">
+                <IconMovie class="w-6 h-6" />
+              </div>
+              <span class="text-[10px] font-mono text-cyan-400/80 bg-cyan-950/50 px-2 py-0.5 rounded border border-cyan-500/20">7,000m Vault</span>
             </div>
-            <h3 class="text-lg font-bold text-white group-hover:text-cyan-400 transition-colors">Cinema & Academy Awards</h3>
+            <h3 class="text-lg font-bold text-white group-hover:text-cyan-400 transition-colors">
+              <a href="/movies" class="flex items-center gap-1.5 hover:underline" title="View dedicated Cinema landing page & strategy">
+                <span>Cinema & Academy Awards</span>
+                <span class="text-xs text-slate-500 group-hover:text-cyan-400">↗</span>
+              </a>
+            </h3>
             <p class="text-xs text-slate-400 leading-relaxed">
-              Name obscure Oscar Best Picture winners from the 1930s–1950s, overlooked Cannes Palme d'Or directors, and golden-age actors. Common blockbuster answers drown at the surface.
+              Name obscure Oscar Best Picture winners from the 1930s–1950s, overlooked Cannes Palme d'Or directors, and golden-age actors.
             </p>
           </div>
-          <div class="pt-6">
-            <a href="/movies" class="block w-full py-2.5 rounded-xl bg-white/5 group-hover:bg-cyan-500 group-hover:text-slate-950 text-slate-200 font-black text-xs transition-all border border-white/10 text-center">
-              Play Cinema Pack ↗
+          <div class="pt-6 flex items-center gap-2">
+            <button
+              type="button"
+              data-switch-mode="https://www.krillion.org/play/movies/"
+              data-badge-name="CINEMA & OSCARS PACK 🎬"
+              class="flex-1 py-2.5 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-black text-xs transition-all shadow-md flex items-center justify-center gap-1.5 cursor-pointer hover:scale-[1.02] active:scale-[0.98]"
+            >
+              <span>Play in Arena</span>
+              <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            </button>
+            <a
+              href="/movies"
+              class="px-3.5 py-2.5 rounded-xl bg-white/5 hover:bg-white/10 text-slate-300 hover:text-white font-bold text-xs transition-all border border-white/10 flex items-center gap-1 text-center"
+              title="View full strategy guide and standalone game"
+            >
+              <span>Guide</span>
+              <span>↗</span>
             </a>
           </div>
         </div>
@@ -124,17 +146,39 @@ const indexFaqSchema = {
         <!-- Geography -->
         <div class="p-6 rounded-3xl bg-abyss-card border border-white/10 hover:border-cyan-500/50 hover:shadow-[0_0_25px_rgba(6,182,212,0.15)] transition-all flex flex-col justify-between group">
           <div class="space-y-3.5">
-            <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-cyan-950 to-blue-950 border border-cyan-500/30 flex items-center justify-center text-cyan-400 group-hover:scale-110 transition-transform shadow-md">
-              <IconGeography class="w-6 h-6" />
+            <div class="flex items-center justify-between">
+              <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-cyan-950 to-blue-950 border border-cyan-500/30 flex items-center justify-center text-cyan-400 group-hover:scale-110 transition-transform shadow-md">
+                <IconGeography class="w-6 h-6" />
+              </div>
+              <span class="text-[10px] font-mono text-cyan-400/80 bg-cyan-950/50 px-2 py-0.5 rounded border border-cyan-500/20">7,000m Vault</span>
             </div>
-            <h3 class="text-lg font-bold text-white group-hover:text-cyan-400 transition-colors">Geography & Enclaves</h3>
+            <h3 class="text-lg font-bold text-white group-hover:text-cyan-400 transition-colors">
+              <a href="/geography" class="flex items-center gap-1.5 hover:underline" title="View dedicated Geography landing page & strategy">
+                <span>Geography & Enclaves</span>
+                <span class="text-xs text-slate-500 group-hover:text-cyan-400">↗</span>
+              </a>
+            </h3>
             <p class="text-xs text-slate-400 leading-relaxed">
-              Plunge into sovereign enclaves (San Marino, Lesotho), microstate archipelagos (Nauru, Tuvalu), and doubly landlocked nations. Skip obvious continents to reach 7,000m.
+              Plunge into sovereign enclaves (San Marino, Lesotho), microstate archipelagos (Nauru, Tuvalu), and doubly landlocked nations.
             </p>
           </div>
-          <div class="pt-6">
-            <a href="/geography" class="block w-full py-2.5 rounded-xl bg-white/5 group-hover:bg-cyan-500 group-hover:text-slate-950 text-slate-200 font-black text-xs transition-all border border-white/10 text-center">
-              Play Geography Pack ↗
+          <div class="pt-6 flex items-center gap-2">
+            <button
+              type="button"
+              data-switch-mode="https://www.krillion.org/play/geography/"
+              data-badge-name="GEOGRAPHY & ENCLAVES PACK 🌍"
+              class="flex-1 py-2.5 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-black text-xs transition-all shadow-md flex items-center justify-center gap-1.5 cursor-pointer hover:scale-[1.02] active:scale-[0.98]"
+            >
+              <span>Play in Arena</span>
+              <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            </button>
+            <a
+              href="/geography"
+              class="px-3.5 py-2.5 rounded-xl bg-white/5 hover:bg-white/10 text-slate-300 hover:text-white font-bold text-xs transition-all border border-white/10 flex items-center gap-1 text-center"
+              title="View full strategy guide and standalone game"
+            >
+              <span>Guide</span>
+              <span>↗</span>
             </a>
           </div>
         </div>
@@ -142,17 +186,39 @@ const indexFaqSchema = {
         <!-- History -->
         <div class="p-6 rounded-3xl bg-abyss-card border border-white/10 hover:border-cyan-500/50 hover:shadow-[0_0_25px_rgba(6,182,212,0.15)] transition-all flex flex-col justify-between group">
           <div class="space-y-3.5">
-            <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-cyan-950 to-blue-950 border border-cyan-500/30 flex items-center justify-center text-cyan-400 group-hover:scale-110 transition-transform shadow-md">
-              <IconHistory class="w-6 h-6" />
+            <div class="flex items-center justify-between">
+              <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-cyan-950 to-blue-950 border border-cyan-500/30 flex items-center justify-center text-cyan-400 group-hover:scale-110 transition-transform shadow-md">
+                <IconHistory class="w-6 h-6" />
+              </div>
+              <span class="text-[10px] font-mono text-cyan-400/80 bg-cyan-950/50 px-2 py-0.5 rounded border border-cyan-500/20">7,000m Vault</span>
             </div>
-            <h3 class="text-lg font-bold text-white group-hover:text-cyan-400 transition-colors">World History & Empires</h3>
+            <h3 class="text-lg font-bold text-white group-hover:text-cyan-400 transition-colors">
+              <a href="/history" class="flex items-center gap-1.5 hover:underline" title="View dedicated History landing page & strategy">
+                <span>World History & Empires</span>
+                <span class="text-xs text-slate-500 group-hover:text-cyan-400">↗</span>
+              </a>
+            </h3>
             <p class="text-xs text-slate-400 leading-relaxed">
-              Test short-lived Roman emperors (Didius Julianus, Majorian), pre-modern peace accords (Treaty of Wedmore), and third-century dynasties.
+              Test short-lived Roman emperors (Didius Julianus, Majorian), pre-modern peace accords (Treaty of Wedmore), and dynasties.
             </p>
           </div>
-          <div class="pt-6">
-            <a href="/history" class="block w-full py-2.5 rounded-xl bg-white/5 group-hover:bg-cyan-500 group-hover:text-slate-950 text-slate-200 font-black text-xs transition-all border border-white/10 text-center">
-              Play History Pack ↗
+          <div class="pt-6 flex items-center gap-2">
+            <button
+              type="button"
+              data-switch-mode="https://www.krillion.org/play/history/"
+              data-badge-name="WORLD HISTORY PACK 🏛️"
+              class="flex-1 py-2.5 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-black text-xs transition-all shadow-md flex items-center justify-center gap-1.5 cursor-pointer hover:scale-[1.02] active:scale-[0.98]"
+            >
+              <span>Play in Arena</span>
+              <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            </button>
+            <a
+              href="/history"
+              class="px-3.5 py-2.5 rounded-xl bg-white/5 hover:bg-white/10 text-slate-300 hover:text-white font-bold text-xs transition-all border border-white/10 flex items-center gap-1 text-center"
+              title="View full strategy guide and standalone game"
+            >
+              <span>Guide</span>
+              <span>↗</span>
             </a>
           </div>
         </div>
@@ -160,17 +226,39 @@ const indexFaqSchema = {
         <!-- Sports -->
         <div class="p-6 rounded-3xl bg-abyss-card border border-white/10 hover:border-cyan-500/50 hover:shadow-[0_0_25px_rgba(6,182,212,0.15)] transition-all flex flex-col justify-between group">
           <div class="space-y-3.5">
-            <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-cyan-950 to-blue-950 border border-cyan-500/30 flex items-center justify-center text-cyan-400 group-hover:scale-110 transition-transform shadow-md">
-              <IconSports class="w-6 h-6" />
+            <div class="flex items-center justify-between">
+              <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-cyan-950 to-blue-950 border border-cyan-500/30 flex items-center justify-center text-cyan-400 group-hover:scale-110 transition-transform shadow-md">
+                <IconSports class="w-6 h-6" />
+              </div>
+              <span class="text-[10px] font-mono text-cyan-400/80 bg-cyan-950/50 px-2 py-0.5 rounded border border-cyan-500/20">7,000m Vault</span>
             </div>
-            <h3 class="text-lg font-bold text-white group-hover:text-cyan-400 transition-colors">Sports & Athletics</h3>
+            <h3 class="text-lg font-bold text-white group-hover:text-cyan-400 transition-colors">
+              <a href="/sports" class="flex items-center gap-1.5 hover:underline" title="View dedicated Sports landing page & strategy">
+                <span>Sports & Athletics</span>
+                <span class="text-xs text-slate-500 group-hover:text-cyan-400">↗</span>
+              </a>
+            </h3>
             <p class="text-xs text-slate-400 leading-relaxed">
-              Unearth forgotten Olympic medalists, historical Champions League contenders, and international athletic tournament champions outside the usual superstars.
+              Unearth forgotten Olympic medalists, historical Champions League contenders, and international athletic champions.
             </p>
           </div>
-          <div class="pt-6">
-            <a href="/sports" class="block w-full py-2.5 rounded-xl bg-white/5 group-hover:bg-cyan-500 group-hover:text-slate-950 text-slate-200 font-black text-xs transition-all border border-white/10 text-center">
-              Play Sports Pack ↗
+          <div class="pt-6 flex items-center gap-2">
+            <button
+              type="button"
+              data-switch-mode="https://www.krillion.org/play/sports/"
+              data-badge-name="SPORTS & ATHLETICS PACK ⚽"
+              class="flex-1 py-2.5 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-black text-xs transition-all shadow-md flex items-center justify-center gap-1.5 cursor-pointer hover:scale-[1.02] active:scale-[0.98]"
+            >
+              <span>Play in Arena</span>
+              <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            </button>
+            <a
+              href="/sports"
+              class="px-3.5 py-2.5 rounded-xl bg-white/5 hover:bg-white/10 text-slate-300 hover:text-white font-bold text-xs transition-all border border-white/10 flex items-center gap-1 text-center"
+              title="View full strategy guide and standalone game"
+            >
+              <span>Guide</span>
+              <span>↗</span>
             </a>
           </div>
         </div>
@@ -178,17 +266,39 @@ const indexFaqSchema = {
         <!-- Language -->
         <div class="p-6 rounded-3xl bg-abyss-card border border-white/10 hover:border-cyan-500/50 hover:shadow-[0_0_25px_rgba(6,182,212,0.15)] transition-all flex flex-col justify-between group">
           <div class="space-y-3.5">
-            <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-cyan-950 to-blue-950 border border-cyan-500/30 flex items-center justify-center text-cyan-400 group-hover:scale-110 transition-transform shadow-md">
-              <IconLanguage class="w-6 h-6" />
+            <div class="flex items-center justify-between">
+              <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-cyan-950 to-blue-950 border border-cyan-500/30 flex items-center justify-center text-cyan-400 group-hover:scale-110 transition-transform shadow-md">
+                <IconLanguage class="w-6 h-6" />
+              </div>
+              <span class="text-[10px] font-mono text-cyan-400/80 bg-cyan-950/50 px-2 py-0.5 rounded border border-cyan-500/20">7,000m Vault</span>
             </div>
-            <h3 class="text-lg font-bold text-white group-hover:text-cyan-400 transition-colors">Language & Literature</h3>
+            <h3 class="text-lg font-bold text-white group-hover:text-cyan-400 transition-colors">
+              <a href="/language" class="flex items-center gap-1.5 hover:underline" title="View dedicated Language landing page & strategy">
+                <span>Language & Literature</span>
+                <span class="text-xs text-slate-500 group-hover:text-cyan-400">↗</span>
+              </a>
+            </h3>
             <p class="text-xs text-slate-400 leading-relaxed">
               Plunge into obscure Shakespearean plays (Cymbeline, Pericles), archaic etymological origins, and lesser-known historical authors.
             </p>
           </div>
-          <div class="pt-6">
-            <a href="/language" class="block w-full py-2.5 rounded-xl bg-white/5 group-hover:bg-cyan-500 group-hover:text-slate-950 text-slate-200 font-black text-xs transition-all border border-white/10 text-center">
-              Play Language Pack ↗
+          <div class="pt-6 flex items-center gap-2">
+            <button
+              type="button"
+              data-switch-mode="https://www.krillion.org/play/language/"
+              data-badge-name="LANGUAGE & LITERATURE PACK 📖"
+              class="flex-1 py-2.5 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-black text-xs transition-all shadow-md flex items-center justify-center gap-1.5 cursor-pointer hover:scale-[1.02] active:scale-[0.98]"
+            >
+              <span>Play in Arena</span>
+              <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            </button>
+            <a
+              href="/language"
+              class="px-3.5 py-2.5 rounded-xl bg-white/5 hover:bg-white/10 text-slate-300 hover:text-white font-bold text-xs transition-all border border-white/10 flex items-center gap-1 text-center"
+              title="View full strategy guide and standalone game"
+            >
+              <span>Guide</span>
+              <span>↗</span>
             </a>
           </div>
         </div>
@@ -196,17 +306,39 @@ const indexFaqSchema = {
         <!-- Science -->
         <div class="p-6 rounded-3xl bg-abyss-card border border-white/10 hover:border-cyan-500/50 hover:shadow-[0_0_25px_rgba(6,182,212,0.15)] transition-all flex flex-col justify-between group">
           <div class="space-y-3.5">
-            <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-cyan-950 to-blue-950 border border-cyan-500/30 flex items-center justify-center text-cyan-400 group-hover:scale-110 transition-transform shadow-md">
-              <IconScience class="w-6 h-6" />
+            <div class="flex items-center justify-between">
+              <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-cyan-950 to-blue-950 border border-cyan-500/30 flex items-center justify-center text-cyan-400 group-hover:scale-110 transition-transform shadow-md">
+                <IconScience class="w-6 h-6" />
+              </div>
+              <span class="text-[10px] font-mono text-cyan-400/80 bg-cyan-950/50 px-2 py-0.5 rounded border border-cyan-500/20">7,000m Vault</span>
             </div>
-            <h3 class="text-lg font-bold text-white group-hover:text-cyan-400 transition-colors">Science & Periodic Elements</h3>
+            <h3 class="text-lg font-bold text-white group-hover:text-cyan-400 transition-colors">
+              <a href="/science" class="flex items-center gap-1.5 hover:underline" title="View dedicated Science landing page & strategy">
+                <span>Science & Periodic Elements</span>
+                <span class="text-xs text-slate-500 group-hover:text-cyan-400">↗</span>
+              </a>
+            </h3>
             <p class="text-xs text-slate-400 leading-relaxed">
               Rare transition metals on the periodic table (Rhenium, Hafnium), deep hadal oceanic biodiversity, and Nobel laureates in Physics.
             </p>
           </div>
-          <div class="pt-6">
-            <a href="/science" class="block w-full py-2.5 rounded-xl bg-white/5 group-hover:bg-cyan-500 group-hover:text-slate-950 text-slate-200 font-black text-xs transition-all border border-white/10 text-center">
-              Play Science Pack ↗
+          <div class="pt-6 flex items-center gap-2">
+            <button
+              type="button"
+              data-switch-mode="https://www.krillion.org/play/science/"
+              data-badge-name="SCIENCE & ELEMENTS PACK 🧪"
+              class="flex-1 py-2.5 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-black text-xs transition-all shadow-md flex items-center justify-center gap-1.5 cursor-pointer hover:scale-[1.02] active:scale-[0.98]"
+            >
+              <span>Play in Arena</span>
+              <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            </button>
+            <a
+              href="/science"
+              class="px-3.5 py-2.5 rounded-xl bg-white/5 hover:bg-white/10 text-slate-300 hover:text-white font-bold text-xs transition-all border border-white/10 flex items-center gap-1 text-center"
+              title="View full strategy guide and standalone game"
+            >
+              <span>Guide</span>
+              <span>↗</span>
             </a>
           </div>
         </div>
