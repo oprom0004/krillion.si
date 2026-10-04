@@ -1,0 +1,33 @@
+---
+import Layout from '../layouts/Layout.astro';
+import KrillionArena from '../components/KrillionArena.astro';
+---
+
+<Layout
+  title="Play Krillion Movies & Cinema Pack | Oscars Trivia - Krillion.si"
+  description="Play Krillion's Cinema & Academy Awards themed pack online. Name rare Oscar Best Picture winners and obscure film festival directors to plunge down to 7,000 meters."
+>
+  <div class="py-6 px-3 sm:px-6 lg:px-8 max-w-7xl mx-auto space-y-6">
+    <div class="text-center space-y-2">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-950/40 border border-cyan-500/30 text-abyss-cyan text-xs font-bold">
+        <span>🎬 THEMED PACK • CINEMA & OSCARS</span>
+      </div>
+      <h1 class="text-3xl sm:text-4xl font-black text-white tracking-tight">
+        Krillion Cinema & Academy Awards Pack
+      </h1>
+      <p class="text-slate-400 text-xs sm:text-sm max-w-xl mx-auto">
+        Test your obscure film knowledge. Guess forgotten Best Picture winners from the 1930s-1950s and cult directors.
+      </p>
+    </div>
+
+    <KrillionArena modeUrl="https://www.krillion.org/play/movies/" />
+
+    <!-- Editorial strategy section for SEO -->
+    <section class="mt-12 p-8 rounded-3xl bg-abyss-card border border-white/5 space-y-4">
+      <h2 class="text-xl font-bold text-white">Cinema 7,000m Strategy & Pitfalls</h2>
+      <p class="text-xs text-slate-300 leading-relaxed">
+        When prompted with Academy Award Best Picture winners, avoid recent viral films like <em>Oppenheimer</em>, <em>Parasite</em>, or <em>Titanic</em>. Dig into the 1930s (e.g. <em>Wings</em>, <em>Cavalcade</em>, <em>The Great Ziegfeld</em>) or vintage classics like <em>Marty</em> (1955) to secure a Hadal Sinker score.
+      </p>
+    </section>
+  </div>
+</Layout>

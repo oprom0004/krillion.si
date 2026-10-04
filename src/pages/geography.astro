@@ -1,0 +1,33 @@
+---
+import Layout from '../layouts/Layout.astro';
+import KrillionArena from '../components/KrillionArena.astro';
+---
+
+<Layout
+  title="Play Krillion Geography & Enclaves Pack | Rare Countries Trivia - Krillion.si"
+  description="Play Krillion's Geography themed pack. Name obscure landlocked microstates, Pacific island archipelagos, and sub-Antarctic territories to reach 7,000m depth."
+>
+  <div class="py-6 px-3 sm:px-6 lg:px-8 max-w-7xl mx-auto space-y-6">
+    <div class="text-center space-y-2">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-950/40 border border-cyan-500/30 text-abyss-cyan text-xs font-bold">
+        <span>🌍 THEMED PACK • GEOGRAPHY & ENCLAVES</span>
+      </div>
+      <h1 class="text-3xl sm:text-4xl font-black text-white tracking-tight">
+        Krillion Geography & Microstates Pack
+      </h1>
+      <p class="text-slate-400 text-xs sm:text-sm max-w-xl mx-auto">
+        Plunge into sovereign enclaves, island microstates, and obscure international borders.
+      </p>
+    </div>
+
+    <KrillionArena modeUrl="https://www.krillion.org/play/geography/" />
+
+    <!-- Editorial strategy section for SEO -->
+    <section class="mt-12 p-8 rounded-3xl bg-abyss-card border border-white/5 space-y-4">
+      <h2 class="text-xl font-bold text-white">Geography 7,000m Strategy & Tips</h2>
+      <p class="text-xs text-slate-300 leading-relaxed">
+        Skip obvious major countries (Australia, Brazil, Switzerland). For Southern Hemisphere and landlocked prompts, target African micro-nations (<em>Eswatini</em>, <em>Lesotho</em>, <em>Burundi</em>) and Pacific archipelagos (<em>Nauru</em>, <em>Tuvalu</em>, <em>Kiribati</em>).
+      </p>
+    </section>
+  </div>
+</Layout>

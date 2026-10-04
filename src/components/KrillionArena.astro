@@ -1,22 +1,18 @@
 ---
-// Direct Pure Game Frame without outer wrapper bars
+interface Props {
+  modeUrl?: string;
+}
+
+const { modeUrl = 'https://www.krillion.org/play/daily/' } = Astro.props;
 ---
 
 <div id="game-frame-container" class="relative w-full rounded-2xl overflow-hidden border border-cyan-500/30 bg-[#030814] shadow-2xl" style="height: clamp(620px, 86vh, 880px);">
   <iframe
     id="krillion-direct-frame"
-    src="https://www.krillion.org/play/daily/"
+    src={modeUrl}
     title="Play Krillion"
     class="w-full h-full border-0 bg-[#030814]"
     allow="fullscreen; clipboard-write; autoplay"
     loading="eager"
   ></iframe>
 </div>
-
-<script>
-  const frame = document.getElementById('krillion-direct-frame') as HTMLIFrameElement;
-  const path = window.location.pathname;
-  if (path.includes('endless')) {
-    if (frame) frame.src = 'https://www.krillion.org/play/endless/';
-  }
-</script>

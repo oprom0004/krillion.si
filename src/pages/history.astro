@@ -1,0 +1,33 @@
+---
+import Layout from '../layouts/Layout.astro';
+import KrillionArena from '../components/KrillionArena.astro';
+---
+
+<Layout
+  title="Play Krillion History & Empires Pack | Roman & Medieval Trivia - Krillion.si"
+  description="Play Krillion's World History themed pack. Guess short-reigning Roman emperors, obscure Bronze Age treaties, and pre-modern dynasties."
+>
+  <div class="py-6 px-3 sm:px-6 lg:px-8 max-w-7xl mx-auto space-y-6">
+    <div class="text-center space-y-2">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-950/40 border border-cyan-500/30 text-abyss-cyan text-xs font-bold">
+        <span>🏛️ THEMED PACK • WORLD HISTORY & EMPIRES</span>
+      </div>
+      <h1 class="text-3xl sm:text-4xl font-black text-white tracking-tight">
+        Krillion History & Empires Pack
+      </h1>
+      <p class="text-slate-400 text-xs sm:text-sm max-w-xl mx-auto">
+        Test your ancient and medieval historical recall against 7,000-meter Hadal benchmarks.
+      </p>
+    </div>
+
+    <KrillionArena modeUrl="https://www.krillion.org/play/history/" />
+
+    <!-- Editorial strategy section for SEO -->
+    <section class="mt-12 p-8 rounded-3xl bg-abyss-card border border-white/5 space-y-4">
+      <h2 class="text-xl font-bold text-white">History 7,000m Strategy & Tips</h2>
+      <p class="text-xs text-slate-300 leading-relaxed">
+        Julio-Claudian emperors (Augustus, Nero) leave you in the shallow 0m zone. To hit 7,000m, choose third-century crisis figures (<em>Majorian</em>, <em>Didius Julianus</em>, <em>Pupienus</em>) or obscure pre-2000 peace accords like the <em>Treaty of Kadesh</em>.
+      </p>
+    </section>
+  </div>
+</Layout>
