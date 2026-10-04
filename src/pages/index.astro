@@ -7,111 +7,98 @@ import KrillionArena from '../components/KrillionArena.astro';
   title="Krillion.si | Play Krillion Online - The Viral Reverse-Trivia Trench Game"
   description="Play Krillion online for free! Plunge into the ocean trench by guessing the rarest, least obvious answers. Features Daily Dive, Endless Practice, and 6 Themed Packs (Cinema, Geography, History, Sports, Science)."
 >
-  <!-- Hero Section -->
-  <section class="relative pt-12 pb-8 overflow-hidden">
-    <!-- Ambient Glow Background -->
-    <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[350px] bg-cyan-500/10 rounded-full blur-[140px] pointer-events-none"></div>
-
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10 space-y-4">
-      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-abyss-card border border-abyss-cyan/30 text-abyss-cyan text-xs font-bold tracking-wide shadow-md">
-        <span class="w-2 h-2 rounded-full bg-abyss-cyan animate-pulse"></span>
-        <span>SI PLATFORM • DAILY DIVE & THEMED VARIANTS LIVE</span>
+  <!-- Screen 1: Minimal Hero + Direct Playable Arena (All in First Viewport) -->
+  <section class="pt-4 pb-10 px-3 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+    <!-- Compact Headline -->
+    <div class="text-center mb-3 space-y-1">
+      <div class="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-abyss-card border border-abyss-cyan/30 text-abyss-cyan text-[11px] font-bold tracking-wide">
+        <span class="w-1.5 h-1.5 rounded-full bg-abyss-cyan animate-pulse"></span>
+        <span>DAILY TRENCH DIVE LIVE • GUESS THE RAREST ANSWER</span>
       </div>
-
-      <h1 class="text-4xl sm:text-5xl md:text-6xl font-black tracking-tight text-white max-w-4xl mx-auto leading-[1.1]">
-        The Obscure Reverse-Trivia Game <br />
-        <span class="text-transparent bg-clip-text bg-gradient-to-r from-abyss-cyan via-blue-400 to-indigo-300">
-          Where Common Answers Drown
-        </span>
+      <h1 class="text-2xl sm:text-3xl md:text-4xl font-black text-white tracking-tight">
+        Krillion: The Reverse-Trivia Game Where Common Answers Drown
       </h1>
-
-      <p class="text-slate-300 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed">
-        Anyone can name the famous answer. On <strong class="text-white">Krillion.si</strong>, you plunge deep into the hadal trench only by naming the valid, rarest answers that nobody else remembers.
+      <p class="text-xs sm:text-sm text-slate-400 max-w-2xl mx-auto">
+        Name the verifiable, rarest answer that nobody else remembers to plunge down to the 7,000m Hadal Abyss.
       </p>
     </div>
-  </section>
 
-  <!-- Interactive Game Arena Section with All Direct Modes -->
-  <section id="game" class="pb-16 px-4 sm:px-6 lg:px-8">
+    <!-- Direct Playable Arena -->
     <KrillionArena initialMode="daily" />
   </section>
 
-  <!-- SECTION: Game Variants & Modes Grid (Mirroring .org Full Breadth) -->
-  <section class="py-16 bg-abyss-dark/60 border-y border-white/5">
+  <!-- Screen 2+: Rich Editorial Content & Ecosystem -->
+
+  <!-- Themed Packs Showcase (Turned into Native Content Cards) -->
+  <section class="py-16 bg-abyss-dark/60 border-t border-white/5">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
-        <div>
-          <span class="text-xs font-bold text-abyss-cyan uppercase tracking-widest font-mono">Game Ecosystem</span>
-          <h2 class="text-3xl sm:text-4xl font-extrabold text-white mt-1">More Ways to Dive</h2>
-          <p class="text-slate-400 text-sm mt-1">Explore all official game variants, unlimited practice runs, and specialized subject vaults.</p>
-        </div>
+      <div class="max-w-3xl mb-10">
+        <span class="text-xs font-bold text-abyss-cyan uppercase tracking-widest font-mono">Variants & Expansion Packs</span>
+        <h2 class="text-2xl sm:text-3xl font-extrabold text-white mt-1">Specialized Trench Categories</h2>
+        <p class="text-slate-400 text-sm mt-1">
+          Mastered the general Daily Dive? Plunge into dedicated subject archives with custom rarity curves.
+        </p>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <!-- Variant 1: Daily Dive -->
-        <div class="p-6 rounded-3xl bg-abyss-card border border-white/10 flex flex-col justify-between group hover:border-abyss-cyan/40 transition-all">
-          <div class="space-y-3">
-            <div class="w-12 h-12 rounded-2xl bg-cyan-950/60 border border-cyan-500/30 flex items-center justify-center text-2xl">
-              ⚡
-            </div>
-            <h3 class="text-xl font-bold text-white group-hover:text-abyss-cyan transition-colors">The Daily Dive</h3>
-            <p class="text-xs text-slate-400 leading-relaxed">
-              Seven daily prompts, about 20 seconds each, synchronized globally at 00:00 UTC. One official attempt per day. Plunge as deep as possible and share your color-coded emoji grid with friends.
-            </p>
-          </div>
-          <div class="pt-6">
-            <a href="/daily" class="text-xs font-bold text-abyss-cyan hover:underline flex items-center gap-1">
-              <span>Play Today's Daily Dive</span> →
-            </a>
-          </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div class="p-6 rounded-2xl bg-abyss-card border border-white/5 hover:border-abyss-cyan/40 transition-all group">
+          <div class="text-2xl mb-2">🎬</div>
+          <h3 class="text-lg font-bold text-white group-hover:text-abyss-cyan transition-colors">Cinema & Academy Awards</h3>
+          <p class="text-xs text-slate-400 mt-1 leading-relaxed">
+            Test obscure directors, Best Picture winners from the golden era, and overlooked film festival nominees.
+          </p>
         </div>
 
-        <!-- Variant 2: Endless Mode -->
-        <div class="p-6 rounded-3xl bg-abyss-card border border-white/10 flex flex-col justify-between group hover:border-abyss-cyan/40 transition-all md:translate-y-[-10px]">
-          <div class="space-y-3">
-            <div class="w-12 h-12 rounded-2xl bg-indigo-950/60 border border-indigo-500/30 flex items-center justify-center text-2xl">
-              ♾️
-            </div>
-            <h3 class="text-xl font-bold text-white group-hover:text-abyss-cyan transition-colors">Endless Sinker Mode</h3>
-            <p class="text-xs text-slate-400 leading-relaxed">
-              No 24-hour lockout and no limits. Seven randomized prompts per run from an expansive question archive. Continuous practice to train your 7,000m obscure recall before playing the Daily challenge.
-            </p>
-          </div>
-          <div class="pt-6">
-            <a href="/endless" class="text-xs font-bold text-abyss-cyan hover:underline flex items-center gap-1">
-              <span>Launch Unlimited Practice</span> →
-            </a>
-          </div>
+        <div class="p-6 rounded-2xl bg-abyss-card border border-white/5 hover:border-abyss-cyan/40 transition-all group">
+          <div class="text-2xl mb-2">🌍</div>
+          <h3 class="text-lg font-bold text-white group-hover:text-abyss-cyan transition-colors">Geography & Enclaves</h3>
+          <p class="text-xs text-slate-400 mt-1 leading-relaxed">
+            Target landlocked nations, microstate enclaves, overseas territories, and sub-Antarctic islands.
+          </p>
         </div>
 
-        <!-- Variant 3: Themed Expansion Packs -->
-        <div class="p-6 rounded-3xl bg-abyss-card border border-white/10 flex flex-col justify-between group hover:border-abyss-cyan/40 transition-all">
-          <div class="space-y-3">
-            <div class="w-12 h-12 rounded-2xl bg-amber-950/60 border border-amber-500/30 flex items-center justify-center text-2xl">
-              🗂️
-            </div>
-            <h3 class="text-xl font-bold text-white group-hover:text-abyss-cyan transition-colors">Themed Category Packs</h3>
-            <p class="text-xs text-slate-400 leading-relaxed">
-              Specialized domain packs for niche specialists: Cinema & Oscars, World Geography & Enclaves, Ancient Empires, Sports & Athletics, Language, and Physical Science.
-            </p>
-          </div>
-          <div class="pt-6">
-            <a href="#game" class="text-xs font-bold text-abyss-cyan hover:underline flex items-center gap-1">
-              <span>Explore Themed Packs Above</span> ↑
-            </a>
-          </div>
+        <div class="p-6 rounded-2xl bg-abyss-card border border-white/5 hover:border-abyss-cyan/40 transition-all group">
+          <div class="text-2xl mb-2">🏛️</div>
+          <h3 class="text-lg font-bold text-white group-hover:text-abyss-cyan transition-colors">World History & Empires</h3>
+          <p class="text-xs text-slate-400 mt-1 leading-relaxed">
+            Short-reigning Roman emperors, obscure Bronze Age peace treaties, and pre-modern dynasty successions.
+          </p>
+        </div>
+
+        <div class="p-6 rounded-2xl bg-abyss-card border border-white/5 hover:border-abyss-cyan/40 transition-all group">
+          <div class="text-2xl mb-2">⚽</div>
+          <h3 class="text-lg font-bold text-white group-hover:text-abyss-cyan transition-colors">Sports & Athletics</h3>
+          <p class="text-xs text-slate-400 mt-1 leading-relaxed">
+            Olympic medalists from non-powerhouse nations, historic club transfers, and forgotten athletic records.
+          </p>
+        </div>
+
+        <div class="p-6 rounded-2xl bg-abyss-card border border-white/5 hover:border-abyss-cyan/40 transition-all group">
+          <div class="text-2xl mb-2">📖</div>
+          <h3 class="text-lg font-bold text-white group-hover:text-abyss-cyan transition-colors">Language & Literature</h3>
+          <p class="text-xs text-slate-400 mt-1 leading-relaxed">
+            Obscure Shakespearean folios, Nobel laureates in Literature, and archaic linguistic roots.
+          </p>
+        </div>
+
+        <div class="p-6 rounded-2xl bg-abyss-card border border-white/5 hover:border-abyss-cyan/40 transition-all group">
+          <div class="text-2xl mb-2">🧪</div>
+          <h3 class="text-lg font-bold text-white group-hover:text-abyss-cyan transition-colors">Science & Periodic Elements</h3>
+          <p class="text-xs text-slate-400 mt-1 leading-relaxed">
+            Rare transition metals, deep-sea abyssal organisms, and Nobel Physics laureates beyond Einstein.
+          </p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- SECTION: Rules & Depth Mechanics (The .org 4 Pillars) -->
+  <!-- SECTION: Rules & Depth Mechanics -->
   <section class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="text-center max-w-3xl mx-auto mb-12 space-y-3">
-      <span class="text-xs font-bold text-abyss-cyan uppercase tracking-widest font-mono">Game Mechanics</span>
-      <h2 class="text-3xl font-extrabold text-white">How Does Krillion Work?</h2>
+      <span class="text-xs font-bold text-abyss-cyan uppercase tracking-widest font-mono">Scoring Architecture</span>
+      <h2 class="text-2xl sm:text-3xl font-extrabold text-white">How Does Krillion Depth Work?</h2>
       <p class="text-slate-400 text-sm">
-        Krillion reverses ordinary trivia. The faster you rush with the obvious crowd answer, the shallower you remain. Depth is determined by factual rarity.
+        Every round evaluates your answer against community frequency distributions. Obscurity plus factual validity unlocks maximum depth.
       </p>
     </div>
 
@@ -120,7 +107,7 @@ import KrillionArena from '../components/KrillionArena.astro';
         <div class="font-mono text-3xl font-black text-abyss-cyan">20s</div>
         <h3 class="text-base font-bold text-white">One Fast Decision</h3>
         <p class="text-xs text-slate-400 leading-relaxed">
-          You have about 20 seconds to name one verifiable thing that satisfies the prompt before your air begins to deplete.
+          You have about 20 seconds to name one verifiable candidate before your timer runs out.
         </p>
       </div>
 
@@ -128,7 +115,7 @@ import KrillionArena from '../components/KrillionArena.astro';
         <div class="font-mono text-3xl font-black text-blue-400">🌊 Surface</div>
         <h3 class="text-base font-bold text-white">The Obvious Crowd</h3>
         <p class="text-xs text-slate-400 leading-relaxed">
-          Common headline answers (0m–1,500m) keep you stranded near the sunlit surface with thousands of other players.
+          Common headline answers (0m–1,500m) keep you stranded near the surface with thousands of players.
         </p>
       </div>
 
@@ -136,7 +123,7 @@ import KrillionArena from '../components/KrillionArena.astro';
         <div class="font-mono text-3xl font-black text-amber-400">3,000m</div>
         <h3 class="text-base font-bold text-amber-300">Too-Clever Trap</h3>
         <p class="text-xs text-slate-400 leading-relaxed">
-          Smart players cluster around standard textbook answers, causing a severe traffic jam in the twilight zone.
+          Smart players cluster around standard textbook cleverness, causing a bottleneck in the twilight zone.
         </p>
       </div>
 
@@ -144,20 +131,20 @@ import KrillionArena from '../components/KrillionArena.astro';
         <div class="font-mono text-3xl font-black text-abyss-cyan">7,000m</div>
         <h3 class="text-base font-bold text-abyss-cyan">Hadal Abyss Crown 👑</h3>
         <p class="text-xs text-slate-400 leading-relaxed">
-          Valid obscure historical and scientific footnotes chosen by under 0.05% of divers take you to maximum depth.
+          Valid obscure historical and scientific footnotes chosen by under 0.05% of divers plunge to maximum depth.
         </p>
       </div>
     </div>
   </section>
 
-  <!-- SECTION: Strategic Field Guides (Full .org-style Library) -->
+  <!-- SECTION: Field Guides (Editorial Authority) -->
   <section class="py-16 bg-abyss-dark/40 border-t border-white/5">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
         <div>
-          <span class="text-xs font-bold text-abyss-cyan uppercase tracking-widest font-mono">Field Notes & Archives</span>
+          <span class="text-xs font-bold text-abyss-cyan uppercase tracking-widest font-mono">Field Notes & Strategy</span>
           <h2 class="text-2xl sm:text-3xl font-extrabold text-white mt-1">Tactical Guides for Trench Explorers</h2>
-          <p class="text-xs text-slate-400 mt-1">Worked examples and recall frameworks to improve your answer selection before each dive.</p>
+          <p class="text-xs text-slate-400 mt-1">Practical frameworks to improve category recall and avoid crowd traps before your next dive.</p>
         </div>
         <a href="/how-to-dive-7000m" class="text-xs font-bold text-abyss-cyan hover:underline flex items-center gap-1">
           <span>Read masterclass guide</span> →
@@ -198,11 +185,11 @@ import KrillionArena from '../components/KrillionArena.astro';
     </div>
   </section>
 
-  <!-- SECTION: FAQ Accordion (Extracted from .org) -->
+  <!-- SECTION: FAQ Accordion -->
   <section class="py-16 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="text-center mb-10 space-y-2">
       <h2 class="text-2xl sm:text-3xl font-extrabold text-white">Frequently Asked Questions</h2>
-      <p class="text-xs text-slate-400">Everything you need to know about reset times, scoring, and playing Krillion.</p>
+      <p class="text-xs text-slate-400">Essential details on reset timing, scoring mechanics, and gameplay modes.</p>
     </div>
 
     <div class="space-y-4">
@@ -212,7 +199,7 @@ import KrillionArena from '../components/KrillionArena.astro';
           <span class="text-abyss-cyan font-mono">+</span>
         </summary>
         <p class="text-xs text-slate-400 mt-3 leading-relaxed">
-          Krillion is a browser-native reverse-trivia game where players dive into a deep ocean trench across seven open prompts. Unlike standard trivia games where the fast obvious answer wins, Krillion rewards factual rarity: the less common your answer is among other players, the deeper you plunge.
+          Krillion is a browser-native reverse-trivia game where players dive into a deep ocean trench across seven open prompts. Unlike standard trivia where popular answers win, Krillion rewards factual rarity: the less common your answer is among other players, the deeper you plunge.
         </p>
       </details>
 
@@ -222,7 +209,7 @@ import KrillionArena from '../components/KrillionArena.astro';
           <span class="text-abyss-cyan font-mono">+</span>
         </summary>
         <p class="text-xs text-slate-400 mt-3 leading-relaxed">
-          The official daily challenge resets globally every night at <strong>00:00 UTC (Midnight)</strong>. You can check our <a href="/when-does-krillion-reset" class="text-abyss-cyan underline">Live Reset Countdown</a> for your local timezone (8 PM EST, 5 PM PST, 8 AM CST).
+          The official daily challenge resets globally every night at <strong>00:00 UTC (Midnight)</strong>. Check our <a href="/when-does-krillion-reset" class="text-abyss-cyan underline">Live Reset Countdown</a> for your local timezone.
         </p>
       </details>
 
@@ -233,16 +220,6 @@ import KrillionArena from '../components/KrillionArena.astro';
         </summary>
         <p class="text-xs text-slate-400 mt-3 leading-relaxed">
           Yes! While the official Daily Dive is limited to one attempt every 24 hours, you can play our unlimited <strong>Endless Sinker Mode</strong> or browse all <strong>Themed Packs</strong> with zero daily lockout.
-        </p>
-      </details>
-
-      <details class="p-5 rounded-2xl bg-abyss-card border border-white/5">
-        <summary class="font-bold text-white text-sm cursor-pointer list-none flex justify-between items-center">
-          <span>How is my dive depth calculated?</span>
-          <span class="text-abyss-cyan font-mono">+</span>
-        </summary>
-        <p class="text-xs text-slate-400 mt-3 leading-relaxed">
-          Every recognized valid answer lands in a rarity tier based on community response frequency logs. Points are converted to depth at 10 meters per point. A flawless 700-point performance sinks you to 7,000 meters at the bottom of the Hadal trench.
         </p>
       </details>
     </div>
