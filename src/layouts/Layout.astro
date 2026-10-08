@@ -98,7 +98,8 @@ const finalSchema = schema || defaultSchema;
 
     <!-- JSON-LD Structured Data for SEO & GEO -->
     <script type="application/ld+json" set:html={JSON.stringify(finalSchema)} />
-  </head>
+    <script is:inline defer src="/_site-analytics.js"></script>
+</head>
   <body class="bg-[#030814] text-slate-100 min-h-screen flex flex-col font-sans selection:bg-cyan-500 selection:text-slate-950 relative antialiased">
     <!-- Submarine Ambient Background Glow -->
     <div class="fixed inset-0 pointer-events-none -z-10 overflow-hidden">
