@@ -11,8 +11,7 @@ const howToSchema = {
   "@context": "https://schema.org",
   "@type": "HowTo",
   "name": "How to Play Krillion Reverse-Trivia Game",
-  "description": "Step-by-step instructions on how to dive past 7,000 meters in the Krillion reverse-trivia game by submitting valid, low-frequency answers.",
-  "totalTime": "PT3M",
+  "description": "An independent guide to reading Krillion prompts, choosing valid less-familiar answers and understanding feedback across official and practice versions.",
   "step": [
     {
       "@type": "HowToStep",
@@ -24,7 +23,7 @@ const howToSchema = {
       "@type": "HowToStep",
       "position": 2,
       "name": "Filter Out the First-Thought Consensus",
-      "text": "Identify the most popular answers that 80% of casual players will guess first (such as Julius Caesar, France, or Titanic) and deliberately discard them."
+      "text": "Think beyond your first familiar answer, while keeping every restriction in the prompt in mind."
     },
     {
       "@type": "HowToStep",
@@ -35,29 +34,29 @@ const howToSchema = {
     {
       "@type": "HowToStep",
       "position": 4,
-      "name": "Accumulate Trench Depth Across 7 Rounds",
-      "text": "Score up to 1,000 meters per round to achieve the maximum 7,000-meter Hadal Abyss Dive."
+      "name": "Review Your Dive",
+      "text": "Read the feedback and accepted answers in your edition, then use the result to improve your category recall."
     }
   ]
 };
 ---
 
 <Layout
-  title="How to Play Krillion: Official Rules, Scoring Algorithm & Depth Guide - Krillion.si"
-  description="Master the official rules of Krillion. Learn how reverse-trivia mechanics work, how ocean trench depth is calculated, and step-by-step instructions to plunge past 7,000 meters."
+  title="How to Play Krillion: Rules, Answers & Endless Dive Guide - Krillion.si"
+  description="Learn how to read Krillion prompts, choose valid rare answers and understand scoring. An independent guide to official play and third-party practice."
   schema={howToSchema}
 >
   <article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10 prose prose-invert prose-cyan">
     <div class="not-prose mb-8 space-y-3">
       <Breadcrumb items={breadcrumbs} />
       <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-950/60 border border-cyan-500/30 text-cyan-400 text-xs font-bold font-mono">
-        <span>OFFICIAL RULEBOOK & SCORING ALGORITHM</span>
+        <span>INDEPENDENT PLAYING GUIDE</span>
       </div>
       <h1 class="text-3xl sm:text-4xl md:text-5xl font-black text-white leading-tight">
         How to Play Krillion: Rules, Mechanics & Depth Curves
       </h1>
       <p class="text-slate-400 text-xs sm:text-sm">
-        Published by Krillion Strategy Guild • Updated 2026 • 5 min read
+        Krillion.si • Updated 21 October 2026 • Independent of krillion.io
       </p>
     </div>
 
@@ -68,10 +67,10 @@ const howToSchema = {
         <span>Krillion at a Glance (Quick Summary)</span>
       </h3>
       <ul class="space-y-2 text-xs text-slate-300">
-        <li><strong>Core Objective:</strong> Reach maximum depth (up to 1,000m per round, 7,000m total depth) across 7 rapid category prompts.</li>
-        <li><strong>Scoring Mechanism:</strong> Depth is directly proportional to <em>answer rarity</em> among global participants. Popular answers drown at the surface; rare verified answers plunge to the Hadal abyss.</li>
-        <li><strong>Turn Clock:</strong> Approximately 20 seconds per prompt. Blank submissions score 0m.</li>
-        <li><strong>Game Modes:</strong> Daily Dive (1 synchronized global challenge every 24h) and Endless Mode (unlimited practice).</li>
+        <li><strong>Core Objective:</strong> Answer category prompts with valid, less-familiar choices to go deeper.</li>
+        <li><strong>Scoring:</strong> The official game uses curated answer sets and question-specific rarity methods. Third-party practice editions can score differently.</li>
+        <li><strong>Turn Clock:</strong> Follow the timer shown in the game you are playing; do not assume every edition uses the same limit.</li>
+        <li><strong>Game Modes:</strong> The official Daily Dive and Unlimited mode are at krillion.io. Krillion.si embeds a separate practice edition from krillion.org.</li>
       </ul>
     </div>
 
@@ -81,75 +80,50 @@ const howToSchema = {
         <strong>Read the Category Prompt:</strong> Each round presents a prompt from history, geography, science, literature, or cinema (e.g. <em>"A sovereign nation located in the Southern Hemisphere"</em>).
       </li>
       <li>
-        <strong>Analyze the Crowd Consensus:</strong> Ask yourself what answer 80% of players will type first (e.g. <em>Australia</em> or <em>Brazil</em>). Discard it immediately!
+        <strong>Think Beyond the Obvious:</strong> Consider a less familiar answer, but do not sacrifice accuracy just to sound unusual.
       </li>
       <li>
-        <strong>Submit a Valid Obscure Answer:</strong> Type an answer that is factually accurate but recalled by only a tiny minority of participants (e.g. <em>Nauru</em> or <em>Tuvalu</em>).
+        <strong>Submit a Valid Answer:</strong> Choose something you can explain and check against the prompt. For the Southern Hemisphere example, confirm the location rather than guessing from a country's reputation.
       </li>
       <li>
-        <strong>Receive Depth Evaluation:</strong> The engine scores your depth based on real-time community frequency logs.
+        <strong>Review the Evaluation:</strong> Read the accepted answer and score from your edition. The official creator describes rarity methods based on reference data, LLM assistance and manual review, depending on the question.
       </li>
       <li>
-        <strong>Share Your Dive Grid:</strong> After 7 rounds, copy your color-coded emoji breakdown to social platforms to compare with friends.
+        <strong>Compare Like for Like:</strong> Use the game's share option if available. Compare results from the same edition and challenge, not official scores against third-party practice scores.
       </li>
     </ol>
 
-    <h2>The Depth Scoring Algorithm Explained</h2>
+    <h2>How official scoring is determined</h2>
     <p>
-      Unlike binary trivia where answers are simply right or wrong, Krillion implements a multi-tiered algorithmic depth curve:
+      The <a href="https://krillion.io/faq" target="_blank" rel="noopener noreferrer">creator's FAQ</a>
+      explains that answer sets are assembled from sources such as dictionaries, encyclopedias and other relevant datasets.
+      Rarity methods vary by question: some use a familiarity database, while others use LLM assistance and manual review.
+      The top Krillion answer is also selected for how satisfying it is to find, not rarity alone.
+    </p>
+    <p>
+      This is not a published table of live player percentages. A separate practice game's score does not reveal
+      how many official players chose your answer, and it may use a different accepted-answer list.
     </p>
 
-    <div class="not-prose my-6 overflow-x-auto">
-      <table class="w-full text-xs text-left bg-abyss-card rounded-2xl border border-white/10 overflow-hidden">
-        <thead class="bg-white/5 uppercase text-slate-400 font-mono">
-          <tr>
-            <th class="p-3">Depth Tier</th>
-            <th class="p-3">Frequency Percentile</th>
-            <th class="p-3">Classification</th>
-            <th class="p-3">Verdict</th>
-          </tr>
-        </thead>
-        <tbody class="divide-y divide-white/5 font-mono">
-          <tr>
-            <td class="p-3 font-semibold text-blue-400">0m - 200m</td>
-            <td class="p-3 text-slate-300">&gt; 35% of players</td>
-            <td class="p-3 font-sans font-bold">🌊 Surface Floater</td>
-            <td class="p-3 text-slate-400 font-sans">Valid, but swallowed by the crowd consensus.</td>
-          </tr>
-          <tr>
-            <td class="p-3 font-semibold text-amber-400">300m - 600m</td>
-            <td class="p-3 text-slate-300">8% - 35% of players</td>
-            <td class="p-3 font-sans font-bold text-amber-300">⚠️ Too-Clever Trap</td>
-            <td class="p-3 text-slate-400 font-sans">Clever answer, but dozens of other smart players had the same idea.</td>
-          </tr>
-          <tr>
-            <td class="p-3 font-semibold text-cyan-300">700m - 900m</td>
-            <td class="p-3 text-slate-300">1.5% - 8% of players</td>
-            <td class="p-3 font-sans font-bold">⚓ Abyssal Sinker</td>
-            <td class="p-3 text-slate-400 font-sans">Genuine rarity with very few daily participants guessing it.</td>
-          </tr>
-          <tr>
-            <td class="p-3 font-semibold text-cyan-400">920m - 1,000m</td>
-            <td class="p-3 text-slate-300">&lt; 1.5% of players</td>
-            <td class="p-3 font-sans font-bold text-cyan-400">👑 Hadal Crown</td>
-            <td class="p-3 text-slate-400 font-sans">Ultra-niche valid archival footnote. Maximum depth achieved.</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+    <h2>Want another round? Find The Endless Dive</h2>
+    <p>
+      Krillion’s official Unlimited mode is called <a href="/endless/">The Endless Dive</a>.
+      Our guide links to the creator’s version at krillion.io and explains how it differs from the
+      third-party practice game embedded on Krillion.si. Questions, scoring and progress can differ between versions.
+    </p>
 
     <!-- Bottom CTA Bar -->
     <div class="mt-12 p-8 rounded-3xl bg-abyss-card border border-cyan-500/30 text-center not-prose space-y-4 shadow-xl">
       <h3 class="text-2xl font-black text-white">Put the Rules Into Practice</h3>
       <p class="text-xs text-slate-400 max-w-md mx-auto">
-        Test your instincts against today's global trench challenge.
+        Try the embedded daily practice, or compare the official and practice Endless Dive versions.
       </p>
       <div class="flex items-center justify-center gap-3">
         <a href="/#game" class="px-6 py-3 rounded-xl bg-gradient-to-r from-cyan-400 to-blue-500 text-slate-950 font-black text-xs hover:scale-105 transition-all shadow-lg shadow-cyan-500/20">
           Play Daily Dive Now ⚓
         </a>
-        <a href="/endless" class="px-6 py-3 rounded-xl bg-white/5 hover:bg-white/10 text-white font-bold text-xs border border-white/10 transition-all">
-          Endless Practice Mode
+        <a href="/endless/" class="px-6 py-3 rounded-xl bg-white/5 hover:bg-white/10 text-white font-bold text-xs border border-white/10 transition-all">
+          The Endless Dive & Practice
         </a>
       </div>
     </div>

@@ -1,40 +1,33 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import KrillionArena from '../components/KrillionArena.astro';
 import Breadcrumb from '../components/Breadcrumb.astro';
 
-const breadcrumbs = [
-  { label: 'Home', href: '/' },
-  { label: 'Endless Practice Mode' }
+const officialUrl = 'https://krillion.io/unlimited/classic';
+const practiceUrl = 'https://www.krillion.org/play/endless/';
+const breadcrumbs = [{ label: 'Home', href: '/' }, { label: 'The Endless Dive' }];
+const faqs = [
+  ['What is The Endless Dive game?', 'The Endless Dive is the name shown on Krillion’s official Unlimited mode at krillion.io. It offers continued, numbered dives beyond the daily challenge. This page explains that mode and links to a separate third-party practice game.'],
+  ['Is The Endless Dive the same as Krillion Unlimited?', 'Yes. The official menu calls the mode Unlimited, while its game screen says The Endless Dive. The practice game linked here is a different version.'],
+  ['Where can I play the official Endless Dive?', 'Open krillion.io/unlimited/classic, or select Unlimited in the menu at krillion.io. The Open official Endless Dive button on this page takes you there directly.'],
+  ['Is Krillion Unlimited free?', 'Do not assume the official Unlimited mode is free because a third-party practice game is free. The official site manages its own access and unlocks; check its current screen before purchasing. The krillion.org practice game linked below can be started without signing in.'],
+  ['How is this practice version different?', 'The practice game is provided by krillion.org, not krillion.io. It presents seven-prompt practice dives with no daily limit. Its questions, accepted answers and scoring belong to that version and are not the official answer set or a live global player ranking.'],
+  ['Do I need an account to practise?', 'You can start the krillion.org practice game without creating a Krillion.si account. Official purchases, linked accounts and saved progress are handled separately at krillion.io.'],
+  ['Why does practice open in a new tab?', 'The practice provider can reject answer submissions inside a cross-site frame with a session ownership error. Opening the game directly lets it manage its own session. If an old session cannot be resumed, start a new dive there.'],
+  ['Does my practice score count toward the official game?', 'No. A result in this third-party practice game is not an official Krillion score and does not unlock official content. Use it to practise category recall, then return to krillion.io for the creator’s game.']
 ];
-
 const endlessFaqSchema = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "What is Krillion Endless Mode?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Krillion Endless Mode is an unconstrained practice chamber where you can play unlimited consecutive trivia rounds without waiting for the 24-hour daily reset."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Is Endless Mode free to play?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes, Endless Mode is completely free and requires no account or registration."
-      }
-    }
-  ]
+  '@context': 'https://schema.org', '@type': 'FAQPage',
+  mainEntity: faqs.map(([question, answer]) => ({
+    '@type': 'Question', name: question,
+    acceptedAnswer: { '@type': 'Answer', text: answer }
+  }))
 };
 ---
 
 <Layout
-  title="Play Krillion Endless Mode | Unlimited Reverse Trivia Practice - Krillion.si"
-  description="Play unlimited Krillion rounds in Endless practice mode. Hone your second-tier pivot strategies and category depth without 24-hour daily limits."
+  title="The Endless Dive Game — Krillion Unlimited Guide & Practice"
+  description="Find the official Krillion Endless Dive, compare Unlimited with Daily Dive, or try a separate seven-prompt practice game. Clear rules and version differences."
+  canonical="https://krillion.si/endless/"
   schema={endlessFaqSchema}
 >
   <div class="py-6 px-3 sm:px-6 lg:px-8 max-w-7xl mx-auto space-y-6">
@@ -44,47 +37,95 @@ const endlessFaqSchema = {
       <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pt-2">
         <div class="space-y-1.5">
           <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-950/60 border border-cyan-500/30 text-cyan-400 text-xs font-bold font-mono">
-            <span>UNLIMITED TRENCH PRACTICE</span>
+            <span>KRILLION UNLIMITED · INDEPENDENT GUIDE</span>
           </div>
           <h1 class="text-3xl sm:text-4xl font-black text-white tracking-tight">
-            Krillion Endless Practice Sinker
+            The Endless Dive: Krillion Unlimited
           </h1>
           <p class="text-slate-400 text-xs sm:text-sm max-w-2xl leading-relaxed">
-            No daily wait times, no 24-hour locks. Hone your rare-candidate recall across continuous randomized prompt sets.
+            Looking for another dive after the daily challenge? The Endless Dive is the name of Krillion’s official Unlimited mode.
+            Open the original at krillion.io, or try the separate practice game linked below, provided by krillion.org.
           </p>
         </div>
 
         <div class="flex sm:flex-col items-center sm:items-end justify-between sm:justify-center p-3 rounded-2xl bg-abyss-card border border-cyan-500/20 text-right">
-          <span class="text-[10px] text-slate-400 font-mono uppercase tracking-wider">Session Limit</span>
-          <span class="text-lg font-black text-cyan-400 font-mono">Unlimited Rounds</span>
+          <span class="text-[10px] text-slate-400 font-mono uppercase tracking-wider">Two separate versions</span>
+          <span class="text-sm font-black text-cyan-400">Official &amp; practice</span>
         </div>
       </div>
     </div>
 
-    <!-- Direct Arena -->
-    <KrillionArena
-      modeUrl="https://www.krillion.org/play/endless/"
-      modeTitle="Krillion Endless Practice Mode"
-      badgeText="ENDLESS PRACTICE ♾️"
-    />
+    <div class="space-y-3">
+      <div class="flex flex-wrap gap-3">
+        <a href={practiceUrl} target="_blank" rel="noopener noreferrer" class="px-5 py-3 rounded-xl bg-cyan-400 text-slate-950 font-bold text-sm hover:bg-cyan-300">Play Endless practice ↗</a>
+        <a href={officialUrl} target="_blank" rel="noopener noreferrer" class="px-5 py-3 rounded-xl border border-cyan-500/40 text-cyan-200 font-bold text-sm hover:bg-cyan-950">Open official Endless Dive ↗</a>
+      </div>
+      <p class="text-xs text-slate-400">Krillion.si is independent of krillion.io. Practice results and official progress are separate.</p>
+    </div>
+
+    <section id="practice" class="scroll-mt-24 space-y-3" aria-labelledby="practice-heading">
+    <div class="p-6 sm:p-8 rounded-3xl bg-abyss-card border border-cyan-500/30 space-y-4">
+      <span class="text-xs font-mono text-cyan-400">KRILLION.ORG PRACTICE</span>
+      <h2 id="practice-heading" class="text-2xl font-bold text-white">Ready for another dive?</h2>
+      <p class="text-sm text-slate-300 max-w-2xl leading-relaxed">Play seven prompts per dive, then start another round. Practice opens in its own tab so the game can keep your session and check your answers.</p>
+      <a href={practiceUrl} target="_blank" rel="noopener noreferrer" class="inline-flex px-6 py-3 rounded-xl bg-cyan-400 text-slate-950 font-bold hover:bg-cyan-300">Launch Endless practice ↗</a>
+      <p class="text-xs text-slate-400 leading-relaxed">Already stuck on “Checking…” in an embedded game? Open practice using this button. If the game says the session belongs to another player, start a new dive there. This game is hosted and maintained by krillion.org; its questions and scores are separate from the official game.</p>
+    </div>
+    </section>
+
+    <section class="p-6 rounded-3xl bg-abyss-card border border-white/10 space-y-3" aria-labelledby="about-heading">
+      <h2 id="about-heading" class="text-2xl font-bold text-white">What is The Endless Dive?</h2>
+      <p class="text-sm text-slate-300 leading-relaxed">At krillion.io, the menu link “Unlimited” opens a screen headed “THE ENDLESS DIVE,” with numbered dives and a Dive Log. It is the continuation mode for players who want to keep answering after the shared daily challenge, not a separate underwater action game.</p>
+      <p class="text-sm text-slate-300 leading-relaxed">The aim is to find a valid answer beyond the most obvious choice. Read the <a href="/how-to-play" class="text-cyan-300 underline">basic Krillion rules</a>, then follow the instructions and timer shown by the version you are playing. A practice score is feedback, not a prediction of your official result.</p>
+      <p class="text-xs text-slate-400">Official entry screen checked <time datetime="2026-10-21">21 October 2026</time>. Direct practice answer submission checked <time datetime="2026-10-22">22 October 2026</time>. Access conditions may change.</p>
+    </section>
+
+    <section class="space-y-4" aria-labelledby="compare-heading">
+      <h2 id="compare-heading" class="text-2xl font-bold text-white">Daily Dive vs Endless Dive vs practice</h2>
+      <div class="overflow-x-auto rounded-2xl border border-white/10">
+        <table class="w-full min-w-[620px] text-left text-sm bg-abyss-card">
+          <caption class="sr-only">The official daily and unlimited modes compared with the third-party practice game.</caption>
+          <thead class="bg-cyan-950/50 text-cyan-200"><tr><th scope="col" class="p-4">Version</th><th scope="col" class="p-4">Best for</th><th scope="col" class="p-4">Where to play</th><th scope="col" class="p-4">What to expect</th></tr></thead>
+          <tbody class="divide-y divide-white/10 text-slate-300">
+            <tr><th scope="row" class="p-4 text-white">Official Daily Dive</th><td class="p-4">The shared daily challenge</td><td class="p-4"><a href="https://krillion.io/" target="_blank" rel="noopener noreferrer" class="text-cyan-300 underline">krillion.io ↗</a></td><td class="p-4">The creator’s daily prompts and results.</td></tr>
+            <tr><th scope="row" class="p-4 text-white">Official Endless Dive</th><td class="p-4">More rounds in the official game</td><td class="p-4"><a href={officialUrl} target="_blank" rel="noopener noreferrer" class="text-cyan-300 underline">Krillion Unlimited ↗</a></td><td class="p-4">Official questions, progress and access requirements.</td></tr>
+            <tr><th scope="row" class="p-4 text-white">Third-party practice</th><td class="p-4">Category recall and repeat attempts</td><td class="p-4"><a href={practiceUrl} target="_blank" rel="noopener noreferrer" class="text-cyan-300 underline">Krillion.org practice ↗</a></td><td class="p-4">A separate provider’s questions and scoring; no official score sync.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
 
     <!-- Practice Strategy Notes -->
     <div class="p-6 rounded-3xl bg-abyss-card border border-white/10 space-y-3">
-      <h3 class="text-base font-bold text-white">How to Use Endless Mode to Improve Daily Scores</h3>
+      <h2 class="text-xl font-bold text-white">Make each practice dive useful</h2>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs text-slate-300">
         <div class="p-4 rounded-2xl bg-white/5 space-y-1">
-          <span class="font-bold text-cyan-400 font-mono">1. Test Obscure Footnotes</span>
-          <p>Experiment with fringe candidates (minor historical treaties, rare metals) to see if the engine recognizes them without risking your daily rank.</p>
+          <h3 class="font-bold text-cyan-400">1. Read the whole category</h3>
+          <p>A surprising answer still has to fit. Check dates, places and other restrictions before submitting.</p>
         </div>
         <div class="p-4 rounded-2xl bg-white/5 space-y-1">
-          <span class="font-bold text-cyan-400 font-mono">2. Master the 20s Clock</span>
-          <p>Train your reflex to immediately discard 1st-tier famous names and anchor on 2nd-tier obscure candidates within 5 seconds.</p>
+          <h3 class="font-bold text-cyan-400">2. Pick something you can explain</h3>
+          <p>Try a less familiar answer you know is valid. Obscurity alone does not make an answer correct.</p>
         </div>
         <div class="p-4 rounded-2xl bg-white/5 space-y-1">
-          <span class="font-bold text-cyan-400 font-mono">3. Calibrate Crowd Overlap</span>
-          <p>Learn which answers you assume are obscure but actually fall into the 3,000m "Too-Clever" crowd trap.</p>
+          <h3 class="font-bold text-cyan-400">3. Review, then play again</h3>
+          <p>Use feedback to expand your recall. Different editions can accept and score the same answer differently.</p>
         </div>
       </div>
     </div>
+    <section class="space-y-4" aria-labelledby="faq-heading">
+      <h2 id="faq-heading" class="text-2xl font-bold text-white">The Endless Dive FAQ</h2>
+      {faqs.map(([question, answer]) => (
+        <details class="rounded-2xl border border-white/10 bg-abyss-card p-5">
+          <summary class="cursor-pointer font-bold text-white text-sm">{question}</summary>
+          <p class="mt-3 text-sm text-slate-300 leading-relaxed">{answer}</p>
+        </details>
+      ))}
+    </section>
+    <section class="border-t border-white/10 pt-6 space-y-3 text-sm" aria-labelledby="next-heading">
+      <h2 id="next-heading" class="text-xl font-bold text-white">Choose your next dive</h2>
+      <div class="flex flex-wrap gap-x-6 gap-y-3 text-cyan-300 underline"><a href="/daily">Daily practice</a><a href="/how-to-play">How to play</a><a href="/what-is">What is Krillion?</a><a href="/how-to-dive-7000m">Answer strategy</a></div>
+      <p class="text-xs text-slate-400">Sources: <a href={officialUrl} target="_blank" rel="noopener noreferrer" class="underline">official Unlimited screen</a>, <a href="https://krillion.io/restore?pack=classic" target="_blank" rel="noopener noreferrer" class="underline">official unlock recovery</a>, <a href="https://krillion.io/faq" target="_blank" rel="noopener noreferrer" class="underline">creator’s FAQ</a>, and the <a href={practiceUrl} target="_blank" rel="noopener noreferrer" class="underline">krillion.org practice game</a>.</p>
+    </section>
   </div>
 </Layout>

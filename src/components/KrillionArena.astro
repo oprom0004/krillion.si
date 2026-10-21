@@ -3,12 +3,14 @@ interface Props {
   modeUrl?: string;
   modeTitle?: string;
   badgeText?: string;
+  statusText?: string;
 }
 
 const {
   modeUrl = 'https://www.krillion.org/play/daily/',
   modeTitle = 'Krillion Trench Arena',
-  badgeText = 'DAILY DIVE ⚓'
+  badgeText = 'DAILY DIVE ⚓',
+  statusText = 'UPLINK: ONLINE'
 } = Astro.props;
 ---
 
@@ -22,7 +24,7 @@ const {
           <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
           <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
         </span>
-        <span>UPLINK: ONLINE</span>
+        <span>{statusText}</span>
       </span>
       <span class="hidden sm:inline-block w-px h-3 bg-white/10"></span>
       <span id="arena-mode-badge" class="px-2.5 py-0.5 rounded-full bg-cyan-950/60 border border-cyan-500/30 text-cyan-400 font-bold text-[10px] tracking-wide uppercase transition-all">
