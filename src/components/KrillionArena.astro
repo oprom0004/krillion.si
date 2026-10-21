@@ -4,13 +4,15 @@ interface Props {
   modeTitle?: string;
   badgeText?: string;
   statusText?: string;
+  showHints?: boolean;
 }
 
 const {
   modeUrl = 'https://www.krillion.org/play/daily/',
   modeTitle = 'Krillion Trench Arena',
   badgeText = 'DAILY DIVE ⚓',
-  statusText = 'UPLINK: ONLINE'
+  statusText = 'UPLINK: ONLINE',
+  showHints = true
 } = Astro.props;
 ---
 
@@ -64,7 +66,7 @@ const {
         <span>Fullscreen</span>
       </button>
 
-      <a
+      {showHints && <a
         href="https://krillionhints.com"
         target="_blank"
         rel="noopener noreferrer"
@@ -76,7 +78,7 @@ const {
           <path d="M9 21h6" />
         </svg>
         <span>Today's Hints ↗</span>
-      </a>
+      </a>}
     </div>
   </div>
 

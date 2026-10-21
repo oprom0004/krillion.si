@@ -1,0 +1,14 @@
+Based on OpenKrillion — https://github.com/VulcanEon/openkrillion.com-service
+Upstream revision: 33fdff48623fb4815e95081a1a1d41bd1902f99d
+Copyright (c) 2026 OpenKrillion contributors. MIT license: LICENSE.txt.
+
+Krillion.si adaptations: browser-only practice engine, independent finite answer
+sets, local save/resume, and site integration. These run without a remote judge.
+The original pixel scenery and synthesized audio are distributed under MIT.
+VT323 font: Peter Hull and contributors, SIL OFL; assets/VT323-LICENSE.txt.
+Unused third-party provider icons have been removed from this distribution.
+
+No Krillion.io or Krillion.org proprietary code, answer banks or player data
+are included. This is an independent practice edition. Scores are editorial
+practice values, not measured player frequencies. See bank.mjs for factual
+references and review dates.
