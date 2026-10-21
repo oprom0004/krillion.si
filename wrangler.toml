@@ -1,0 +1,8 @@
+name = "krillion-si"
+pages_build_output_dir = "./dist"
+compatibility_date = "2025-09-01"
+
+[[d1_databases]]
+binding = "ENDLESS_STATS"
+database_name = "krillion-endless-stats"
+database_id = "6f9eb175-a2f3-42f6-b03f-943736035d86"

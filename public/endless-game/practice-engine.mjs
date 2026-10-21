@@ -1,4 +1,4 @@
-// Local practice adapter for the MIT OpenKrillion UI. No remote APIs or cookies.
+// Local answer judge with optional same-origin anonymous scoring statistics.
 import { BANK, BANK_VERSION } from './bank.mjs';
 import { TIERS, ROUND_MS, PREVIEW_MS, matchAnswer, normalize } from './rules.mjs';
 
@@ -15,7 +15,7 @@ export function matchPractice(input, prompt) {
   if (direct) return { ...direct, correction: false };
   return matchAnswer(cleaned, prompt.answers);
 }
-export function createEngine({ storage, now = Date.now, random = Math.random, uuid = () => crypto.randomUUID() } = {}) {
+export function createEngine({ storage, statistics = null, now = Date.now, random = Math.random, uuid = () => crypto.randomUUID() } = {}) {
   let memory = { version: BANK_VERSION, queue: [], runs: {}, number: 0 };
   let persistent = Boolean(storage);
   function load() {
@@ -68,12 +68,14 @@ export function createEngine({ storage, now = Date.now, random = Math.random, uu
       serverNow: now(), round: r.round, roundStart: r.roundStart,
       pausedAt: r.pausedAt, completed: r.round === 7,
       results: structuredClone(r.results), score: r.results.reduce((s, x) => s + x.score, 0),
-      persistent, bankSize: BANK.length
+      persistent, bankSize: BANK.length, scoring: structuredClone(r.scoring||{}), statisticsUnavailable:!!r.statisticsUnavailable
     };
   }
   async function api(path, data) {
-    const db = load();
     const [route, query = ''] = path.split('?');
+    let snapshot=null;
+    if(route==='start' && statistics) {try{snapshot=await statistics.getScores()}catch{}}
+    const db = load();
     const params = new URLSearchParams(query);
     if (route === 'today') return { date: new Date(now()).toISOString().slice(0, 10), dayNumber: db.number + 1, sample: false, bankSize: BANK.length, persistent };
     if (route === 'start') {
@@ -84,7 +86,9 @@ export function createEngine({ storage, now = Date.now, random = Math.random, uu
         const id = db.queue.shift();
         if (!selected.includes(id)) selected.push(id);
       }
-      const r = { id: uuid(), ids: selected, number: ++db.number, date: new Date(now()).toISOString().slice(0, 10), round: 0, results: [], roundStart: now() + PREVIEW_MS, pausedAt: null };
+      const scoring=structuredClone(Object.fromEntries(selected.map(id=>[id,snapshot?.questions[id]||{mode:'preset',sampleSize:null}])));
+      if(statistics)void statistics.flush?.();
+      const r = { id: uuid(), ids: selected, scoring, statisticsUnavailable:!!statistics&&!snapshot, number: ++db.number, date: new Date(now()).toISOString().slice(0, 10), round: 0, results: [], roundStart: now() + PREVIEW_MS, pausedAt: null };
       db.runs[r.id] = r;
       const oldest = Object.keys(db.runs);
       while (oldest.length > 30) delete db.runs[oldest.shift()];
@@ -94,7 +98,10 @@ export function createEngine({ storage, now = Date.now, random = Math.random, uu
     if (route === 'state') return state(r);
     if (route === 'review') {
       if (r.round !== 7) throw new Error('Finish this dive to see all accepted answers.');
-      return { prompts: questions(r.ids).map(p => ({ ...p, answers: p.answers.map(a => ({ ...a, score: TIERS[a.tier].score })).sort((a, b) => b.score - a.score || a.answer.localeCompare(b.answer)) })), population: 0, betterThan: null, dist: [] };
+      return { prompts: questions(r.ids).map(p => ({ ...p, scoring:r.scoring?.[p.id]||{mode:'preset',sampleSize:null}, answers: p.answers.map(a => {
+        const observed=r.scoring?.[p.id]?.mode==='observed'?r.scoring[p.id].answers[normalize(a.answer)]:null;
+        return {...a,score:TIERS[a.tier].score,...observed};
+      }).sort((a, b) => b.score - a.score || a.answer.localeCompare(b.answer)) })), population: 0, betterThan: null, dist: [] };
     }
     if (route === 'pause') {
       if (data.paused && r.round < 7 && r.roundStart !== null && !r.pausedAt && now() <= r.roundStart + ROUND_MS) r.pausedAt = now();
@@ -120,9 +127,17 @@ export function createEngine({ storage, now = Date.now, random = Math.random, uu
       const exact = match && [match.answer, ...match.aliases].some(x => normalize(x) === normalize(raw) || normalize(x) === normalize(cleanInput(raw)));
       if (!exact && match && data.confirm !== true) return { correction: match.answer, original: raw };
       if (!match && !expired && !data.timeout) return { rejected: true, message: 'That does not match this category. Try another answer before time runs out.' };
-      const result = { round: r.round, rawAnswer: raw || null, answer: match?.answer || null, tier: match?.tier || null, score: match ? TIERS[match.tier].score : 0, quip: match ? 'Preset practice score · not a measured player frequency.' : 'The answer window closed. Review this category after the dive.', promptText: prompt.text };
+      const scoring=r.scoring?.[prompt.id];
+      const observed=match&&scoring?.mode==='observed'?scoring.answers[normalize(match.answer)]:null;
+      const result = { round: r.round, rawAnswer: raw || null, answer: match?.answer || null, tier: observed?.tier||match?.tier||null, score: observed?.score??(match?TIERS[match.tier].score:0),
+        scoringMode:observed?'observed':'preset',sampleSize:scoring?.sampleSize??null,
+        quip: !match?'The answer window closed. Review this category after the dive.':observed?
+          `${(observed.proportion*100).toFixed(1)}% in ${scoring.sampleSize} first valid answers · ${scoring.snapshotDay} snapshot.`:
+          'Preset practice score · this category needs 50 first valid answers for observed scoring.', promptText: prompt.text };
       r.results.push(result); r.round++; r.roundStart = null;
-      save(db); return { result, state: state(r) };
+      save(db);
+      if(match && statistics) {try{statistics.enqueue(prompt.id,normalize(match.answer))}catch{}}
+      return { result, state: state(r) };
     }
     throw new Error('This action is not available in practice mode.');
   }

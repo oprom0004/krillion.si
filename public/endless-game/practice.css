@@ -13,3 +13,5 @@
 
 body[data-phase="done"] .hero,body[data-phase="done"] .hud{display:none}
 .storage-warning{position:absolute;top:12px;left:50%;transform:translateX(-50%);z-index:40;max-width:220px;padding:6px 10px;background:#30220f;color:#ffdc9a;font-size:14px;text-align:center}
+
+.scoring-note{font-size:15px;color:#a6bdd7;line-height:1.2;margin:8px 0 0;letter-spacing:0}

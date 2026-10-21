@@ -8,11 +8,11 @@ const practiceUrl = '/endless-game/index.html';
 const breadcrumbs = [{ label: 'Home', href: '/' }, { label: 'The Endless Dive' }];
 const faqs = [
   ['What is The Endless Dive game?', 'The Endless Dive is the name shown on Krillion’s official Unlimited mode at krillion.io. This page also offers an independent Endless practice game that you can play here on Krillion.si.'],
-  ['Is this the official Krillion Unlimited game?', 'No. Our practice game is adapted from the MIT-licensed OpenKrillion project. Its questions, accepted answers and preset practice scores are separate from the official game.'],
+  ['Is this the official Krillion Unlimited game?', 'No. Our practice game is adapted from the MIT-licensed OpenKrillion project. Its questions, accepted answers and practice scores are separate from the official game.'],
   ['Where can I play the official Endless Dive?', 'Open krillion.io/unlimited/classic, or select Unlimited in the menu at krillion.io. Official access and purchases are managed there.'],
   ['Is practice free, and do I need an account?', 'Practice here is free and requires no account. It runs in your browser, without an external judging service. When browser storage is available, your progress and last 30 practice dives are saved on this device.'],
   ['How many questions are available?', 'The practice bank has 42 finite categories. Each dive selects seven different prompts, using unseen categories first and reshuffling after the pool is used. Each category includes its complete standard answer list and common aliases, checked against the linked references.'],
-  ['How does scoring work?', 'Practice uses OpenKrillion’s score tiers, with preset editorial values for each accepted answer. These are not official scores or measured player answer frequencies. Every point moves your dive ten metres.'],
+  ['How does scoring work?', 'Each category uses preset scores until it has 50 first valid answers from anonymous browser identifiers. After that, observed answer frequencies determine its score tiers. Only your first accepted answer per category counts toward statistics. Daily snapshots refresh the scoring; each dive keeps the scores it started with. These are independent practice scores. Every point moves your dive ten metres.'],
   ['Can I retry an answer or resume a dive?', 'Yes. Unrecognized answers can be retried while the 25-second timer runs. Suggested spelling corrections require confirmation. Refreshing restores your dive when browser storage is available; the clock continues in background tabs. Opening the game menu pauses it.'],
   ['Does my practice score count toward the official game?', 'No. Practice scores stay separate from krillion.io. After seven prompts, you can review every accepted answer and start another dive here.']
 ];
@@ -69,7 +69,7 @@ const endlessFaqSchema = {
     <h2 id="practice-heading" class="text-xl font-bold text-white">Play Endless practice</h2>
     <p class="text-sm text-slate-400">Seven prompts per dive · 25 seconds per answer · 42 complete categories. New dives are free, with unseen categories first.</p>
     <KrillionArena modeUrl={practiceUrl} modeTitle="Krillion.si Endless practice game" badgeText="ENDLESS PRACTICE" statusText="PLAY ON KRILLION.SI" showHints={false} />
-    <p class="text-xs text-slate-400 leading-relaxed">Scores are preset for practice, not official results or live player rankings. Progress stays in this browser when storage is available. Use Fullscreen for more room, or <a href={practiceUrl} target="_blank" rel="noopener noreferrer" class="text-cyan-300 underline">open the same game on its own page</a>.</p>
+    <p class="text-xs text-slate-400 leading-relaxed">Each category starts with preset scores and switches to observed answer rarity at 50 first valid answers. One accepted answer per browser and category counts; anonymous answer IDs are sent to our statistics service. Dive progress stays in this browser. <a href="/privacy" class="text-cyan-300 underline">How statistics work</a>. Use Fullscreen for more room, or <a href={practiceUrl} target="_blank" rel="noopener noreferrer" class="text-cyan-300 underline">open the same game on its own page</a>.</p>
     <p class="text-xs text-slate-400">Built with <a href="https://github.com/VulcanEon/openkrillion.com-service" target="_blank" rel="noopener noreferrer" class="underline">OpenKrillion</a> · <a href="/endless-game/LICENSE.txt" target="_blank" rel="noopener noreferrer" class="underline">MIT license</a> · <a href="/endless-game/NOTICE.txt" target="_blank" rel="noopener noreferrer" class="underline">Credits</a></p>
     </section>
 
@@ -89,7 +89,7 @@ const endlessFaqSchema = {
           <tbody class="divide-y divide-white/10 text-slate-300">
             <tr><th scope="row" class="p-4 text-white">Official Daily Dive</th><td class="p-4">The shared daily challenge</td><td class="p-4"><a href="https://krillion.io/" target="_blank" rel="noopener noreferrer" class="text-cyan-300 underline">krillion.io ↗</a></td><td class="p-4">The creator’s daily prompts and results.</td></tr>
             <tr><th scope="row" class="p-4 text-white">Official Endless Dive</th><td class="p-4">More rounds in the official game</td><td class="p-4"><a href={officialUrl} target="_blank" rel="noopener noreferrer" class="text-cyan-300 underline">Krillion Unlimited ↗</a></td><td class="p-4">Official questions, progress and access requirements.</td></tr>
-            <tr><th scope="row" class="p-4 text-white">Practice on Krillion.si</th><td class="p-4">Category recall and repeat attempts</td><td class="p-4"><a href="#practice" class="text-cyan-300 underline">Play practice here ↑</a></td><td class="p-4">Our curated questions and preset practice scores; no official score sync.</td></tr>
+            <tr><th scope="row" class="p-4 text-white">Practice on Krillion.si</th><td class="p-4">Category recall and repeat attempts</td><td class="p-4"><a href="#practice" class="text-cyan-300 underline">Play practice here ↑</a></td><td class="p-4">Our curated questions; preset scores below 50 first answers per category, observed rarity after that; no official score sync.</td></tr>
           </tbody>
         </table>
       </div>
