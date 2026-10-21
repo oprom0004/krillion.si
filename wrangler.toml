@@ -1,5 +1,4 @@
 name = "krillion-si"
-account_id = "890529cf303eac850f070097d3aa2d85"
 pages_build_output_dir = "./dist"
 compatibility_date = "2025-09-01"
 
