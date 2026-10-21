@@ -9,7 +9,11 @@ const expected = {
   halogens:6, 'group-18':7, 'period-2':8, 'period-3':8, 'one-letter-symbol':14,
   'first-ten-elements':10, 'us-states':50, 'canada-all':13, 'canada-provinces':10,
   'canada-territories':3, 'si-base-units':7, 'si-base-quantities':7, 'si-prefixes':24,
-  'un-languages':6, 'nato-alphabet':26, 'chess-pieces':6
+  'un-languages':6, 'nato-alphabet':26, 'chess-pieces':6,
+  'eu-countries':27,'eu-languages':24,'nato-countries':32,'uk-countries':4,'australia-states':8,
+  'us-capitals':50,'canada-capitals':13,'un-permanent':5,'moon-phases':8,'tennis-slams':4,
+  'nobel-fields':6,'oceans':5,'continents':7,'card-suits':4,'card-ranks':13,'greek-alphabet':24,
+  'chinese-zodiac':12,'weekdays':7,'months':12,'hogwarts-houses':4,'world-cup-winners':8
 };
 function harness(storage) {
   let t = 100000, n = 0;
@@ -18,8 +22,8 @@ function harness(storage) {
   const opts = {storage, now:()=>t, random:()=>0.51, uuid:()=>`test-${++n}`};
   return { ...createEngine(opts), storage, advance:ms=>{t+=ms}, reload:()=>createEngine(opts) };
 }
-test('21 finite sets have complete canonical counts and every alias resolves uniquely', () => {
-  assert.equal(BANK.length,21); assert.equal(new Set(BANK.map(p=>p.id)).size,21);
+test('42 finite sets have complete canonical counts and every alias resolves uniquely', () => {
+  assert.equal(BANK.length,42); assert.equal(new Set(BANK.map(p=>p.id)).size,42);
   for(const p of BANK) {
     assert.equal(p.answers.length,expected[p.id],p.id);
     const seen = new Map();
@@ -41,11 +45,11 @@ test('scope boundaries exclude related but invalid answers', () => {
     'si-prefixes':['Kibi'], 'un-languages':['German'], 'nato-alphabet':['Apple'], 'chess-pieces':['Dragon']};
   for(const [id,words] of Object.entries(excluded)) for(const word of words) assert.equal(matchPractice(word,BANK.find(p=>p.id===id)),null,`${id}: ${word}`);
 });
-test('three complete dives cover all 21 categories, score once, reveal answers and keep diving',async()=>{
+test('six complete dives cover all 42 categories, score once, reveal answers and keep diving',async()=>{
   const h=harness(), ids=[];
-  for(let dive=0;dive<4;dive++) {
+  for(let dive=0;dive<7;dive++) {
     let state=await h.api('start',{}); assert.equal(new Set(state.prompts.map(p=>p.id)).size,7);
-    if(dive<3) ids.push(...state.prompts.map(p=>p.id));
+    if(dive<6) ids.push(...state.prompts.map(p=>p.id));
     await assert.rejects(h.api('review?run='+state.runId),/Finish/);
     for(let round=0;round<7;round++) {
       h.advance(PREVIEW_MS);
@@ -62,7 +66,7 @@ test('three complete dives cover all 21 categories, score once, reveal answers a
     assert.equal(review.prompts.length,7);assert.equal(review.betterThan,null);
     assert.equal(review.prompts[0].answers.length,expected[state.prompts[0].id]);
   }
-  assert.equal(new Set(ids).size,21);
+  assert.equal(new Set(ids).size,42);
 });
 test('early submit, invalid retry, spelling confirmation, refresh and deadline',async()=>{
   const h=harness();let s=await h.api('start',{});
@@ -125,4 +129,45 @@ test('standalone game ships all scene assets and does not call a remote judge',(
   assert.doesNotMatch(readFileSync(new URL('app.mjs',root),'utf8'),/fetch\(/);
   assert.doesNotMatch(readFileSync(new URL('practice-engine.mjs',root),'utf8'),/fetch\(/);
   assert.match(readFileSync(new URL('LICENSE.txt',root),'utf8'),/MIT License/);
+});
+test('every canonical answer and explicit alias is accepted by the actual submit engine',async()=>{
+  let checked=0;
+  for(const p of BANK) for(const a of p.answers) for(const input of [a.answer,...a.aliases]) {
+    const h=harness();
+    const ids=[p.id,...BANK.filter(x=>x.id!==p.id).slice(0,6).map(x=>x.id)];
+    const run={id:'coverage',ids,number:1,date:'2026-10-22',round:0,results:[],roundStart:100000,pausedAt:null};
+    h.storage.setItem(STORAGE_KEY,JSON.stringify({version:BANK_VERSION,queue:[],runs:{coverage:run},number:1}));
+    const reply=await h.api('answer',{runId:'coverage',round:0,answer:input.toUpperCase()});
+    assert.equal(reply.result?.answer,a.answer,`${p.id}: ${input} must score directly, not reject or ask to correct a valid alias`);
+    checked++;
+  }
+  assert.ok(checked>900);
+});
+test('common alternate names and category boundaries are explicit',()=>{
+  const cases=[['eu-countries','the Czech Republic','Czechia'],['nato-countries','Türkiye','Turkey'],
+    ['un-permanent','the United States of America','United States'],['us-capitals','St. Paul','Saint Paul'],
+    ['canada-capitals',"St. John's",'Saint John’s'],['moon-phases','last quarter moon','Third Quarter'],
+    ['tennis-slams','Roland-Garros','French Open'],['nobel-fields','Medicine','Physiology or Medicine'],
+    ['oceans','Antarctic Ocean','Southern Ocean'],['continents','Oceania','Australia'],
+    ['card-ranks','T','Ten'],['card-ranks','Deuce','Two'],['greek-alphabet','Lamda','Lambda'],
+    ['chinese-zodiac','Sheep','Goat'],['months','Sept.','September'],['world-cup-winners','West Germany','Germany']];
+  for(const [id,input,answer] of cases) assert.equal(matchPractice(input,BANK.find(p=>p.id===id))?.answer,answer);
+  for(const [id,input] of [['eu-countries','United Kingdom'],['nato-countries','Ireland'],['us-capitals','Washington DC'],
+    ['canada-capitals','Ottawa'],['canada-capitals','Saint John'],['card-ranks','Joker'],['greek-alphabet','Digamma'],
+    ['uk-countries','Ireland'],['world-cup-winners','Netherlands']]) assert.equal(matchPractice(input,BANK.find(p=>p.id===id)),null,`${id}: ${input}`);
+});
+test('append-only upgrade preserves an existing 21-category dive and its score',async()=>{
+  const h=harness();
+  const ids=['planets','rocky-planets','giant-planets','alkali-metals','alkaline-earth','halogens','group-18'];
+  const run={id:'old-run',ids,number:4,date:'2026-10-21',round:1,roundStart:null,pausedAt:null,
+    results:[{round:0,rawAnswer:'Uranus',answer:'Uranus',tier:'krillion',score:100}]};
+  const oldQueue=['us-states','si-base-units','nato-alphabet'];
+  h.storage.setItem(STORAGE_KEY,JSON.stringify({version:'2026-10-22.1',queue:oldQueue,runs:{'old-run':run},number:4}));
+  const restored=await h.api('state?run=old-run');
+  assert.equal(restored.score,100);assert.equal(restored.round,1);assert.deepEqual(restored.prompts.map(p=>p.id),ids);
+  await h.api('next',{runId:'old-run'});
+  const migrated=JSON.parse(h.storage.getItem(STORAGE_KEY));
+  assert.equal(migrated.version,BANK_VERSION);assert.equal(migrated.queue.length,24);
+  assert.ok(migrated.queue.includes('hogwarts-houses'));assert.deepEqual(migrated.queue.slice(0,3),oldQueue);
+  assert.equal((await h.reload().api('state?run=old-run')).score,100);
 });

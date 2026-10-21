@@ -1,6 +1,7 @@
 // Independently curated finite answer sets. Facts checked 2026-10-22.
 // Scores are editorial practice values, never measured player frequencies.
-export const BANK_VERSION = '2026-10-22.1';
+import { EXTRA_BANK } from './extra-bank.mjs';
+export const BANK_VERSION = '2026-10-22.2';
 const sources = {
   nasa: 'https://science.nasa.gov/solar-system/planets/',
   elements: 'https://iupac.org/what-we-do/periodic-table-of-elements/',
@@ -20,7 +21,7 @@ function question(id, text, entries, expected, source) {
     const [answer, ...aliases] = entry.split('|');
     return { answer, aliases, tier: tiers[Math.round(i * 4 / (all.length - 1))] };
   });
-  return { id, text, answers, expected, source: sources[source], checked: '2026-10-22' };
+  return { id, text, answers, expected, source: sources[source] || source, checked: '2026-10-22' };
 }
 const planets = 'Earth|Terra;Mars;Jupiter;Saturn;Venus;Mercury;Neptune;Uranus';
 const provinces = 'Ontario|ON;Quebec|Québec|QC;British Columbia|BC;Alberta|AB;Nova Scotia|NS;Manitoba|MB;Saskatchewan|SK;New Brunswick|NB;Newfoundland and Labrador|Newfoundland & Labrador|NL;Prince Edward Island|PEI|PE';
@@ -47,4 +48,5 @@ export const BANK = [
   question('un-languages', 'Name one of the six official languages of the United Nations. English language names only.', 'English;French;Spanish;Chinese|Mandarin|Mandarin Chinese|Standard Chinese;Russian;Arabic|Modern Standard Arabic', 6, 'un'),
   question('nato-alphabet', 'Name a word in the current 26-letter NATO spelling alphabet. Give the code word, not the letter.', 'Alfa|Alpha;Bravo;Charlie;Delta;Echo;Foxtrot;Golf;Hotel;India;Juliett|Juliet;Kilo;Lima;Mike;November;Oscar;Papa;Quebec|Québec;Romeo;Sierra;Tango;Uniform;Victor;Whiskey|Whisky;X-ray|Xray|X ray;Yankee;Zulu', 26, 'nato'),
   question('chess-pieces', 'Name one of the six types of piece in standard chess, including the pawn. Names only, not notation letters.', 'King|Kings;Queen|Queens;Pawn|Pawns;Rook|Rooks|Castle|Castles;Bishop|Bishops;Knight|Knights|Horse|Horses', 6, 'chess')
+  ,...EXTRA_BANK.map(row => question(...row))
 ];

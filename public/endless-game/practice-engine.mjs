@@ -4,10 +4,16 @@ import { TIERS, ROUND_MS, PREVIEW_MS, matchAnswer, normalize } from './rules.mjs
 
 export const STORAGE_KEY = 'krillion-si:endless:engine:v1';
 // These are different entities, not spelling errors to silently repair.
-const excluded = { 'us-states': ['Washington DC','Washington D.C.','District of Columbia'], 'si-base-units': ['Celsius','Degree Celsius','Degrees Celsius'] };
+const excluded = { 'us-states': ['Washington DC','Washington D.C.','District of Columbia'], 'us-capitals': ['Washington DC','Washington D.C.','Washington'], 'canada-capitals': ['Ottawa','Saint John','St John'], 'si-base-units': ['Celsius','Degree Celsius','Degrees Celsius'], 'nato-countries': ['Ireland','Republic of Ireland','Austria','Switzerland','Ukraine','Russia','China','Japan','Australia','New Zealand','Cyprus','Malta'], 'eu-countries': ['United Kingdom','UK','Britain','Great Britain','Norway','Iceland','Switzerland','Russia','Ukraine','Turkey','Türkiye','US','USA'] };
+const cleanInput = input => String(input).trim().replace(/^the\s+/i, '');
 export function matchPractice(input, prompt) {
-  if ((excluded[prompt.id] || []).some(value => normalize(value) === normalize(input))) return null;
-  return matchAnswer(input, prompt.answers);
+  const cleaned = cleanInput(input);
+  if ((excluded[prompt.id] || []).some(value => normalize(value) === normalize(cleaned))) return null;
+  // Honor a full explicit alias before stripping an optional article: e.g.
+  // "The Championships" is itself a conventional name for Wimbledon.
+  const direct = prompt.answers.find(a => [a.answer, ...a.aliases].some(x => normalize(x) === normalize(input)));
+  if (direct) return { ...direct, correction: false };
+  return matchAnswer(cleaned, prompt.answers);
 }
 export function createEngine({ storage, now = Date.now, random = Math.random, uuid = () => crypto.randomUUID() } = {}) {
   let memory = { version: BANK_VERSION, queue: [], runs: {}, number: 0 };
@@ -18,6 +24,12 @@ export function createEngine({ storage, now = Date.now, random = Math.random, uu
       const raw = storage?.getItem(STORAGE_KEY);
       if (raw) {
         const parsed = JSON.parse(raw);
+        if (parsed.version === '2026-10-22.1' && Array.isArray(parsed.queue) && parsed.runs && Number.isInteger(parsed.number)) {
+          // Append-only bank upgrade: keep in-progress dives and scores, and add
+          // new categories to the unplayed queue without reusing old questions.
+          parsed.queue = [...new Set([...parsed.queue, ...BANK.slice(21).map(p => p.id)])];
+          parsed.version = BANK_VERSION;
+        }
         if (parsed.version === BANK_VERSION && Array.isArray(parsed.queue) && parsed.runs && Number.isInteger(parsed.number)) memory = parsed;
       }
     } catch { persistent = false; }
@@ -105,7 +117,7 @@ export function createEngine({ storage, now = Date.now, random = Math.random, uu
       // an automatic timeout never turns a typo into a correct answer.
       let match = !expired && raw ? matchPractice(raw, prompt) : null;
       if (match && normalize(raw).length < 4 && ![match.answer, ...match.aliases].some(x => normalize(x) === normalize(raw))) match = null;
-      const exact = match && [match.answer, ...match.aliases].some(x => normalize(x) === normalize(raw));
+      const exact = match && [match.answer, ...match.aliases].some(x => normalize(x) === normalize(raw) || normalize(x) === normalize(cleanInput(raw)));
       if (!exact && match && data.confirm !== true) return { correction: match.answer, original: raw };
       if (!match && !expired && !data.timeout) return { rejected: true, message: 'That does not match this category. Try another answer before time runs out.' };
       const result = { round: r.round, rawAnswer: raw || null, answer: match?.answer || null, tier: match?.tier || null, score: match ? TIERS[match.tier].score : 0, quip: match ? 'Preset practice score · not a measured player frequency.' : 'The answer window closed. Review this category after the dive.', promptText: prompt.text };
