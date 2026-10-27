@@ -1,0 +1,61 @@
+{
+  "date": "2026-10-22",
+  "commit": "da98336",
+  "bank": {
+    "categories": 21,
+    "canonical_answers": 233,
+    "explicit_aliases": 196,
+    "version": "2026-10-22.1",
+    "scoring": "editorial practice values, not player frequencies"
+  },
+  "automated_tests": {
+    "passed": 8,
+    "covered": [
+      "all canonical answers and explicit aliases",
+      "category boundary exclusions",
+      "four complete dives and reshuffle",
+      "duplicate submit idempotency",
+      "spelling confirmation and invalid retry",
+      "timeout and refresh recovery",
+      "pause/resume",
+      "blocked storage and corrupt saves",
+      "scene asset paths and no remote judge"
+    ]
+  },
+  "browser_checks": {
+    "desktop": {
+      "seven_rounds_completed": true,
+      "score": 295,
+      "depth_m": 2950,
+      "timeout_included": true,
+      "refresh_resume": true,
+      "review_all_50_us_states": true,
+      "next_dive_started": true
+    },
+    "narrow_viewport": {
+      "width": 390,
+      "height": 640,
+      "submission": "Mass",
+      "result_score": 30,
+      "game_console_errors": 0
+    }
+  },
+  "integration": {
+    "frame": "/endless-game/index.html",
+    "same_origin": true,
+    "antigravity_endlessdive_link_preserved": true,
+    "faq_entries": 8,
+    "canonical": "https://krillion.si/endless/"
+  },
+  "deployment": {
+    "status": "success",
+    "url": "https://krillion.si/endless/",
+    "production_submission": {
+      "answer": "Uranus",
+      "score": 100,
+      "depth_m": 1000,
+      "inside_site": true
+    },
+    "public_assets_verified": true
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "date": "2026-10-22",
+  "commit": "4880777",
+  "bank_version": "2026-10-22.2",
+  "categories": 42,
+  "canonical_answer_entries": 510,
+  "explicit_alias_entries": 435,
+  "tests_passed": 11,
+  "submit_engine_coverage_inputs": 945,
+  "automated_complete_dives": 7,
+  "browser_play": {
+    "new_category": "continents",
+    "input": "Oceania",
+    "recognized_as": "Australia",
+    "score": 85,
+    "depth_m": 850
+  },
+  "save_migration": "2026-10-22.1 saves retain run IDs, prompts and scores; new categories are appended to the unseen queue",
+  "scoring": "preset practice values, not observed player frequencies",
+  "deployment": {
+    "status": "success",
+    "url": "https://krillion.si/endless/",
+    "bank_version_verified": "2026-10-22.2",
+    "old_live_run_restored": {
+      "answer": "Uranus",
+      "score": 100,
+      "round": 2,
+      "depth_m": 1000
+    }
+  }
+}
