@@ -15,7 +15,18 @@ export function matchPractice(input, prompt) {
   if (direct) return { ...direct, correction: false };
   return matchAnswer(cleaned, prompt.answers);
 }
-export function createEngine({ storage, statistics = null, now = Date.now, random = Math.random, uuid = () => crypto.randomUUID() } = {}) {
+const defaultUuid = () => {
+  if (typeof crypto !== 'undefined' && typeof crypto.randomUUID === 'function') {
+    try { return crypto.randomUUID(); } catch (_) {}
+  }
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => {
+    const r = (Math.random() * 16) | 0;
+    const v = c === 'x' ? r : (r & 0x3) | 0x8;
+    return v.toString(16);
+  });
+};
+
+export function createEngine({ storage, statistics = null, now = Date.now, random = Math.random, uuid = defaultUuid } = {}) {
   let memory = { version: BANK_VERSION, queue: [], runs: {}, number: 0 };
   let persistent = Boolean(storage);
   function load() {
