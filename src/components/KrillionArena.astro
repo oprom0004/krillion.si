@@ -32,6 +32,27 @@ const {
       <span id="arena-mode-badge" class="px-2.5 py-0.5 rounded-full bg-cyan-950/60 border border-cyan-500/30 text-cyan-400 font-bold text-[10px] tracking-wide uppercase transition-all">
         {badgeText}
       </span>
+      <span class="hidden sm:inline-block w-px h-3 bg-white/10"></span>
+      <div class="inline-flex rounded-xl bg-black/40 border border-white/10 p-0.5 text-[10px] font-mono">
+        <button
+          type="button"
+          id="btn-mode-native"
+          class="px-2.5 py-1 rounded-lg bg-cyan-400 text-slate-950 font-bold transition shadow cursor-pointer"
+          data-url="/endless-game/"
+          data-badge="INSTANT PLAY • 7 PROMPTS ⚓"
+        >
+          ⚓ Endless (Instant)
+        </button>
+        <button
+          type="button"
+          id="btn-mode-daily"
+          class="px-2.5 py-1 rounded-lg text-slate-300 hover:text-white transition cursor-pointer"
+          data-url="https://www.krillion.org/play/daily/"
+          data-badge="DAILY DIVE • 00:00 UTC 🌐"
+        >
+          🌐 Daily Dive
+        </button>
+      </div>
     </div>
 
     <!-- Right: Quick Interactive Controls -->
@@ -105,6 +126,27 @@ const {
   const reloadBtn = document.getElementById('btn-reload-game');
   const fullScreenBtn = document.getElementById('btn-fullscreen-game');
   const badgeEl = document.getElementById('arena-mode-badge');
+  const btnNative = document.getElementById('btn-mode-native');
+  const btnDaily = document.getElementById('btn-mode-daily');
+
+  if (btnNative && btnDaily && iframe && badgeEl) {
+    btnNative.addEventListener('click', () => {
+      const url = btnNative.getAttribute('data-url') || '/endless-game/';
+      const badge = btnNative.getAttribute('data-badge') || 'INSTANT PLAY ⚓';
+      iframe.src = url;
+      badgeEl.textContent = badge;
+      btnNative.className = 'px-2.5 py-1 rounded-lg bg-cyan-400 text-slate-950 font-bold transition shadow cursor-pointer';
+      btnDaily.className = 'px-2.5 py-1 rounded-lg text-slate-300 hover:text-white transition cursor-pointer';
+    });
+    btnDaily.addEventListener('click', () => {
+      const url = btnDaily.getAttribute('data-url') || 'https://www.krillion.org/play/daily/';
+      const badge = btnDaily.getAttribute('data-badge') || 'DAILY DIVE 🌐';
+      iframe.src = url;
+      badgeEl.textContent = badge;
+      btnDaily.className = 'px-2.5 py-1 rounded-lg bg-cyan-400 text-slate-950 font-bold transition shadow cursor-pointer';
+      btnNative.className = 'px-2.5 py-1 rounded-lg text-slate-300 hover:text-white transition cursor-pointer';
+    });
+  }
 
   if (reloadBtn && iframe) {
     reloadBtn.addEventListener('click', () => {
