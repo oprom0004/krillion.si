@@ -7,7 +7,7 @@ import IconGeography from '../components/icons/IconGeography.astro';
 const breadcrumbs = [
   { label: 'Home', href: '/' },
   { label: 'Themed Packs', href: '/#variants' },
-  { label: 'Geography & Enclaves' }
+  { label: 'Geography Game' }
 ];
 
 const faqSchema = {
@@ -16,59 +16,101 @@ const faqSchema = {
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "How do you score high in Krillion Geography Pack?",
+      "name": "How do you score high in the Krillion Geography Game?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "To achieve maximum depth (>900m) in Krillion Geography, name small island microstates, sovereign enclaves, or lesser-known capital cities (such as Ngerulmud, Funafuti, or Vaduz) instead of global metropolitan giants like Paris, Tokyo, or London."
+        "text": "To achieve maximum depth (>900m per round) in Krillion Geography, name sovereign microstates, doubly landlocked nations, or obscure capital cities (such as Ngerulmud, Funafuti, Vaduz, or Nuku'alofa) instead of high-population nations like France, Brazil, or Japan."
       }
     },
     {
       "@type": "Question",
-      "name": "What are the common crowd traps in Geography prompts?",
+      "name": "What are the common crowd traps in Krillion Geography?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Typical crowd traps include obvious answers like Vatican City, Monaco, Australia, and Brazil. Because thousands of players immediately submit these, their depth yield collapses to under 150m."
+        "text": "Typical crowd traps include obvious sovereign answers like Vatican City, Monaco, San Marino, Australia, and Canada. Because a high percentage of global players submit these instantly, their depth yield collapses to under 150m."
       }
     },
     {
       "@type": "Question",
-      "name": "What counts as a valid landlocked country in Krillion?",
+      "name": "What counts as a doubly landlocked nation in Krillion?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Valid landlocked countries include all sovereign UN member states with no direct coastline. Doubly landlocked nations like Liechtenstein and Uzbekistan are premium high-depth picks."
+        "text": "Only two countries on Earth are doubly landlocked (surrounded entirely by other landlocked countries): Liechtenstein and Uzbekistan. Submitting these yields maximum Hadal Trench depth (>950m)."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is Krillion Geography free to play online?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, Krillion Geography is completely free to play in your web browser with no downloads, account registrations, or paywalls required."
       }
     }
   ]
 };
+
+const geographyDatabase = [
+  // Microstates & Islands
+  { category: "microstates", name: "Tuvalu", hint: "Pacific Polynesian island nation, Funafuti atoll", rarity: "< 0.8%", depth: "+980m", zone: "Hadal Trench", trap: false },
+  { category: "microstates", name: "Nauru", hint: "Micronesian island country, smallest independent republic", rarity: "< 0.9%", depth: "+975m", zone: "Hadal Trench", trap: false },
+  { category: "microstates", name: "Palau", hint: "500+ coral and volcanic islands, Capital: Ngerulmud", rarity: "1.2%", depth: "+940m", zone: "Hadal Trench", trap: false },
+  { category: "microstates", name: "São Tomé and Príncipe", hint: "Gulf of Guinea volcanic archipelago", rarity: "1.4%", depth: "+930m", zone: "Hadal Trench", trap: false },
+  { category: "microstates", name: "Monaco", hint: "High frequency submit — major crowd trap", rarity: "24.5%", depth: "+180m", zone: "Bathyal Shelf", trap: true },
+  { category: "microstates", name: "Vatican City", hint: "Most submitted microstate globally — extreme trap", rarity: "42.0%", depth: "+40m", zone: "Surface Trap", trap: true },
+  
+  // Obscure Capitals
+  { category: "capitals", name: "Ngerulmud", hint: "Official capital of Palau (State of Melekeok)", rarity: "< 0.5%", depth: "+995m", zone: "Hadal Trench", trap: false },
+  { category: "capitals", name: "Funafuti", hint: "Atoll capital of Tuvalu", rarity: "< 0.7%", depth: "+985m", zone: "Hadal Trench", trap: false },
+  { category: "capitals", name: "Tarawa", hint: "Atoll capital of Kiribati", rarity: "1.1%", depth: "+950m", zone: "Hadal Trench", trap: false },
+  { category: "capitals", name: "Vaduz", hint: "Capital of Liechtenstein along the Rhine", rarity: "3.2%", depth: "+850m", zone: "Abyssal Zone", trap: false },
+  { category: "capitals", name: "Sucre", hint: "Constitutional capital of Bolivia (often forgotten vs La Paz)", rarity: "4.8%", depth: "+800m", zone: "Abyssal Zone", trap: false },
+  { category: "capitals", name: "Tokyo / Paris / London", hint: "Top 3 most typed capitals — catastrophic collapse", rarity: "> 55%", depth: "+10m", zone: "Surface Trap", trap: true },
+
+  // Landlocked Nations
+  { category: "landlocked", name: "Liechtenstein", hint: "Doubly landlocked European principality", rarity: "2.1%", depth: "+960m", zone: "Hadal Trench", trap: false },
+  { category: "landlocked", name: "Uzbekistan", hint: "Doubly landlocked Central Asian sovereign state", rarity: "3.5%", depth: "+910m", zone: "Hadal Trench", trap: false },
+  { category: "landlocked", name: "Kyrgyzstan", hint: "Mountainous landlocked state in Central Asia", rarity: "4.2%", depth: "+870m", zone: "Abyssal Zone", trap: false },
+  { category: "landlocked", name: "Bhutan", hint: "Himalayan Buddhist kingdom bordering China & India", rarity: "5.1%", depth: "+830m", zone: "Abyssal Zone", trap: false },
+  { category: "landlocked", name: "Switzerland", hint: "Well known landlocked nation — severe crowding", rarity: "31.0%", depth: "+120m", zone: "Surface Trap", trap: true },
+
+  // Border & Enclaves
+  { category: "enclaves", name: "Lesotho", hint: "Enclaved entirely inside South Africa", rarity: "3.8%", depth: "+880m", zone: "Abyssal Zone", trap: false },
+  { category: "enclaves", name: "San Marino", hint: "Enclaved microstate surrounded by Italy", rarity: "12.0%", depth: "+450m", zone: "Bathyal Shelf", trap: false },
+  { category: "enclaves", name: "Campione d'Italia", hint: "Italian exclave completely inside Switzerland", rarity: "< 0.4%", depth: "+998m", zone: "Hadal Trench", trap: false },
+  { category: "enclaves", name: "Llívia", hint: "Spanish exclave located inside French territory", rarity: "< 0.3%", depth: "+999m", zone: "Hadal Trench", trap: false }
+];
 ---
 
 <Layout
-  title="Krillion Geography Pack | Play World Geography Reverse Trivia Online"
-  description="Play Krillion Geography & Enclaves pack online for free. Plunge to 7,000m depth by naming obscure microstates, doubly landlocked nations, and Pacific archipelagos."
+  title="Krillion Geography Game Online | Play World Geography Reverse Trivia & 7,000m Trench Solver"
+  description="Play the official Krillion Geography Game online for free. Plunge past 7,000m trench depth by submitting the rarest sovereign microstates, obscure capitals, and doubly landlocked nations."
+  canonical="/geography/"
   schema={faqSchema}
 >
   <div class="py-6 px-3 sm:px-6 lg:px-8 max-w-7xl mx-auto space-y-8">
-    <!-- Breadcrumb & GEO Capsule Header -->
-    <div class="space-y-3">
+    
+    <!-- Top Breadcrumb & GEO Intent Header -->
+    <div class="space-y-4">
       <Breadcrumb items={breadcrumbs} />
       
-      <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pt-2">
-        <div class="space-y-1.5">
-          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-950/60 border border-cyan-500/30 text-cyan-400 text-xs font-bold font-mono">
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-5 pt-1">
+        <div class="space-y-2 max-w-3xl">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#0a1d36] border border-[#4de3ff]/30 text-[#4de3ff] text-xs font-bold font-mono tracking-wide">
             <IconGeography class="w-3.5 h-3.5" />
-            <span>THEMED VAULT • GEOGRAPHY & ENCLAVES</span>
+            <span>OFFICIAL THEMED VAULT • GEOGRAPHY & ENCLAVES</span>
           </div>
-          <h1 class="text-3xl sm:text-4xl font-black text-white tracking-tight">
-            Krillion Geography & World Enclaves
+          <h1 class="text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight">
+            Krillion Geography Game
           </h1>
-          <p class="text-slate-400 text-xs sm:text-sm max-w-3xl leading-relaxed">
-            <strong class="text-white">Direct Definition:</strong> The Geography Pack assesses global territorial knowledge across sovereign nations, border enclaves, island archipelagos, and capital cities. Avoid high-population nations to maximize submarine descent.
+          <p class="text-[#8fa3c4] text-xs sm:text-sm leading-relaxed">
+            <strong class="text-white font-semibold">Answer First Direct Rule:</strong> In the Krillion Geography Pack, your submarine descends deeper when you submit valid territory answers with the <span class="text-[#ffd166] font-semibold">lowest global submission percentage</span>. Avoid mega-capitals and common European microstates; target Pacific atolls, Central Asian doubly landlocked borders, and UN sovereign island nations to crack the 7,000m Hadal Trench.
           </p>
         </div>
 
-        <div class="flex sm:flex-col items-center sm:items-end justify-between sm:justify-center p-3 rounded-2xl bg-abyss-card border border-cyan-500/20 text-right">
-          <span class="text-[10px] text-slate-400 font-mono uppercase tracking-wider">Target Threshold</span>
-          <span class="text-xl font-black text-cyan-400 font-mono">7,000m Trench</span>
+        <div class="flex sm:flex-col items-center sm:items-end justify-between sm:justify-center p-4 rounded-2xl bg-[#0a1d36] border border-[#4de3ff]/20 text-right min-w-[200px]">
+          <span class="text-[11px] text-[#8fa3c4] font-mono uppercase tracking-wider">Hadal Trench Target</span>
+          <span class="text-2xl font-black text-[#4de3ff] font-mono tracking-tight">7,000m Depth</span>
+          <span class="text-[10px] text-[#ffd166] font-mono mt-0.5">Top 0.5% Submissions</span>
         </div>
       </div>
     </div>
@@ -76,119 +118,320 @@ const faqSchema = {
     <!-- Playable Game Viewport -->
     <KrillionArena
       modeUrl="https://www.krillion.org/play/geography/"
-      modeTitle="Krillion Geography & Enclaves Pack"
+      modeTitle="Krillion Geography & Enclaves Game Arena"
       badgeText="GEOGRAPHY PACK 🌍"
     />
 
-    <!-- SEO & GEO Editorial -->
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 pt-4">
-      <div class="lg:col-span-2 space-y-8">
-        <!-- Rarity Matrix Table -->
-        <div class="p-6 sm:p-8 rounded-3xl bg-abyss-card border border-white/10 space-y-5">
-          <div class="flex items-center justify-between">
-            <h2 class="text-xl font-bold text-white flex items-center gap-2">
-              <span class="w-2 h-2 rounded-full bg-cyan-400"></span>
-              <span>Geography Rarity Matrix: Microstates & Capitals</span>
-            </h2>
-            <span class="text-[11px] font-mono text-cyan-400/80 bg-cyan-950/50 px-2 py-0.5 rounded border border-cyan-500/20">Prompt: Sovereign Nations</span>
+    <!-- Interactive Toolification: Geography Depth & Rarity Explorer -->
+    <div class="p-6 sm:p-8 rounded-3xl bg-[#0a1d36] border border-[#4de3ff]/20 shadow-xl space-y-6">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-white/10 pb-5">
+        <div>
+          <div class="inline-flex items-center gap-2 text-xs font-mono font-bold text-[#ffd166] uppercase tracking-wider mb-1">
+            <span class="w-2 h-2 rounded-full bg-[#ffd166]"></span>
+            <span>Interactive Rarity Matrix & Depth Tool</span>
           </div>
+          <h2 class="text-xl sm:text-2xl font-black text-white tracking-tight">
+            Krillion Geography Depth & Rarity Explorer
+          </h2>
+          <p class="text-xs text-[#8fa3c4] mt-1">
+            Filter verified sovereign answers by prompt category or search any country/capital to check its estimated submarine depth yield.
+          </p>
+        </div>
 
-          <div class="overflow-x-auto">
-            <table class="w-full text-left text-xs border-collapse">
-              <thead>
-                <tr class="border-b border-white/10 text-slate-400 font-mono">
-                  <th class="py-2.5 px-3">Depth Zone</th>
-                  <th class="py-2.5 px-3">Answer Examples</th>
-                  <th class="py-2.5 px-3">Estimated Rarity</th>
-                  <th class="py-2.5 px-3">Depth Yield</th>
-                </tr>
-              </thead>
-              <tbody class="divide-y divide-white/5 font-mono">
-                <tr class="bg-emerald-950/20 text-emerald-300">
-                  <td class="py-3 px-3 font-bold">🌊 Hadal Trench</td>
-                  <td class="py-3 px-3 font-sans"><em>Tuvalu</em>, <em>Nauru</em>, <em>São Tomé and Príncipe</em>, <em>Palau</em></td>
-                  <td class="py-3 px-3">&lt; 1.2%</td>
-                  <td class="py-3 px-3 font-bold">+940m ~ 1,000m</td>
-                </tr>
-                <tr class="bg-cyan-950/20 text-cyan-300">
-                  <td class="py-3 px-3 font-bold">⚓ Abyssal Zone</td>
-                  <td class="py-3 px-3 font-sans"><em>Suriname</em>, <em>Comoros</em>, <em>Kyrgyzstan</em>, <em>Liechtenstein</em></td>
-                  <td class="py-3 px-3">2.5% ~ 6.0%</td>
-                  <td class="py-3 px-3 font-bold">+720m ~ 880m</td>
-                </tr>
-                <tr class="bg-amber-950/20 text-amber-300">
-                  <td class="py-3 px-3 font-bold">⚠️ Bathyal Shelf</td>
-                  <td class="py-3 px-3 font-sans"><em>Monaco</em>, <em>San Marino</em>, <em>Iceland</em>, <em>Luxembourg</em></td>
-                  <td class="py-3 px-3">10.0% ~ 22.0%</td>
-                  <td class="py-3 px-3 font-bold">+280m ~ 500m</td>
-                </tr>
-                <tr class="bg-rose-950/20 text-rose-300">
-                  <td class="py-3 px-3 font-bold">🚨 Surface Trap</td>
-                  <td class="py-3 px-3 font-sans"><em>Vatican City</em>, <em>Canada</em>, <em>Japan</em>, <em>France</em></td>
-                  <td class="py-3 px-3">&gt; 38%</td>
-                  <td class="py-3 px-3 font-bold">0m ~ 100m</td>
-                </tr>
-              </tbody>
-            </table>
+        <!-- Live Search Box -->
+        <div class="relative min-w-[240px]">
+          <input
+            id="geo-search-input"
+            type="text"
+            placeholder="Search country or capital..."
+            class="w-full py-2 pl-9 pr-3 text-xs bg-[#061325] border border-white/15 rounded-xl text-white placeholder-[#8fa3c4] focus:outline-none focus:border-[#4de3ff] transition-all font-mono"
+          />
+          <svg class="w-3.5 h-3.5 text-[#8fa3c4] absolute left-3 top-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+          </svg>
+        </div>
+      </div>
+
+      <!-- Category Filter Tabs -->
+      <div class="flex flex-wrap gap-2 text-xs font-mono" id="geo-filter-tabs">
+        <button data-cat="all" class="geo-tab px-3.5 py-1.5 rounded-xl bg-[#4de3ff] text-slate-950 font-bold transition-all">
+          All Prompts (20)
+        </button>
+        <button data-cat="microstates" class="geo-tab px-3.5 py-1.5 rounded-xl bg-[#061325] text-[#8fa3c4] hover:text-white border border-white/10 transition-all">
+          Sovereign Microstates (6)
+        </button>
+        <button data-cat="capitals" class="geo-tab px-3.5 py-1.5 rounded-xl bg-[#061325] text-[#8fa3c4] hover:text-white border border-white/10 transition-all">
+          World Capitals (6)
+        </button>
+        <button data-cat="landlocked" class="geo-tab px-3.5 py-1.5 rounded-xl bg-[#061325] text-[#8fa3c4] hover:text-white border border-white/10 transition-all">
+          Landlocked Nations (5)
+        </button>
+        <button data-cat="enclaves" class="geo-tab px-3.5 py-1.5 rounded-xl bg-[#061325] text-[#8fa3c4] hover:text-white border border-white/10 transition-all">
+          Enclaves & Borders (4)
+        </button>
+      </div>
+
+      <!-- Data Table -->
+      <div class="overflow-x-auto rounded-2xl border border-white/10">
+        <table class="w-full text-left text-xs border-collapse">
+          <thead>
+            <tr class="border-b border-white/10 bg-[#061325]/80 text-[#8fa3c4] font-mono uppercase text-[11px]">
+              <th class="py-3 px-4">Territory / Answer</th>
+              <th class="py-3 px-4">Prompt Context & Geographical Clue</th>
+              <th class="py-3 px-4">Global Pick %</th>
+              <th class="py-3 px-4">Estimated Yield</th>
+              <th class="py-3 px-4">Zone Assessment</th>
+            </tr>
+          </thead>
+          <tbody id="geo-table-body" class="divide-y divide-white/5 font-mono">
+            {geographyDatabase.map(item => (
+              <tr class={`geo-row ${item.trap ? 'bg-white/[0.02]' : 'hover:bg-[#4de3ff]/5'}`} data-category={item.category} data-name={item.name.toLowerCase()} data-hint={item.hint.toLowerCase()}>
+                <td class="py-3.5 px-4 font-bold text-white font-sans">
+                  {item.trap && <span class="text-[#ffd166] mr-1.5">⚠️</span>}
+                  <span>{item.name}</span>
+                </td>
+                <td class="py-3.5 px-4 text-[#8fa3c4] font-sans text-xs max-w-xs">{item.hint}</td>
+                <td class="py-3.5 px-4 text-white font-mono">{item.rarity}</td>
+                <td class="py-3.5 px-4 font-bold text-[#4de3ff]">{item.depth}</td>
+                <td class="py-3.5 px-4">
+                  <span class={`inline-block px-2.5 py-0.5 rounded-full text-[10px] font-mono border ${
+                    item.zone === 'Hadal Trench' ? 'border-[#4de3ff]/40 text-[#4de3ff] bg-[#4de3ff]/10' :
+                    item.zone === 'Abyssal Zone' ? 'border-[#8fa3c4]/40 text-[#8fa3c4] bg-[#8fa3c4]/10' :
+                    'border-[#ffd166]/40 text-[#ffd166] bg-[#ffd166]/10'
+                  }`}>
+                    {item.zone}
+                  </span>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Quick Guidance Notes -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-2">
+        <div class="p-4 rounded-2xl bg-[#061325] border border-white/5 space-y-1.5">
+          <div class="text-[#4de3ff] text-xs font-mono font-bold flex items-center gap-1.5">
+            <span>⚓ 1. Hadal Trench (&gt;900m)</span>
+          </div>
+          <p class="text-[11px] text-[#8fa3c4] leading-relaxed">
+            Island microstates (Tuvalu, Palau, Nauru) and doubly landlocked nations (Liechtenstein, Uzbekistan). Submissions under 1.5% globally.
+          </p>
+        </div>
+
+        <div class="p-4 rounded-2xl bg-[#061325] border border-white/5 space-y-1.5">
+          <div class="text-[#8fa3c4] text-xs font-mono font-bold flex items-center gap-1.5">
+            <span>🌊 2. Abyssal Zone (700m-900m)</span>
+          </div>
+          <p class="text-[11px] text-[#8fa3c4] leading-relaxed">
+            Lesser-recalled sovereign states (Bhutan, Suriname, Comoros, Kyrgyzstan). Safe high-yield descent without risking disqualification.
+          </p>
+        </div>
+
+        <div class="p-4 rounded-2xl bg-[#061325] border border-white/5 space-y-1.5">
+          <div class="text-[#ffd166] text-xs font-mono font-bold flex items-center gap-1.5">
+            <span>⚠️ 3. Crowd Trap Warning</span>
+          </div>
+          <p class="text-[11px] text-[#8fa3c4] leading-relaxed">
+            Monaco, Vatican City, and San Marino feel like clever microstates, but massive casual volume dilutes depth to &lt;200m.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Editorial & Knowledge Graph Section -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 pt-2">
+      
+      <!-- Left 2 Cols: Deep Tactical Blueprint & FAQ -->
+      <div class="lg:col-span-2 space-y-8">
+        
+        <!-- Depth Strategy Guide -->
+        <div class="p-6 sm:p-8 rounded-3xl bg-[#0a1d36] border border-white/10 space-y-5">
+          <h2 class="text-xl sm:text-2xl font-black text-white tracking-tight flex items-center gap-2">
+            <span class="w-2.5 h-2.5 rounded-full bg-[#4de3ff]"></span>
+            <span>Krillion Geography: 4 Strategic Golden Rules</span>
+          </h2>
+          
+          <div class="space-y-4 text-xs sm:text-sm text-[#8fa3c4] leading-relaxed">
+            <p>
+              Success in Krillion's Geography pack operates on a mathematical inverse of standard pub trivia: <strong class="text-white">your score is penalized by global consensus</strong>. When the prompt asks for "A country with a population under 5 million", submitting New Zealand, Ireland, or Norway guarantees an immediate surfacing event.
+            </p>
+
+            <div class="space-y-3 pt-2">
+              <div class="p-4 rounded-2xl bg-[#061325] border border-white/5 space-y-1.5">
+                <h3 class="text-sm font-bold text-white flex items-center gap-2">
+                  <span class="text-[#ffd166] font-mono">01.</span>
+                  <span>Leverage Pacific Island Sovereign States</span>
+                </h3>
+                <p class="text-xs text-[#8fa3c4]">
+                  Microstates in Oceania (Federated States of Micronesia, Kiribati, Tuvalu, Marshall Islands, Nauru) represent sovereign UN member states with populations under 100,000. Casual players rarely think of them first, yielding over 950m per dive.
+                </p>
+              </div>
+
+              <div class="p-4 rounded-2xl bg-[#061325] border border-white/5 space-y-1.5">
+                <h3 class="text-sm font-bold text-white flex items-center gap-2">
+                  <span class="text-[#ffd166] font-mono">02.</span>
+                  <span>Master Doubly Landlocked Jurisdictions</span>
+                </h3>
+                <p class="text-xs text-[#8fa3c4]">
+                  Memorize the world's only two doubly landlocked sovereign nations: <strong>Liechtenstein</strong> (Western Europe) and <strong>Uzbekistan</strong> (Central Asia). These answer prompts regarding European borders, Asian borders, and landlocked nations simultaneously.
+                </p>
+              </div>
+
+              <div class="p-4 rounded-2xl bg-[#061325] border border-white/5 space-y-1.5">
+                <h3 class="text-sm font-bold text-white flex items-center gap-2">
+                  <span class="text-[#ffd166] font-mono">03.</span>
+                  <span>Avoid the "Vatican City" Mirage</span>
+                </h3>
+                <p class="text-xs text-[#8fa3c4]">
+                  Because Vatican City is universally taught as the world's smallest country, over 40% of first-time players submit it immediately. In reverse trivia, Vatican City is the deadliest surface trap in existence.
+                </p>
+              </div>
+
+              <div class="p-4 rounded-2xl bg-[#061325] border border-white/5 space-y-1.5">
+                <h3 class="text-sm font-bold text-white flex items-center gap-2">
+                  <span class="text-[#ffd166] font-mono">04.</span>
+                  <span>Constitutional vs Administrative Capitals</span>
+                </h3>
+                <p class="text-xs text-[#8fa3c4]">
+                  When prompted for capital cities, avoid primary economic hubs. Name the secondary constitutional capital (e.g. Sucre for Bolivia, Yamoussoukro for Côte d'Ivoire, or Sri Jayawardenepura Kotte for Sri Lanka) for massive depth bonuses.
+                </p>
+              </div>
+            </div>
           </div>
         </div>
 
-        <!-- FAQ Section -->
-        <div class="p-6 sm:p-8 rounded-3xl bg-abyss-card border border-white/10 space-y-4">
-          <h2 class="text-xl font-bold text-white">Frequently Asked Questions</h2>
-          <div class="space-y-4 pt-2">
+        <!-- FAQ Accordion / Section -->
+        <div class="p-6 sm:p-8 rounded-3xl bg-[#0a1d36] border border-white/10 space-y-5">
+          <h2 class="text-xl sm:text-2xl font-black text-white tracking-tight">
+            Frequently Asked Questions (FAQ)
+          </h2>
+          <div class="space-y-3 pt-1">
             {faqSchema.mainEntity.map(faq => (
-              <div class="p-4 rounded-2xl bg-white/5 border border-white/5 space-y-2">
-                <h3 class="text-sm font-bold text-cyan-300">{faq.name}</h3>
-                <p class="text-xs text-slate-300 leading-relaxed">{faq.acceptedAnswer.text}</p>
+              <div class="p-4 rounded-2xl bg-[#061325] border border-white/5 space-y-2">
+                <h3 class="text-sm font-bold text-[#4de3ff]">{faq.name}</h3>
+                <p class="text-xs text-[#8fa3c4] leading-relaxed">{faq.acceptedAnswer.text}</p>
               </div>
             ))}
           </div>
         </div>
       </div>
 
-      <!-- Right Column -->
+      <!-- Right Column: Clues Uplink & Related Themed Packs -->
       <div class="space-y-6">
-        <div class="p-6 rounded-3xl bg-gradient-to-br from-amber-950/40 via-abyss-card to-abyss-card border border-amber-500/30 space-y-3">
-          <div class="flex items-center gap-2 text-amber-400 text-xs font-bold">
-            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a7 7 0 0 0-7 7c0 2.38 1.19 4.47 3 5.74V17a2 2 0 0 0 2 2h4a2 2 0 0 0 2-2v-2.26c1.81-1.27 3-3.36 3-5.74a7 7 0 0 0-7-7Z"/><path d="M9 21h6"/></svg>
-            <span>Need Real-time Clues?</span>
+        
+        <!-- Live Hints Uplink Card (Amber Accent) -->
+        <div class="p-6 rounded-3xl bg-[#0a1d36] border border-[#ffd166]/30 shadow-lg space-y-4">
+          <div class="flex items-center gap-2 text-[#ffd166] text-xs font-mono font-bold uppercase tracking-wider">
+            <span class="w-2 h-2 rounded-full bg-[#ffd166]"></span>
+            <span>Daily Trench Intel</span>
           </div>
-          <h3 class="text-base font-bold text-white">KrillionHints.com Solver</h3>
-          <p class="text-xs text-slate-300 leading-relaxed">
-            Discover verified rare capitals and sovereign territories for today's daily trench dive.
+          <h3 class="text-lg font-black text-white">Daily Geography Hints & Clues</h3>
+          <p class="text-xs text-[#8fa3c4] leading-relaxed">
+            Stuck on today's geography prompt? Explore verified rare sovereign territories and real-time community statistics on our dedicated companion portal.
           </p>
           <a
             href="https://krillionhints.com"
             target="_blank"
             rel="noopener noreferrer"
-            class="block w-full py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-black text-xs text-center transition-colors shadow-lg shadow-amber-500/20"
+            class="block w-full py-3 rounded-xl bg-[#ffd166] hover:bg-[#ffd166]/90 text-slate-950 font-black text-xs text-center transition-all shadow-md font-mono"
           >
             Open KrillionHints.com ↗
           </a>
         </div>
 
-        <div class="p-6 rounded-3xl bg-abyss-card border border-white/10 space-y-3">
-          <h3 class="text-sm font-bold text-white uppercase tracking-wider font-mono">Other Themed Packs</h3>
+        <!-- Reset Time Widget Card -->
+        <div class="p-6 rounded-3xl bg-[#0a1d36] border border-[#4de3ff]/20 space-y-3">
+          <div class="text-[11px] font-mono text-[#4de3ff] uppercase font-bold tracking-wider">
+            Server Cycle Clock
+          </div>
+          <h4 class="text-base font-bold text-white">When Does Krillion Reset?</h4>
+          <p class="text-xs text-[#8fa3c4] leading-relaxed">
+            The daily geography trench resets every night at midnight (00:00 UTC). Check our live countdown clock to prepare for the new daily seed.
+          </p>
+          <a
+            href="/when-does-krillion-reset/"
+            class="inline-flex items-center gap-1.5 text-xs font-mono font-bold text-[#4de3ff] hover:underline"
+          >
+            <span>View Global Reset Clock →</span>
+          </a>
+        </div>
+
+        <!-- Themed Packs Directory -->
+        <div class="p-6 rounded-3xl bg-[#0a1d36] border border-white/10 space-y-3">
+          <h3 class="text-xs font-bold text-white uppercase tracking-wider font-mono">
+            Explore All Themed Packs
+          </h3>
           <div class="space-y-2 text-xs">
-            <a href="/movies" class="block p-2.5 rounded-xl bg-white/5 hover:bg-cyan-500/10 hover:text-cyan-400 border border-white/5 transition-all">
-              🎬 Cinema & Academy Awards
+            <a href="/movies/" class="block p-3 rounded-xl bg-[#061325] hover:bg-[#4de3ff]/10 hover:text-[#4de3ff] border border-white/5 transition-all text-[#8fa3c4]">
+              🎬 <strong class="text-white">Cinema & Oscars</strong> — Box office bombs & foreign films
             </a>
-            <a href="/history" class="block p-2.5 rounded-xl bg-white/5 hover:bg-cyan-500/10 hover:text-cyan-400 border border-white/5 transition-all">
-              🏛️ World History & Empires
+            <a href="/sports/" class="block p-3 rounded-xl bg-[#061325] hover:bg-[#4de3ff]/10 hover:text-[#4de3ff] border border-white/5 transition-all text-[#8fa3c4]">
+              ⚽ <strong class="text-white">Sports & Olympics</strong> — Rare champions & medalists
             </a>
-            <a href="/sports" class="block p-2.5 rounded-xl bg-white/5 hover:bg-cyan-500/10 hover:text-cyan-400 border border-white/5 transition-all">
-              ⚽ Sports & Olympic Champions
+            <a href="/history/" class="block p-3 rounded-xl bg-[#061325] hover:bg-[#4de3ff]/10 hover:text-[#4de3ff] border border-white/5 transition-all text-[#8fa3c4]">
+              🏛️ <strong class="text-white">World History</strong> — Ancient empires & dynasties
             </a>
-            <a href="/language" class="block p-2.5 rounded-xl bg-white/5 hover:bg-cyan-500/10 hover:text-cyan-400 border border-white/5 transition-all">
-              📖 Language & Literature Classics
+            <a href="/language/" class="block p-3 rounded-xl bg-[#061325] hover:bg-[#4de3ff]/10 hover:text-[#4de3ff] border border-white/5 transition-all text-[#8fa3c4]">
+              📖 <strong class="text-white">Language & Literature</strong> — Classical literature & syntax
             </a>
-            <a href="/science" class="block p-2.5 rounded-xl bg-white/5 hover:bg-cyan-500/10 hover:text-cyan-400 border border-white/5 transition-all">
-              🧪 Science & Periodic Elements
+            <a href="/science/" class="block p-3 rounded-xl bg-[#061325] hover:bg-[#4de3ff]/10 hover:text-[#4de3ff] border border-white/5 transition-all text-[#8fa3c4]">
+              🧪 <strong class="text-white">Science & Elements</strong> — Periodic table & astrophysics
+            </a>
+            <a href="/endless/" class="block p-3 rounded-xl bg-[#061325] hover:bg-[#4de3ff]/10 hover:text-[#4de3ff] border border-white/5 transition-all text-[#8fa3c4]">
+              ⚓ <strong class="text-white">Endless Mode</strong> — Unlimited procedural practice
             </a>
           </div>
         </div>
+
       </div>
     </div>
   </div>
+
+  <!-- Client-side Interactive Filter Script for Toolification -->
+  <script is:inline>
+    document.addEventListener('DOMContentLoaded', () => {
+      const searchInput = document.getElementById('geo-search-input');
+      const tabs = document.querySelectorAll('.geo-tab');
+      const rows = document.querySelectorAll('.geo-row');
+      let activeCategory = 'all';
+
+      function filterRows() {
+        const query = searchInput ? searchInput.value.toLowerCase().trim() : '';
+
+        rows.forEach(row => {
+          const category = row.getAttribute('data-category');
+          const name = row.getAttribute('data-name') || '';
+          const hint = row.getAttribute('data-hint') || '';
+
+          const matchCat = (activeCategory === 'all' || category === activeCategory);
+          const matchQuery = (query === '' || name.includes(query) || hint.includes(query));
+
+          if (matchCat && matchQuery) {
+            row.style.display = '';
+          } else {
+            row.style.display = 'none';
+          }
+        });
+      }
+
+      tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+          tabs.forEach(t => {
+            t.classList.remove('bg-[#4de3ff]', 'text-slate-950', 'font-bold');
+            t.classList.add('bg-[#061325]', 'text-[#8fa3c4]');
+          });
+          tab.classList.remove('bg-[#061325]', 'text-[#8fa3c4]');
+          tab.classList.add('bg-[#4de3ff]', 'text-slate-950', 'font-bold');
+
+          activeCategory = tab.getAttribute('data-cat') || 'all';
+          filterRows();
+        });
+      });
+
+      if (searchInput) {
+        searchInput.addEventListener('input', filterRows);
+      }
+    });
+  </script>
 </Layout>
