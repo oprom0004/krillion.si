@@ -54,8 +54,21 @@ const indexFaqSchema = {
   description="Play Krillion online for free! Plunge into the ocean trench by guessing the rarest, least obvious answers. Features Daily Dive, Endless Practice, and 6 Themed Packs (Cinema, Geography, History, Sports, Science)."
   schema={indexFaqSchema}
 >
-  <!-- TOP GAME ZONE: Direct, Full-Width, Above the Fold -->
-  <section id="game" class="pt-2 pb-8 px-2 sm:px-6 lg:px-8 max-w-7xl mx-auto space-y-3">
+  <!-- TOP GAME ZONE: Hero Headline & Direct Game Arena -->
+  <section id="game" class="pt-4 pb-8 px-2 sm:px-6 lg:px-8 max-w-7xl mx-auto space-y-4">
+    <div class="space-y-2">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-950/60 border border-cyan-500/30 text-cyan-400 text-xs font-mono uppercase tracking-wider">
+        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+        Official Online Trench Game
+      </div>
+      <h1 class="text-2xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight">
+        Krillion: The Reverse-Trivia Hadal Trench Game
+      </h1>
+      <p class="text-xs sm:text-sm text-slate-300 max-w-3xl leading-relaxed">
+        Plunge into the deep ocean trench by guessing the rarest, least obvious valid answers across 7 category prompts. The lower the community frequency, the deeper your submarine sinks toward the 7,000-meter Hadal Abyss.
+      </p>
+    </div>
+
     <!-- Direct Pure Game Canvas with Console Toolbar -->
     <KrillionArena
       modeUrl="/endless-game/"
